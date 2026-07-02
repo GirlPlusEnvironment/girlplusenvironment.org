@@ -39,6 +39,28 @@
             flex: 0 0 auto;
             padding-right: 2rem;
         }
+        .neon-form-wrap {
+            margin-top: 2rem;
+            padding: 0;
+            line-height: 0;
+            overflow: hidden;
+        }
+        .neon-form-wrap iframe {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            border: 0;
+            margin: 0 auto;
+            min-height: 0 !important;
+        }
+        .neon-form-wrap > * {
+            margin-bottom: 0 !important;
+        }
+        .neon-form-wrap::after {
+            content: "";
+            display: block;
+            height: 2rem;
+        }
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -1634,7 +1656,7 @@ video {
     </div>
 
     
-    <div class="py-24 px-6 bg-white border-y-4 border-black" vid="260">
+    <div class="pt-24 px-6 bg-white border-y-4 border-black" style="padding-bottom: 2rem;" vid="260">
         <div class="max-w-6xl mx-auto" vid="261">
             <h2 class="header-font text-6xl mb-16 text-center" vid="262">💚 RESOURCES TO EXPLORE</h2>
             <div class="grid md:grid-cols-3 gap-8" vid="263">
@@ -1678,7 +1700,7 @@ video {
                     </div>
                 </a>
             </div>
-            <div class="mt-12 bg-cyan-50 brutalist-border rounded-[40px] p-6 brutalist-shadow" vid="2901">
+            <div class="neon-form-wrap bg-cyan-50 brutalist-border rounded-[40px] brutalist-shadow" vid="2901">
                 <script src='https://girlplusenvironment.app.neoncrm.com/forms/share/Rk9STS1FTUJFRFNIQVJJTkctQ09ERTE1'></script>
             </div>
         </div>
