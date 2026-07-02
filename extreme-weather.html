@@ -1,0 +1,1428 @@
+
+<html vid="0"><head vid="1">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet" vid="3">
+    <script src="https://unpkg.com/@phosphor-icons/web" vid="4"></script>
+    <style vid="5">
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: #fbd3d3; 
+        }
+        .header-font {
+            font-family: 'Archivo Black', sans-serif;
+            -webkit-text-stroke: 1px black;
+        }
+        .brutalist-border {
+            border: 3px solid black;
+        }
+        .brutalist-shadow {
+            box-shadow: 6px 6px 0px 0px #000;
+        }
+        .paper-tear {
+            clip-path: polygon(0% 0%, 5% 5%, 10% 0%, 15% 5%, 20% 0%, 25% 5%, 30% 0%, 35% 5%, 40% 0%, 45% 5%, 50% 0%, 55% 5%, 60% 0%, 65% 5%, 70% 0%, 75% 5%, 80% 0%, 85% 5%, 90% 0%, 95% 5%, 100% 0%, 100% 100%, 0% 100%);
+        }
+        .paper-tear-bottom {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 90% 95%, 85% 100%, 80% 95%, 75% 100%, 70% 95%, 65% 100%, 60% 95%, 55% 100%, 50% 95%, 45% 100%, 40% 95%, 35% 100%, 30% 95%, 25% 100%, 20% 95%, 15% 100%, 10% 95%, 5% 100%, 0% 95%);
+        }
+    </style>
+
+  <style type="text/css">
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}/*
+! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+.fixed {
+  position: fixed;
+}
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.-left-6 {
+  left: -1.5rem;
+}
+.-top-6 {
+  top: -1.5rem;
+}
+.bottom-0 {
+  bottom: 0px;
+}
+.bottom-20 {
+  bottom: 5rem;
+}
+.left-0 {
+  left: 0px;
+}
+.left-1\/4 {
+  left: 25%;
+}
+.left-10 {
+  left: 2.5rem;
+}
+.right-10 {
+  right: 2.5rem;
+}
+.right-12 {
+  right: 3rem;
+}
+.top-10 {
+  top: 2.5rem;
+}
+.top-20 {
+  top: 5rem;
+}
+.top-32 {
+  top: 8rem;
+}
+.top-48 {
+  top: 12rem;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-50 {
+  z-index: 50;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mb-12 {
+  margin-bottom: 3rem;
+}
+.mb-16 {
+  margin-bottom: 4rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+.mt-12 {
+  margin-top: 3rem;
+}
+.mt-16 {
+  margin-top: 4rem;
+}
+.mt-20 {
+  margin-top: 5rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
+.inline-block {
+  display: inline-block;
+}
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+.h-12 {
+  height: 3rem;
+}
+.h-16 {
+  height: 4rem;
+}
+.h-20 {
+  height: 5rem;
+}
+.h-24 {
+  height: 6rem;
+}
+.w-12 {
+  width: 3rem;
+}
+.w-16 {
+  width: 4rem;
+}
+.w-20 {
+  width: 5rem;
+}
+.w-24 {
+  width: 6rem;
+}
+.w-full {
+  width: 100%;
+}
+.max-w-4xl {
+  max-width: 56rem;
+}
+.max-w-5xl {
+  max-width: 64rem;
+}
+.max-w-6xl {
+  max-width: 72rem;
+}
+.max-w-7xl {
+  max-width: 80rem;
+}
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.-rotate-1 {
+  --tw-rotate: -1deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-rotate-12 {
+  --tw-rotate: -12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.rotate-1 {
+  --tw-rotate: 1deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.rotate-12 {
+  --tw-rotate: 12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-12 {
+  gap: 3rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-6 {
+  gap: 1.5rem;
+}
+.gap-8 {
+  gap: 2rem;
+}
+.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+.rounded-2xl {
+  border-radius: 1rem;
+}
+.rounded-3xl {
+  border-radius: 1.5rem;
+}
+.rounded-\[30px\] {
+  border-radius: 30px;
+}
+.rounded-\[40px\] {
+  border-radius: 40px;
+}
+.rounded-full {
+  border-radius: 9999px;
+}
+.border {
+  border-width: 1px;
+}
+.border-2 {
+  border-width: 2px;
+}
+.border-y-4 {
+  border-top-width: 4px;
+  border-bottom-width: 4px;
+}
+.border-b-4 {
+  border-bottom-width: 4px;
+}
+.border-r-4 {
+  border-right-width: 4px;
+}
+.border-t {
+  border-top-width: 1px;
+}
+.border-t-2 {
+  border-top-width: 2px;
+}
+.border-t-4 {
+  border-top-width: 4px;
+}
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
+}
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
+}
+.border-white\/20 {
+  border-color: rgb(255 255 255 / 0.2);
+}
+.bg-\[\#222\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 34 34 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#d53f8c\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(213 63 140 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#fbd3d3\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 211 211 / var(--tw-bg-opacity, 1));
+}
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+.bg-cyan-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(165 243 252 / var(--tw-bg-opacity, 1));
+}
+.bg-cyan-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 211 238 / var(--tw-bg-opacity, 1));
+}
+.bg-cyan-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 182 212 / var(--tw-bg-opacity, 1));
+}
+.bg-orange-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 146 60 / var(--tw-bg-opacity, 1));
+}
+.bg-orange-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 115 22 / var(--tw-bg-opacity, 1));
+}
+.bg-purple-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(192 132 252 / var(--tw-bg-opacity, 1));
+}
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+.bg-yellow-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 204 21 / var(--tw-bg-opacity, 1));
+}
+.p-10 {
+  padding: 2.5rem;
+}
+.p-16 {
+  padding: 4rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-6 {
+  padding: 1.5rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+.py-24 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.pb-16 {
+  padding-bottom: 4rem;
+}
+.pt-24 {
+  padding-top: 6rem;
+}
+.pt-6 {
+  padding-top: 1.5rem;
+}
+.pt-8 {
+  padding-top: 2rem;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+.text-9xl {
+  font-size: 8rem;
+  line-height: 1;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.italic {
+  font-style: italic;
+}
+.leading-none {
+  line-height: 1;
+}
+.leading-relaxed {
+  line-height: 1.625;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.tracking-tighter {
+  letter-spacing: -0.05em;
+}
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+.text-cyan-400 {
+  --tw-text-opacity: 1;
+  color: rgb(34 211 238 / var(--tw-text-opacity, 1));
+}
+.text-cyan-500 {
+  --tw-text-opacity: 1;
+  color: rgb(6 182 212 / var(--tw-text-opacity, 1));
+}
+.text-orange-400 {
+  --tw-text-opacity: 1;
+  color: rgb(251 146 60 / var(--tw-text-opacity, 1));
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.text-yellow-400 {
+  --tw-text-opacity: 1;
+  color: rgb(250 204 21 / var(--tw-text-opacity, 1));
+}
+.underline {
+  text-decoration-line: underline;
+}
+.decoration-8 {
+  text-decoration-thickness: 8px;
+}
+.underline-offset-8 {
+  text-underline-offset: 8px;
+}
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.opacity-20 {
+  opacity: 0.2;
+}
+.opacity-30 {
+  opacity: 0.3;
+}
+.opacity-40 {
+  opacity: 0.4;
+}
+.opacity-50 {
+  opacity: 0.5;
+}
+.opacity-70 {
+  opacity: 0.7;
+}
+.opacity-90 {
+  opacity: 0.9;
+}
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.hover\:-translate-y-2:hover {
+  --tw-translate-y: -0.5rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.hover\:bg-cyan-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(103 232 249 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-yellow-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(253 224 71 / var(--tw-bg-opacity, 1));
+}
+.group:hover .group-hover\:-rotate-12 {
+  --tw-rotate: -12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:rotate-12 {
+  --tw-rotate: 12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:rotate-180 {
+  --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:scale-110 {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:scale-125 {
+  --tw-scale-x: 1.25;
+  --tw-scale-y: 1.25;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+@media (min-width: 768px) {
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .md\:text-right {
+    text-align: right;
+  }
+
+  .md\:text-8xl {
+    font-size: 6rem;
+    line-height: 1;
+  }
+
+  .md\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}* {
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+    }
+
+    *::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+  </style></head>
+<body class="antialiased overflow-x-hidden" vid="6">
+
+    
+    <div class="bg-[#d53f8c] border-b-4 border-black py-4 px-8 flex justify-between items-center fixed w-full z-50" vid="7">
+        <div class="header-font text-white text-3xl tracking-tighter" vid="8">GIRL + ENVIRONMENTâ„¢</div>
+        <div class="hidden md:flex gap-6 items-center" vid="9">
+            <div class="bg-white brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="10">HOME</div>
+            <div class="bg-white brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="11">RESOURCES</div>
+            <div class="bg-white brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="12">COHORTS</div>
+            <div class="bg-black text-white px-6 py-1 rounded-full text-sm font-bold cursor-pointer" vid="13">JOIN US</div>
+        </div>
+    </div>
+
+    
+    <div class="pt-24 pb-16 relative" vid="14">
+        
+        <div class="absolute top-32 left-10 text-cyan-400 text-6xl opacity-50" vid="15"><i class="ph ph-butterfly" vid="16"></i></div>
+        <div class="absolute top-48 right-12 text-orange-400 text-7xl opacity-50" vid="17"><i class="ph ph-flower" vid="18"></i></div>
+        <div class="absolute bottom-20 left-1/4 text-magenta-500 text-5xl opacity-40 rotate-12" vid="19"><i class="ph ph-sparkle" vid="20"></i></div>
+
+        <div class="max-w-6xl mx-auto px-6 text-center" vid="21">
+            <h1 class="header-font text-7xl md:text-8xl text-black leading-none mb-6" vid="22">
+                CLIMATE EXTREME WEATHER
+            </h1>
+            
+            <div class="inline-block bg-white brutalist-border rounded-full px-8 py-3 brutalist-shadow mb-8" vid="23">
+                <span class="header-font text-2xl uppercase italic" vid="24">When the Forecast Gets Personal</span>
+            </div>
+
+            <p class="header-font text-3xl text-black mb-12 max-w-4xl mx-auto leading-tight" vid="25">
+                Because surviving another record-breaking summer wasn't on anyone's vision board.
+            </p>
+
+            
+            <div class="bg-white brutalist-border rounded-[40px] p-10 brutalist-shadow max-w-5xl mx-auto relative" vid="26">
+                
+                <div class="absolute -top-6 -left-6 bg-magenta-500 brutalist-border rounded-full w-16 h-16 flex items-center justify-center text-white text-3xl rotate-12" vid="27">
+                    <i class="ph ph-sun" vid="28"></i>
+                </div>
+                
+                <div class="text-lg md:text-xl text-left leading-relaxed space-y-6" vid="29">
+                    <p vid="30">
+                        Extreme weather isn't just about uncomfortable temperaturesâ€”it's about higher energy bills, canceled plans, damaged homes, unsafe working conditions, and communities being pushed to the brink. Black and Brown communities often experience the greatest impacts first because of historic disinvestment, fewer cooling resources, and neighborhoods with less tree cover.
+                    </p>
+                    <p vid="31">
+                        <span class="font-bold" vid="32">Hot Girls Hate Extreme Weather</span> is helping our community connect the dots between climate change, rising costs, beauty routines, health, and everyday life. Through creator content, educational resources, community stories, and advocacy, we're making climate conversations feel a lot less intimidatingâ€”and a lot more relatable.
+                    </p>
+                    <p class="font-bold text-center text-2xl border-t-2 border-black pt-6" vid="33">
+                        Because protecting our communities starts with understanding what's happeningâ€¦and then using our voices to change it.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="bg-white border-y-4 border-black py-20 relative overflow-hidden" vid="34">
+        <div class="absolute top-10 right-10 text-yellow-400 text-8xl rotate-12 opacity-30" vid="35"><i class="ph ph-sun-dim" vid="36"></i></div>
+        
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center" vid="37">
+            <div vid="38">
+                <h2 class="header-font text-5xl mb-8 leading-tight" vid="39">WHY IS EXTREME WEATHER GETTING WORSE?</h2>
+                <p class="text-xl mb-8" vid="40">
+                    Climate change is making many weather events stronger, longer, and more frequent. As greenhouse gases trap more heat in our atmosphere, our planet warmsâ€”and that extra heat fuels everything from dangerous heat waves to stronger storms and heavier rainfall.
+                </p>
+                <div class="bg-[#fbd3d3] brutalist-border p-6 rounded-3xl brutalist-shadow" vid="41">
+                    <p class="text-lg font-bold italic" vid="42">And yesâ€¦the heat melting your makeup before brunch? That's connected too.</p>
+                </div>
+            </div>
+            
+            <div class="bg-cyan-200 brutalist-border rounded-[40px] p-8 brutalist-shadow" vid="43">
+                <h3 class="header-font text-3xl mb-6" vid="44">WE'RE ALREADY SEEING:</h3>
+                <ul class="space-y-6 text-xl" vid="45">
+                    <li class="flex items-center gap-4" vid="46">
+                        <span class="bg-white border-2 border-black rounded-full p-2 flex items-center justify-center h-12 w-12 text-2xl" vid="47">â˜€ï¸</span>
+                        <span vid="48">Longer summers and record-breaking heat</span>
+                    </li>
+                    <li class="flex items-center gap-4" vid="49">
+                        <span class="bg-white border-2 border-black rounded-full p-2 flex items-center justify-center h-12 w-12 text-2xl" vid="50">ðŸŒ§ï¸</span>
+                        <span vid="51">More powerful hurricanes and flooding</span>
+                    </li>
+                    <li class="flex items-center gap-4" vid="52">
+                        <span class="bg-white border-2 border-black rounded-full p-2 flex items-center justify-center h-12 w-12 text-2xl" vid="53">ðŸŒ«ï¸</span>
+                        <span vid="54">Poorer air quality from wildfire smoke</span>
+                    </li>
+                    <li class="flex items-center gap-4" vid="55">
+                        <span class="bg-white border-2 border-black rounded-full p-2 flex items-center justify-center h-12 w-12 text-2xl" vid="56">ðŸ’¸</span>
+                        <span vid="57">Higher energy bills as we rely more on air conditioning</span>
+                    </li>
+                    <li class="flex items-center gap-4" vid="58">
+                        <span class="bg-white border-2 border-black rounded-full p-2 flex items-center justify-center h-12 w-12 text-2xl" vid="59">ðŸ’š</span>
+                        <span vid="60">More stress on our physical and mental health</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="py-20 px-6" vid="61">
+        <div class="max-w-6xl mx-auto" vid="62">
+            <h2 class="header-font text-center text-5xl mb-16 underline decoration-magenta-500 decoration-8 underline-offset-8" vid="63">WHY DOES THIS MATTER?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8" vid="64">
+                
+                <div class="bg-cyan-400 brutalist-border rounded-[30px] p-8 brutalist-shadow transform -rotate-1" vid="65">
+                    <div class="bg-white brutalist-border w-16 h-16 rounded-2xl flex items-center justify-center mb-6 text-3xl" vid="66">
+                        <i class="ph ph-shield-check" vid="67"></i>
+                    </div>
+                    <h3 class="header-font text-3xl mb-4" vid="68">STAY SAFE</h3>
+                    <p class="text-lg leading-relaxed" vid="69">Learn how to prepare for heat waves, storms, flooding, and poor air quality before they happen.</p>
+                </div>
+
+                
+                <div class="bg-purple-400 brutalist-border rounded-[30px] p-8 brutalist-shadow" vid="70">
+                    <div class="bg-white brutalist-border w-16 h-16 rounded-2xl flex items-center justify-center mb-6 text-3xl" vid="71">
+                        <i class="ph ph-piggy-bank" vid="72"></i>
+                    </div>
+                    <h3 class="header-font text-3xl mb-4 text-white" vid="73">SAVE MONEY</h3>
+                    <p class="text-lg text-white leading-relaxed" vid="74">Understand why your electricity bill keeps climbing and discover ways clean energy and efficiency can lower costs.</p>
+                </div>
+
+                
+                <div class="bg-orange-400 brutalist-border rounded-[30px] p-8 brutalist-shadow transform rotate-1" vid="75">
+                    <div class="bg-white brutalist-border w-16 h-16 rounded-2xl flex items-center justify-center mb-6 text-3xl" vid="76">
+                        <i class="ph ph-megaphone" vid="77"></i>
+                    </div>
+                    <h3 class="header-font text-3xl mb-4" vid="78">TAKE ACTION</h3>
+                    <p class="text-lg leading-relaxed" vid="79">Turn climate anxiety into community action by supporting policies that protect the people most affected.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="bg-[#222] text-white py-24 paper-tear relative overflow-hidden" vid="80">
+        <div class="absolute top-20 left-10 text-magenta-500 text-9xl opacity-20 -rotate-12" vid="81"><i class="ph ph-star-four" vid="82"></i></div>
+        <div class="absolute bottom-20 right-10 text-cyan-500 text-9xl opacity-20 rotate-12" vid="83"><i class="ph ph-sparkle" vid="84"></i></div>
+        
+        <div class="max-w-6xl mx-auto px-6 relative z-10" vid="85">
+            <div class="text-center mb-16" vid="86">
+                <h2 class="header-font text-6xl mb-6" vid="87">HOT GIRL SURVIVAL GUIDE â˜€ï¸ðŸ’…</h2>
+                <p class="text-2xl italic text-magenta-400" vid="88">"Climate conversations don't have to feel complicated. They can start with everyday moments."</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12" vid="89">
+                
+                <div class="flex gap-6 group" vid="90">
+                    <div class="flex-shrink-0 bg-white brutalist-border h-20 w-20 rounded-full flex items-center justify-center text-black text-4xl group-hover:rotate-12 transition-transform" vid="91">
+                        <i class="ph ph-sneaker" vid="92"></i>
+                    </div>
+                    <div vid="93">
+                        <h3 class="header-font text-3xl mb-3 text-cyan-400" vid="94">YOUR HOT GIRL WALK</h3>
+                        <p class="text-lg leading-relaxed opacity-90" vid="95">If it's too dangerous to safely walk outside because temperatures remain above 95Â°F, that's not just "summer being summer." Extreme heat is becoming more common because of climate change.</p>
+                    </div>
+                </div>
+
+                
+                <div class="flex gap-6 group" vid="96">
+                    <div class="flex-shrink-0 bg-white brutalist-border h-20 w-20 rounded-full flex items-center justify-center text-black text-4xl group-hover:-rotate-12 transition-transform" vid="97">
+                        <i class="ph ph-sparkles" vid="98"></i>
+                    </div>
+                    <div vid="99">
+                        <h3 class="header-font text-3xl mb-3 text-magenta-400" vid="100">YOUR NAILS</h3>
+                        <p class="text-lg leading-relaxed opacity-90" vid="101">Extreme heat, UV exposure, and dehydration can affect nail healthâ€”and higher temperatures make salon workers and outdoor commuters more vulnerable throughout the day.</p>
+                    </div>
+                </div>
+
+                
+                <div class="flex gap-6 group" vid="102">
+                    <div class="flex-shrink-0 bg-white brutalist-border h-20 w-20 rounded-full flex items-center justify-center text-black text-4xl group-hover:scale-110 transition-transform" vid="103">
+                        <i class="ph ph-wind" vid="104"></i>
+                    </div>
+                    <div vid="105">
+                        <h3 class="header-font text-3xl mb-3 text-yellow-400" vid="106">YOUR HAIR</h3>
+                        <p class="text-lg leading-relaxed opacity-90" vid="107">Humidity, extreme heat, and poor air quality all affect natural hair care routines. Climate justice includes protecting the environments our beauty routines depend on.</p>
+                    </div>
+                </div>
+
+                
+                <div class="flex gap-6 group" vid="108">
+                    <div class="flex-shrink-0 bg-white brutalist-border h-20 w-20 rounded-full flex items-center justify-center text-black text-4xl group-hover:rotate-180 transition-transform" vid="109">
+                        <i class="ph ph-currency-circle-dollar" vid="110"></i>
+                    </div>
+                    <div vid="111">
+                        <h3 class="header-font text-3xl mb-3 text-orange-400" vid="112">YOUR WALLET</h3>
+                        <p class="text-lg leading-relaxed opacity-90" vid="113">Keeping your home cool costs more every year. Rising temperatures often mean higher electricity bills, especially for families already facing energy burdens.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 text-center" vid="114">
+                <p class="header-font text-3xl border-2 border-white inline-block px-10 py-4 rounded-full" vid="115">
+                    Climate change is showing up everywhereâ€”and that's exactly why we're talking about it.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="py-24 px-6 bg-white border-b-4 border-black" vid="116">
+        <div class="max-w-6xl mx-auto" vid="117">
+            <h2 class="header-font text-5xl mb-16 text-center uppercase" vid="118">WHAT IS GPE DOING?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-12" vid="119">
+                <div class="text-center" vid="120">
+                    <div class="bg-magenta-500 brutalist-border w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center text-4xl text-white brutalist-shadow" vid="121">
+                        <i class="ph ph-devices" vid="122"></i>
+                    </div>
+                    <h3 class="header-font text-2xl mb-4" vid="123">DIGITAL STORYTELLING</h3>
+                    <p class="text-lg" vid="124">We're partnering with creators to make climate education accessible, funny, shareable, and rooted in the experiences of Black and Brown women.</p>
+                </div>
+
+                <div class="text-center" vid="125">
+                    <div class="bg-cyan-500 brutalist-border w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center text-4xl text-white brutalist-shadow" vid="126">
+                        <i class="ph ph-book-open" vid="127"></i>
+                    </div>
+                    <h3 class="header-font text-2xl mb-4" vid="128">COMMUNITY EDUCATION</h3>
+                    <p class="text-lg" vid="129">From social posts to downloadable guides, we're breaking down climate science without the jargon.</p>
+                </div>
+
+                <div class="text-center" vid="130">
+                    <div class="bg-orange-500 brutalist-border w-24 h-24 rounded-full mx-auto mb-6 flex items-center justify-center text-4xl text-white brutalist-shadow" vid="131">
+                        <i class="ph ph-users-three" vid="132"></i>
+                    </div>
+                    <h3 class="header-font text-2xl mb-4" vid="133">ADVOCACY</h3>
+                    <p class="text-lg" vid="134">Every campaign encourages our community to take meaningful action by signing petitions, supporting climate policies, and making their voices heard.</p>
+                </div>
+            </div>
+
+            <p class="text-center header-font text-3xl mt-16 italic text-magenta-500" vid="135">
+                Because awareness is only the beginning.
+            </p>
+        </div>
+    </div>
+
+    
+    <div class="grid md:grid-cols-3 w-full border-b-4 border-black" vid="136">
+        <div class="bg-cyan-400 p-16 text-center border-r-4 border-black hover:bg-cyan-300 transition-colors cursor-pointer group" vid="137">
+            <h2 class="header-font text-6xl mb-6 group-hover:scale-110 transition-transform" vid="138">LEARN</h2>
+            <p class="text-xl font-bold" vid="139">Understand why temperatures are rising, who is most affected, and what climate science tells us about our changing world.</p>
+        </div>
+        <div class="bg-magenta-500 p-16 text-center border-r-4 border-black hover:bg-magenta-400 transition-colors cursor-pointer group" vid="140">
+            <h2 class="header-font text-6xl mb-6 text-white group-hover:scale-110 transition-transform" vid="141">SHARE</h2>
+            <p class="text-xl font-bold text-white" vid="142">Help climate conversations reach your group chat, your timeline, and your community.</p>
+        </div>
+        <div class="bg-yellow-400 p-16 text-center hover:bg-yellow-300 transition-colors cursor-pointer group" vid="143">
+            <h2 class="header-font text-6xl mb-6 group-hover:scale-110 transition-transform" vid="144">ACT</h2>
+            <p class="text-xl font-bold" vid="145">Sign petitions, support climate solutions, and advocate for policies that protect Black and Brown communities.</p>
+        </div>
+    </div>
+
+    
+    <div class="py-24 px-6 bg-[#fbd3d3] relative overflow-hidden" vid="146">
+        <div class="absolute bottom-0 left-0 w-full h-12 bg-white paper-tear" vid="147"></div>
+        
+        <div class="max-w-6xl mx-auto" vid="148">
+            <h2 class="header-font text-7xl mb-16 text-center" vid="149">RESOURCES</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8" vid="150">
+                
+                <div class="bg-white brutalist-border rounded-3xl p-8 brutalist-shadow flex flex-col items-center text-center group cursor-pointer hover:-translate-y-2 transition-all" vid="151">
+                    <div class="text-7xl mb-6 group-hover:scale-125 transition-transform" vid="152">ðŸŒ¡ï¸</div>
+                    <h3 class="header-font text-2xl mb-4" vid="153">HeatRisk Interactive Map</h3>
+                    <p class="text-lg flex-grow" vid="154">An interactive map showing heat risk levels by location so members can check dangerous temperatures where they live.</p>
+                    <div class="mt-8 bg-black text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest text-sm" vid="155">Open Map</div>
+                </div>
+
+                
+                <div class="bg-white brutalist-border rounded-3xl p-8 brutalist-shadow flex flex-col items-center text-center group cursor-pointer hover:-translate-y-2 transition-all" vid="156">
+                    <div class="text-7xl mb-6 group-hover:scale-125 transition-transform" vid="157">âš¡</div>
+                    <h3 class="header-font text-2xl mb-4" vid="158">Energy Cost Calculator</h3>
+                    <p class="text-lg flex-grow" vid="159">A simple calculator or guide showing how weather affects home energy use and practical ways to reduce bills.</p>
+                    <div class="mt-8 bg-black text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest text-sm" vid="160">Calculate</div>
+                </div>
+
+                
+                <div class="bg-white brutalist-border rounded-3xl p-8 brutalist-shadow flex flex-col items-center text-center group cursor-pointer hover:-translate-y-2 transition-all" vid="161">
+                    <div class="text-7xl mb-6 group-hover:scale-125 transition-transform" vid="162">📝 </div>
+                    <h3 class="header-font text-2xl mb-4" vid="163">GPE Climate Action Center</h3>
+                    <p class="text-lg flex-grow" vid="164">A petition hub where every visitor can immediately take action after learning about extreme weather.</p>
+                    <div class="mt-8 bg-black text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest text-sm" vid="165">Take Action</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="bg-magenta-600 text-white py-12 px-8 border-t-4 border-black" vid="166">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8" vid="167">
+            <div class="header-font text-4xl" vid="168">GIRL + ENVIRONMENT</div>
+            <div class="text-center md:text-right" vid="169">
+                <p class="font-bold text-lg mb-2" vid="170">The Non-Profit Centering Black &amp; Brown Women+ in the Climate &amp; Environmental Movement</p>
+                <div class="flex gap-4 justify-center md:justify-end mt-4" vid="171">
+                    <i class="ph ph-instagram-logo text-3xl cursor-pointer" vid="172"></i>
+                    <i class="ph ph-tiktok-logo text-3xl cursor-pointer" vid="173"></i>
+                    <i class="ph ph-twitter-logo text-3xl cursor-pointer" vid="174"></i>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-12 pt-8 border-t border-white/20 text-sm opacity-70" vid="175">
+            © 2026 GIRL PLUS ENVIRONMENT. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+
+</body></html>
