@@ -1726,4 +1726,12 @@ video {
     </footer>
 
 
+<script>
+  document.querySelectorAll('a[href^="https://www.girlplusenvironment.org"]').forEach((link) => {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      window.top.location.href = this.href;
+    });
+  });
+</script>
 </body></html>
