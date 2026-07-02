@@ -29,10 +29,15 @@
             clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 95% 100%, 90% 95%, 85% 100%, 80% 95%, 75% 100%, 70% 95%, 65% 100%, 60% 95%, 55% 100%, 50% 95%, 45% 100%, 40% 95%, 35% 100%, 30% 95%, 25% 100%, 20% 95%, 15% 100%, 10% 95%, 5% 100%, 0% 95%);
         }
         .marquee {
+            display: flex;
+            width: max-content;
+            min-width: 100%;
             white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
             animation: marquee 20s linear infinite;
+        }
+        .marquee > span {
+            flex: 0 0 auto;
+            padding-right: 2rem;
         }
         @keyframes marquee {
             0% { transform: translateX(0); }
@@ -1249,9 +1254,9 @@ video {
         <div class="header-font text-white text-3xl tracking-tighter" vid="8">GIRL + ENVIRONMENT</div>
         <div class="hidden md:flex gap-6 items-center" vid="9">
             <a href="https://www.girlplusenvironment.org" class="bg-white brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="10">HOME</a>
-            <a href="/resources" class="bg-white brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="11">RESOURCES</a>
-            <a href="/become-a-member" class="bg-cyan-300 brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="12">JOIN US</a>
-            <a href="/donate" class="bg-black text-white px-6 py-1 rounded-full text-sm font-bold cursor-pointer" vid="13">DONATE</a>
+            <a href="https://www.girlplusenvironment.org/resources" class="bg-white brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="11">RESOURCES</a>
+            <a href="https://www.girlplusenvironment.org/become-a-member" class="bg-cyan-300 brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="12">JOIN US</a>
+            <a href="https://www.girlplusenvironment.org/donate" class="bg-black text-white px-6 py-1 rounded-full text-sm font-bold cursor-pointer" vid="13">DONATE</a>
         </div>
     </div>
 
@@ -1297,7 +1302,7 @@ video {
 
     
     <div class="bg-black text-white py-4 border-y-4 border-black overflow-hidden" vid="36">
-        <div class="marquee flex gap-8 text-2xl font-bold uppercase header-font" vid="37">
+        <div class="marquee text-2xl font-bold uppercase header-font" vid="37">
             <span vid="38">REGISTRATION NOW OPEN • JOIN A CABIN • HOT GIRL SUMMER • CLIMATE JUSTICE • CAMP GPE • REGISTRATION NOW OPEN • JOIN A CABIN • HOT GIRL SUMMER • CLIMATE JUSTICE • CAMP GPE • </span>
             <span vid="39">REGISTRATION NOW OPEN • JOIN A CABIN • HOT GIRL SUMMER • CLIMATE JUSTICE • CAMP GPE • REGISTRATION NOW OPEN • JOIN A CABIN • HOT GIRL SUMMER • CLIMATE JUSTICE • CAMP GPE • </span>
         </div>
@@ -1322,7 +1327,7 @@ video {
                 </div>
                 <div class="bg-magenta-400 brutalist-border rounded-3xl p-6 brutalist-shadow text-center transform rotate-3" vid="54">
                     <i class="ph ph-book-open-text text-5xl mb-4 text-white" vid="55"></i>
-                    <h3 class="header-font text-xl text-white" vid="56">NO SONGS,<br vid="57">JUST STORIES</h3>
+                    <h3 class="header-font text-xl text-white" vid="56">📖 NO SONGS,<br vid="57">JUST STORIES</h3>
                 </div>
                 <div class="bg-yellow-400 brutalist-border rounded-3xl p-6 brutalist-shadow text-center transform rotate-1" vid="58">
                     <i class="ph ph-pencil-line text-5xl mb-4" vid="59"></i>
@@ -1403,22 +1408,22 @@ video {
                 <div class="text-center" vid="108">
                     <div class="bg-white text-black border-4 border-black w-20 h-20 rounded-full flex items-center justify-center text-3xl font-black mx-auto mb-6 brutalist-shadow" vid="109">1</div>
                     <h3 class="header-font text-2xl mb-4" vid="110">JOIN A CABIN</h3>
-                    <p class="opacity-90" vid="111">Every camper joins a team and competes alongside fellow GPE members.</p>
+                    <p class="opacity-90 text-black" vid="111">Every camper joins a team and competes alongside fellow GPE members.</p>
                 </div>
                 <div class="text-center" vid="112">
                     <div class="bg-white text-black border-4 border-black w-20 h-20 rounded-full flex items-center justify-center text-3xl font-black mx-auto mb-6 brutalist-shadow" vid="113">2</div>
                     <h3 class="header-font text-2xl mb-4" vid="114">COMPLETE MISSIONS</h3>
-                    <p class="opacity-90" vid="115">New missions drop every two weeks inside our private Slack community.</p>
+                    <p class="opacity-90 text-black" vid="115">New missions drop every two weeks inside our private Slack community.</p>
                 </div>
                 <div class="text-center" vid="116">
                     <div class="bg-white text-black border-4 border-black w-20 h-20 rounded-full flex items-center justify-center text-3xl font-black mx-auto mb-6 brutalist-shadow" vid="117">3</div>
                     <h3 class="header-font text-2xl mb-4" vid="118">EARN POINTS</h3>
-                    <p class="opacity-90" vid="119">Every completed activity earns points. More participation = more chances to win.</p>
+                    <p class="opacity-90 text-black" vid="119">Every completed activity earns points. More participation = more chances to win.</p>
                 </div>
                 <div class="text-center" vid="120">
                     <div class="bg-white text-black border-4 border-black w-20 h-20 rounded-full flex items-center justify-center text-3xl font-black mx-auto mb-6 brutalist-shadow" vid="121">4</div>
                     <h3 class="header-font text-2xl mb-4" vid="122">CLIMB THE BOARD</h3>
-                    <p class="opacity-90" vid="123">Weekly updates show which cabin leads. Friendly competition encouraged!</p>
+                    <p class="opacity-90 text-black" vid="123">Weekly updates show which cabin leads. Friendly competition encouraged!</p>
                 </div>
             </div>
 
@@ -1662,7 +1667,7 @@ video {
                     <div class="bg-black text-white px-6 py-2 rounded-full inline-block font-bold" vid="283">COMING SOON</div>
                 </div>
                 
-                <a href="/take-action" class="bg-purple-200 brutalist-border p-8 rounded-3xl brutalist-shadow brutalist-shadow-hover transition-all cursor-pointer group md:col-span-2 block" vid="284">
+                <a href="https://www.girlplusenvironment.org/take-action" class="bg-purple-200 brutalist-border p-8 rounded-3xl brutalist-shadow brutalist-shadow-hover transition-all cursor-pointer group md:col-span-2 block" vid="284">
                     <div class="flex flex-col md:flex-row gap-8 items-center" vid="285">
                         <div class="bg-white border-2 border-black w-24 h-24 rounded-2xl flex items-center justify-center text-5xl flex-shrink-0 group-hover:rotate-12 transition-transform" vid="286">📣</div>
                         <div vid="287">
@@ -1680,9 +1685,9 @@ video {
     </div>
 
     
-    <footer class="bg-magenta-600 text-white py-12 px-8" vid="291">
+    <footer class="bg-magenta-600 text-black py-12 px-8" vid="291">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8" vid="292">
-            <div class="header-font text-4xl" vid="293">GIRL + ENVIRONMENT</div>
+            <div class="header-font text-4xl text-white" vid="293">GIRL + ENVIRONMENT</div>
             <div class="text-center md:text-right" vid="294">
                 <p class="font-bold text-lg mb-2" vid="295">Hot Girl Summer, but Make It Climate Advocacy.</p>
                 <div class="flex gap-4 justify-center md:justify-end mt-4" vid="296">
