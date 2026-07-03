@@ -61,6 +61,63 @@
             display: block;
             height: 0;
         }
+        .camp-gpe-footer {
+  height: 150px;
+  max-height: 150px;
+  overflow: hidden;
+  padding: 18px 32px;
+  box-sizing: border-box;
+  background: #d53f8c;
+  color: black;
+  font-family: 'Space Mono', monospace;
+}
+
+.camp-gpe-footer-inner {
+  max-width: 80rem;
+  height: 70px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.camp-gpe-footer img {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+.camp-gpe-footer-right {
+  text-align: right;
+}
+
+.camp-gpe-footer-right p {
+  font-weight: 700;
+  font-size: 18px;
+  margin: 0 0 8px 0;
+}
+
+.camp-gpe-socials {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.camp-gpe-socials i {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.camp-gpe-footer-bottom {
+  text-align: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.2);
+  font-size: 14px;
+  opacity: .7;
+}
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -1258,16 +1315,35 @@ video {
   .lg\:grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
-}* {
-      -ms-overflow-style: none !important;
-      scrollbar-width: none !important;
-    }
+}html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
-    *::-webkit-scrollbar {
-      display: none !important;
-      width: 0 !important;
-      height: 0 !important;
-    }
+body {
+  font-family: 'Space Mono', monospace;
+  background-color: #fbd3d3;
+}
+
+iframe,
+embed,
+object {
+  max-width: 100%;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
   </style></head>
 <body class="antialiased overflow-x-hidden" vid="6">
 
@@ -1704,25 +1780,27 @@ video {
         <div class="mt-12 mb-6 bg-cyan-50 brutalist-border rounded-[40px] p-5 brutalist-shadow" style="height: 1320px; max-height: 1320px; overflow: hidden; position: relative;">
             <script src="https://girlplusenvironment.app.neoncrm.com/forms/share/Rk9STS1FTUJFRFNIQVJJTkctQ09ERTE1"></script>
         </div>
+        </div>
     </div>
 </div>
-    
-<div class="bg-magenta-600 text-black" style="height: 150px; overflow: hidden; padding: 18px 32px; box-sizing: border-box;">
-  <div class="max-w-7xl mx-auto flex flex-row justify-between items-center" style="height: 70px; gap: 24px;">
-    <img src="https://static.wixstatic.com/media/265a01_e2bdfec40bcb424189b3dad95d6e7fe9~mv2.png/v1/crop/x_0,y_233,w_688,h_76/fill/w_956,h_106,fp_0.50_0.50,lg_1,q_85,enc_avif,quality_auto/GPE%20Full%20TM%20Logo%20White.png" alt="Girl Plus Environment" style="height: 38px; width: auto; display: block;">
-    
-    <div class="text-right">
-      <p class="font-bold text-lg" style="margin-bottom: 8px;">Hot Girl Summer, but Make It Climate Advocacy.</p>
-      <div class="flex gap-4 justify-end">
-        <a href="https://www.linkedin.com/company/girlplusenvironment/" aria-label="LinkedIn"><i class="ph ph-linkedin-logo text-3xl cursor-pointer"></i></a>
-        <a href="https://www.instagram.com/girlplusenvironment/" aria-label="Instagram"><i class="ph ph-instagram-logo text-3xl cursor-pointer"></i></a>
-        <a href="https://www.tiktok.com/@girlplusenvironment" aria-label="TikTok"><i class="ph ph-tiktok-logo text-3xl cursor-pointer"></i></a>
-        <a href="https://www.youtube.com/@GirlEnvironmentOrganization" aria-label="YouTube"><i class="ph ph-youtube-logo text-3xl cursor-pointer"></i></a>
+
+<div class="camp-gpe-footer">
+  <div class="camp-gpe-footer-inner">
+    <img src="https://static.wixstatic.com/media/265a01_e2bdfec40bcb424189b3dad95d6e7fe9~mv2.png/v1/crop/x_0,y_233,w_688,h_76/fill/w_956,h_106,fp_0.50_0.50,lg_1,q_85,enc_avif,quality_auto/GPE%20Full%20TM%20Logo%20White.png" alt="Girl Plus Environment">
+
+    <div class="camp-gpe-footer-right">
+      <p>Hot Girl Summer, but Make It Climate Advocacy.</p>
+
+      <div class="camp-gpe-socials">
+        <a href="https://www.linkedin.com/company/girlplusenvironment/" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+        <a href="https://www.instagram.com/girlplusenvironment/" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+        <a href="https://www.tiktok.com/@girlplusenvironment" aria-label="TikTok"><i class="ph ph-tiktok-logo"></i></a>
+        <a href="https://www.youtube.com/@GirlEnvironmentOrganization" aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>
       </div>
     </div>
   </div>
 
-  <div class="text-center border-t border-white/20 text-sm opacity-70" style="margin-top: 12px; padding-top: 10px;">
+  <div class="camp-gpe-footer-bottom">
     © 2026 GIRL PLUS ENVIRONMENT. CAMP GPE PROGRAM. ALL RIGHTS RESERVED.
   </div>
 </div>
