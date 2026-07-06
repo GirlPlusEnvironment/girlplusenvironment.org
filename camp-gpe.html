@@ -1360,6 +1360,12 @@ body {
 body > * {
   max-width: 100%;
 }
+.camp-gpe-form-wrap {
+  height: 1320px;
+  max-height: 1320px;
+  overflow: hidden;
+  position: relative;
+}
 @media (max-width: 767px) {
   .fixed {
     position: relative !important;
@@ -1437,10 +1443,15 @@ body > * {
     padding-top: 1rem !important;
   }
   .camp-gpe-form-wrap {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-    padding: 0.75rem !important;
+    height: 760px !important;
+    max-height: 760px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .camp-gpe-form-wrap iframe {
+    width: 100% !important;
+    max-width: 100% !important;
   }
   .camp-gpe-footer {
     height: auto !important;
@@ -1928,25 +1939,16 @@ body > * {
     });
   });
   function sendHeightToWix() {
-    const height = Math.max(
-      document.body.scrollHeight,
-      document.documentElement.scrollHeight,
-      document.body.offsetHeight,
-      document.documentElement.offsetHeight
-    );
-    window.parent.postMessage({
-      type: 'resize',
-      height: height + 80
-    }, '*');
-    window.parent.postMessage(height + 80, '*');
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'resize', height: height + 120 }, '*');
   }
-  window.addEventListener('load', sendHeightToWix);
-  window.addEventListener('resize', sendHeightToWix);
-  const resizeObserver = new ResizeObserver(sendHeightToWix);
-  resizeObserver.observe(document.body);
-  setTimeout(sendHeightToWix, 500);
-  setTimeout(sendHeightToWix, 1500);
-  setTimeout(sendHeightToWix, 3000);
-  setTimeout(sendHeightToWix, 6000);
+  window.addEventListener('load', () => {
+    setTimeout(sendHeightToWix, 500);
+    setTimeout(sendHeightToWix, 1500);
+    setTimeout(sendHeightToWix, 3000);
+  });
+  window.addEventListener('resize', () => {
+    setTimeout(sendHeightToWix, 300);
+  });
 </script>
 </body></html>
