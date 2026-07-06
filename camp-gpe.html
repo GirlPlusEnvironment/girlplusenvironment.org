@@ -1344,6 +1344,122 @@ object {
   display: block;
   vertical-align: middle;
 }
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+body {
+  max-width: 100vw;
+}
+body > * {
+  max-width: 100%;
+}
+@media (max-width: 767px) {
+  .fixed {
+    position: relative !important;
+  }
+  .pt-32 {
+    padding-top: 2rem !important;
+  }
+  .py-24 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .px-6,
+  .px-8,
+  .px-10 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  .p-12,
+  .p-10,
+  .p-8,
+  .p-6 {
+    padding: 1.25rem !important;
+  }
+  .text-8xl,
+  .text-7xl,
+  .text-6xl,
+  .text-5xl {
+    font-size: clamp(2.2rem, 13vw, 3.6rem) !important;
+    line-height: 0.95 !important;
+    overflow-wrap: anywhere;
+  }
+  .text-4xl,
+  .text-3xl {
+    font-size: clamp(1.6rem, 8vw, 2.25rem) !important;
+    line-height: 1.05 !important;
+  }
+  .header-font {
+    -webkit-text-stroke: 0.5px black;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+  .grid,
+  .md\:grid-cols-2,
+  .md\:grid-cols-3,
+  .md\:grid-cols-4,
+  .lg\:grid-cols-6 {
+    grid-template-columns: 1fr !important;
+  }
+  .grid-cols-2 {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+  .grid-cols-2 h3 {
+    font-size: 1rem !important;
+    line-height: 1.05 !important;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+  .grid-cols-2 i {
+    font-size: 2.5rem !important;
+  }
+  .rounded-\[40px\] {
+    border-radius: 24px !important;
+  }
+  .brutalist-shadow {
+    box-shadow: 4px 4px 0px 0px #000;
+  }
+  .absolute {
+    max-width: 100vw;
+  }
+  .border-l-4 {
+    border-left-width: 0 !important;
+    border-top-width: 4px !important;
+    padding-left: 0 !important;
+    padding-top: 1rem !important;
+  }
+  .camp-gpe-form-wrap {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0.75rem !important;
+  }
+  .camp-gpe-footer {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 24px 18px !important;
+  }
+  .camp-gpe-footer-inner {
+    height: auto !important;
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  .camp-gpe-footer-right {
+    text-align: center !important;
+  }
+  .camp-gpe-socials {
+    justify-content: center !important;
+  }
+}
   </style></head>
 <body class="antialiased overflow-x-hidden" vid="6">
 
@@ -1777,8 +1893,8 @@ object {
                 </a>
             </div>
           <!-- Camp GPE Registration Form -->
-        <div class="mt-12 mb-6 bg-cyan-50 brutalist-border rounded-[40px] p-5 brutalist-shadow" style="height: 1320px; max-height: 1320px; overflow: hidden; position: relative;">
-            <script src="https://girlplusenvironment.app.neoncrm.com/forms/share/Rk9STS1FTUJFRFNIQVJJTkctQ09ERTE1"></script>
+        <div class="mt-12 mb-6 bg-cyan-50 brutalist-border rounded-[40px] p-5 brutalist-shadow camp-gpe-form-wrap">
+          <script src="https://girlplusenvironment.app.neoncrm.com/forms/share/Rk9STS1FTUJFRFNIQVJJTkctQ09ERTE1"></script>
         </div>
         </div>
     </div>
@@ -1811,5 +1927,26 @@ object {
       window.top.location.href = this.href;
     });
   });
+  function sendHeightToWix() {
+    const height = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight
+    );
+    window.parent.postMessage({
+      type: 'resize',
+      height: height + 80
+    }, '*');
+    window.parent.postMessage(height + 80, '*');
+  }
+  window.addEventListener('load', sendHeightToWix);
+  window.addEventListener('resize', sendHeightToWix);
+  const resizeObserver = new ResizeObserver(sendHeightToWix);
+  resizeObserver.observe(document.body);
+  setTimeout(sendHeightToWix, 500);
+  setTimeout(sendHeightToWix, 1500);
+  setTimeout(sendHeightToWix, 3000);
+  setTimeout(sendHeightToWix, 6000);
 </script>
 </body></html>
