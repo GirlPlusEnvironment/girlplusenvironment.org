@@ -1217,26 +1217,6 @@ body > * {
     overflow: visible !important;
     padding: 0.75rem !important;
   }
-  .camp-gpe-footer {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-    padding: 24px 18px !important;
-  }
-  .camp-gpe-footer-inner {
-    height: auto !important;
-    flex-direction: column !important;
-    text-align: center !important;
-  }
-  .camp-gpe-footer-right {
-    text-align: center !important;
-  }
-  .camp-gpe-socials {
-    justify-content: center !important;
-  }
-  body {
-    padding-bottom: 260px !important;
-  }
   .pt-24,
   .py-24 {
     padding-bottom: 4rem !important;
@@ -1245,19 +1225,7 @@ body > * {
   </style></head>
 <body class="antialiased overflow-x-hidden" vid="6">
 
-    
-    <div class="bg-[#d53f8c] border-b-4 border-black py-4 px-8 flex justify-between items-center fixed w-full z-50" vid="7">
-        <img src="https://static.wixstatic.com/media/265a01_e2bdfec40bcb424189b3dad95d6e7fe9~mv2.png/v1/crop/x_0,y_233,w_688,h_76/fill/w_956,h_106,fp_0.50_0.50,lg_1,q_85,enc_avif,quality_auto/GPE%20Full%20TM%20Logo%20White.png" alt="Girl Plus Environment" style="height: 38px; width: auto; display: block;">
-        <div class="hidden md:flex gap-6 items-center" vid="9">
-            <a href="https://www.girlplusenvironment.org" class="bg-white brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="10">HOME</a>
-            <a href="https://www.girlplusenvironment.org/resources" class="bg-white brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="11">RESOURCES</a>
-            <a href="https://www.girlplusenvironment.org/become-a-member" class="bg-white brutalist-border px-4 py-1 rounded-full text-sm font-bold brutalist-shadow cursor-pointer" vid="12">JOIN US</a>
-            <a href="https://www.girlplusenvironment.org/donate" class="bg-black text-white px-6 py-1 rounded-full text-sm font-bold cursor-pointer" vid="13">DONATE</a>
-        </div>
-    </div>
-
-    
-    <div class="pt-24 pb-16 relative" vid="14">
+    <div class="pt-16 pb-16 relative" vid="14">
         
         <div class="absolute top-32 left-10 text-cyan-400 text-6xl opacity-50" vid="15"><i class="ph ph-butterfly" vid="16"></i></div>
         <div class="absolute top-48 right-12 text-orange-400 text-7xl opacity-50" vid="17"><i class="ph ph-flower" vid="18"></i></div>
@@ -1520,7 +1488,7 @@ body > * {
                 </a>
 
                 
-                <a href="https://www.girlplusenvironment.org/take-action" class="bg-white brutalist-border rounded-3xl p-8 brutalist-shadow flex flex-col items-center text-center group cursor-pointer hover:-translate-y-2 transition-all" vid="161">
+                <a href="https://www.girlplusenvironment.org/take-action" target="_top" rel="noopener" class="bg-white brutalist-border rounded-3xl p-8 brutalist-shadow flex flex-col items-center text-center group cursor-pointer hover:-translate-y-2 transition-all" vid="161">
                     <div class="text-7xl mb-6 group-hover:scale-125 transition-transform" vid="162">📝 </div>
                     <h3 class="header-font text-2xl mb-4" vid="163">GPE Climate Action Center</h3>
                     <p class="text-lg flex-grow" vid="164">A petition hub where every visitor can immediately take action after learning about extreme weather.</p>
@@ -1530,33 +1498,7 @@ body > * {
         </div>
     </div>
 
-    
-    <footer class="bg-magenta-600 text-black py-6 px-8" vid="166">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8" vid="167">
-            <img src="https://static.wixstatic.com/media/265a01_e2bdfec40bcb424189b3dad95d6e7fe9~mv2.png/v1/crop/x_0,y_233,w_688,h_76/fill/w_956,h_106,fp_0.50_0.50,lg_1,q_85,enc_avif,quality_auto/GPE%20Full%20TM%20Logo%20White.png" alt="Girl Plus Environment" style="height: 42px; width: auto; display: block;">
-            <div class="text-center md:text-right" vid="169">
-                <p class="font-bold text-lg mb-2" vid="170">The Non-Profit Centering Black &amp; Brown Women+ in the Climate &amp; Environmental Movement</p>
-                <div class="flex gap-4 justify-center md:justify-end mt-3" vid="171">
-                    <a href="https://www.linkedin.com/company/girlplusenvironment/" aria-label="LinkedIn" vid="172"><i class="ph ph-linkedin-logo text-3xl cursor-pointer" vid="173"></i></a>
-                    <a href="https://www.instagram.com/girlplusenvironment/" aria-label="Instagram" vid="174"><i class="ph ph-instagram-logo text-3xl cursor-pointer" vid="175"></i></a>
-                    <a href="https://www.tiktok.com/@girlplusenvironment" aria-label="TikTok" vid="176"><i class="ph ph-tiktok-logo text-3xl cursor-pointer" vid="177"></i></a>
-                    <a href="https://www.youtube.com/@GirlEnvironmentOrganization" aria-label="YouTube" vid="178"><i class="ph ph-youtube-logo text-3xl cursor-pointer" vid="179"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="text-center mt-6 pt-4 border-t border-white/20 text-sm opacity-70" vid="175">
-            © 2026 GIRL PLUS ENVIRONMENT. ALL RIGHTS RESERVED.
-        </div>
-    </footer>
-
-
 <script>
-  document.querySelectorAll('a[href^="https://www.girlplusenvironment.org"]').forEach((link) => {
-    link.addEventListener('click', function(event) {
-      event.preventDefault();
-      window.top.location.href = this.href;
-    });
-  });
   function sendHeightToWix() {
     const height = document.documentElement.scrollHeight;
     window.parent.postMessage({ type: 'resize', height: height + 120 }, '*');
