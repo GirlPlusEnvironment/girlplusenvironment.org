@@ -1,0 +1,1942 @@
+
+
+<html vid="0"><head vid="1">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet" vid="3">
+    <script src="https://unpkg.com/@phosphor-icons/web" vid="4"></script>
+    <style vid="5">
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: #fbd3d3; 
+            scroll-behavior: smooth;
+        }
+        .header-font {
+            font-family: 'Archivo Black', sans-serif;
+            -webkit-text-stroke: 1px black;
+        }
+        .brutalist-border {
+            border: 3px solid black;
+        }
+        .brutalist-shadow {
+            box-shadow: 8px 8px 0px 0px #000;
+        }
+        .brutalist-shadow-sm {
+            box-shadow: 4px 4px 0px 0px #000;
+        }
+        .brutalist-shadow-hover:hover {
+            box-shadow: 12px 12px 0px 0px #000;
+            transform: translate(-4px, -4px);
+        }
+        .nav-dropdown { display: none; position: absolute; top: 100%; left: 0; min-width: 240px; background: white; border: 3px solid black; border-radius: 20px; box-shadow: 8px 8px 0px 0px #000; padding: 12px; z-index: 60; }
+        .nav-item:hover .nav-dropdown { display: block; animation: popIn 0.2s ease; }
+        
+        @keyframes popIn { from { opacity: 0; transform: translateY(-8px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        
+        .sticky-nav {
+            position: sticky;
+            top: 104px; 
+            z-index: 40;
+        }
+
+        .tab-active {
+            background-color: #000 !important;
+            color: #fff !important;
+        }
+
+        .modal-overlay {
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(4px);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: bold;
+            z-index: 100;
+            display: none;
+        }
+    </style>
+
+  <style type="text/css">
+*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}/*
+! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+.fixed {
+  position: fixed;
+}
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.sticky {
+  position: sticky;
+}
+.inset-0 {
+  inset: 0px;
+}
+.-right-6 {
+  right: -1.5rem;
+}
+.-top-6 {
+  top: -1.5rem;
+}
+.bottom-full {
+  bottom: 100%;
+}
+.left-0 {
+  left: 0px;
+}
+.right-6 {
+  right: 1.5rem;
+}
+.top-0 {
+  top: 0px;
+}
+.top-6 {
+  top: 1.5rem;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-50 {
+  z-index: 50;
+}
+.z-\[100\] {
+  z-index: 100;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-12 {
+  margin-bottom: 3rem;
+}
+.mb-16 {
+  margin-bottom: 4rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-12 {
+  margin-top: 3rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mt-6 {
+  margin-top: 1.5rem;
+}
+.mt-auto {
+  margin-top: auto;
+}
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+.aspect-\[4\/3\] {
+  aspect-ratio: 4/3;
+}
+.aspect-\[9\/16\] {
+  aspect-ratio: 9/16;
+}
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+.h-12 {
+  height: 3rem;
+}
+.h-48 {
+  height: 12rem;
+}
+.h-full {
+  height: 100%;
+}
+.w-12 {
+  width: 3rem;
+}
+.w-48 {
+  width: 12rem;
+}
+.w-full {
+  width: 100%;
+}
+.max-w-2xl {
+  max-width: 42rem;
+}
+.max-w-3xl {
+  max-width: 48rem;
+}
+.max-w-4xl {
+  max-width: 56rem;
+}
+.max-w-6xl {
+  max-width: 72rem;
+}
+.max-w-7xl {
+  max-width: 80rem;
+}
+.flex-1 {
+  flex: 1 1 0%;
+}
+.rotate-2 {
+  --tw-rotate: 2deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.rotate-6 {
+  --tw-rotate: 6deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.rotate-\[-1deg\] {
+  --tw-rotate: -1deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-end {
+  align-items: flex-end;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-12 {
+  gap: 3rem;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-3 {
+  gap: 0.75rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-6 {
+  gap: 1.5rem;
+}
+.gap-8 {
+  gap: 2rem;
+}
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.overflow-x-auto {
+  overflow-x: auto;
+}
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+.rounded-2xl {
+  border-radius: 1rem;
+}
+.rounded-3xl {
+  border-radius: 1.5rem;
+}
+.rounded-\[24px\] {
+  border-radius: 24px;
+}
+.rounded-\[32px\] {
+  border-radius: 32px;
+}
+.rounded-\[40px\] {
+  border-radius: 40px;
+}
+.rounded-\[48px\] {
+  border-radius: 48px;
+}
+.rounded-full {
+  border-radius: 9999px;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+.border {
+  border-width: 1px;
+}
+.border-2 {
+  border-width: 2px;
+}
+.border-y-4 {
+  border-top-width: 4px;
+  border-bottom-width: 4px;
+}
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+.border-b-4 {
+  border-bottom-width: 4px;
+}
+.border-t {
+  border-top-width: 1px;
+}
+.border-t-2 {
+  border-top-width: 2px;
+}
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity, 1));
+}
+.border-white\/20 {
+  border-color: rgb(255 255 255 / 0.2);
+}
+.bg-\[\#d53f8c\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(213 63 140 / var(--tw-bg-opacity, 1));
+}
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+.bg-black\/40 {
+  background-color: rgb(0 0 0 / 0.4);
+}
+.bg-cyan-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(207 250 254 / var(--tw-bg-opacity, 1));
+}
+.bg-cyan-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(103 232 249 / var(--tw-bg-opacity, 1));
+}
+.bg-cyan-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(236 254 255 / var(--tw-bg-opacity, 1));
+}
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+}
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
+}
+.bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
+}
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
+}
+.bg-green-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1));
+}
+.bg-orange-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 146 60 / var(--tw-bg-opacity, 1));
+}
+.bg-orange-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 247 237 / var(--tw-bg-opacity, 1));
+}
+.bg-pink-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 231 243 / var(--tw-bg-opacity, 1));
+}
+.bg-purple-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 232 255 / var(--tw-bg-opacity, 1));
+}
+.bg-purple-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(216 180 254 / var(--tw-bg-opacity, 1));
+}
+.bg-purple-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 245 255 / var(--tw-bg-opacity, 1));
+}
+.bg-red-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity, 1));
+}
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+}
+.bg-white\/50 {
+  background-color: rgb(255 255 255 / 0.5);
+}
+.bg-yellow-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 204 21 / var(--tw-bg-opacity, 1));
+}
+.p-10 {
+  padding: 2.5rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-3 {
+  padding: 0.75rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-6 {
+  padding: 1.5rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-24 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.pb-20 {
+  padding-bottom: 5rem;
+}
+.pt-4 {
+  padding-top: 1rem;
+}
+.pt-40 {
+  padding-top: 10rem;
+}
+.pt-8 {
+  padding-top: 2rem;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+.text-\[10px\] {
+  font-size: 10px;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.leading-none {
+  line-height: 1;
+}
+.leading-relaxed {
+  line-height: 1.625;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.tracking-tighter {
+  letter-spacing: -0.05em;
+}
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+}
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity, 1));
+}
+.text-green-400 {
+  --tw-text-opacity: 1;
+  color: rgb(74 222 128 / var(--tw-text-opacity, 1));
+}
+.text-orange-500 {
+  --tw-text-opacity: 1;
+  color: rgb(249 115 22 / var(--tw-text-opacity, 1));
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.underline {
+  text-decoration-line: underline;
+}
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-20 {
+  opacity: 0.2;
+}
+.opacity-30 {
+  opacity: 0.3;
+}
+.opacity-40 {
+  opacity: 0.4;
+}
+.opacity-70 {
+  opacity: 0.7;
+}
+.opacity-80 {
+  opacity: 0.8;
+}
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.backdrop-filter {
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.hover\:translate-y-\[-2px\]:hover {
+  --tw-translate-y: -2px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.hover\:rotate-90:hover {
+  --tw-rotate: 90deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.hover\:scale-110:hover {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.hover\:bg-cyan-50:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(236 254 255 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-gray-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-white\/80:hover {
+  background-color: rgb(255 255 255 / 0.8);
+}
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.group:hover .group-hover\:block {
+  display: block;
+}
+.group:hover .group-hover\:rotate-12 {
+  --tw-rotate: 12deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+@media (min-width: 640px) {
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 768px) {
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:w-auto {
+    width: auto;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .md\:justify-center {
+    justify-content: center;
+  }
+
+  .md\:p-16 {
+    padding: 4rem;
+  }
+
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .md\:text-right {
+    text-align: right;
+  }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .md\:text-9xl {
+    font-size: 8rem;
+    line-height: 1;
+  }
+}
+@media (min-width: 1024px) {
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}* {
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+    }
+
+    *::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+  </style></head>
+<body class="antialiased overflow-x-hidden" vid="6">
+
+    
+    <div id="toast" class="toast brutalist-border" vid="7">Copied to clipboard!</div>
+
+    
+    <div class="bg-[#d53f8c] border-b-4 border-black fixed w-full z-50 top-0" vid="8">
+        <div class="px-4 md:px-8 py-3 flex justify-between items-center" vid="9">
+            <div class="header-font text-white text-2xl md:text-3xl tracking-tighter" vid="10">GIRL + ENVIRONMENTâ„¢</div>
+            <div class="hidden md:flex flex-col items-end gap-2" vid="11">
+                <div class="flex gap-3 items-center" vid="12">
+                    <a href="#" class="bg-white brutalist-border px-4 py-2 rounded-full text-sm font-bold brutalist-shadow-sm" vid="13">CONTACT US</a>
+                    <a href="#" class="bg-cyan-300 brutalist-border px-4 py-2 rounded-full text-sm font-bold brutalist-shadow-sm" vid="14">BECOME A MEMBER</a>
+                    <a href="#" class="bg-black text-white px-5 py-2 rounded-full text-sm font-bold" vid="15">DONATE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <section class="pt-40 pb-20 px-6 bg-pink-100" vid="16">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-center" vid="17">
+            <div class="flex-1" vid="18">
+                <div class="flex flex-wrap gap-3 mb-6" vid="19">
+                    <span class="bg-yellow-400 brutalist-border px-4 py-1 rounded-full text-xs font-bold" vid="20">SUMMER CAMPAIGN</span>
+                    <span class="bg-cyan-300 brutalist-border px-4 py-1 rounded-full text-xs font-bold" vid="21">CLIMATE JUSTICE</span>
+                    <span class="bg-purple-300 brutalist-border px-4 py-1 rounded-full text-xs font-bold" vid="22">MEMBER TOOLKIT</span>
+                </div>
+                <h1 class="header-font text-7xl md:text-9xl mb-6 leading-none" vid="23">CAMP GPE ðŸ•ï¸</h1>
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 bg-white brutalist-border inline-block px-4 py-2 rotate-[-1deg]" vid="24">Hot Girl Summer, but make it climate advocacy.</h2>
+                <p class="text-xl mb-8 max-w-2xl leading-relaxed" vid="25">
+                    A summer-long engagement campaign that turns everyday social media activity into storytelling, community action, content creation, and climate advocacy.
+                </p>
+                <div class="flex flex-wrap gap-4" vid="26">
+                    <button class="bg-black text-white px-8 py-4 rounded-2xl font-bold brutalist-shadow-hover text-lg" vid="27">VISIT CAMP GPE</button>
+                    <button class="bg-white brutalist-border px-8 py-4 rounded-2xl font-bold brutalist-shadow-hover text-lg" vid="28">DOWNLOAD ALL ASSETS</button>
+                </div>
+                <p class="mt-6 font-bold flex items-center gap-2" vid="29"><i class="ph ph-calendar text-2xl" vid="30"></i> JULY â€“ AUGUST 2024</p>
+            </div>
+            <div class="flex-1 w-full" vid="31">
+                <div class="bg-white brutalist-border p-4 rounded-[40px] brutalist-shadow rotate-2 relative overflow-hidden group" vid="32">
+                    <div class="bg-gray-200 aspect-[4/3] rounded-[24px] flex items-center justify-center border-2 border-black overflow-hidden" vid="33">
+                        <i class="ph ph-image text-8xl text-gray-400" vid="34"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <div class="sticky-nav bg-white border-y-4 border-black px-4 py-2 overflow-x-auto whitespace-nowrap" vid="35">
+        <div class="max-w-6xl mx-auto flex gap-6 md:justify-center items-center font-bold text-sm uppercase" vid="36">
+            <a href="#quick-links" class="hover:text-magenta-600 px-3 py-1" vid="37">Quick Links</a>
+            <a href="#about" class="hover:text-magenta-600 px-3 py-1" vid="38">About</a>
+            <a href="#media-library" class="hover:text-magenta-600 px-3 py-1" vid="39">Media Library</a>
+            <a href="#social-posts" class="hover:text-magenta-600 px-3 py-1" vid="40">Social Posts</a>
+            <a href="#partner-posts" class="hover:text-magenta-600 px-3 py-1" vid="41">Partner Toolkit</a>
+            <a href="#resources" class="hover:text-magenta-600 px-3 py-1" vid="42">Downloads</a>
+        </div>
+    </div>
+
+    
+    <section class="py-12 px-6 bg-cyan-50 border-b-4 border-black" vid="43">
+        <div class="max-w-6xl mx-auto" vid="44">
+            <div class="flex items-center gap-2 mb-6" vid="45">
+                <i class="ph ph-code text-3xl" vid="46"></i>
+                <h2 class="header-font text-3xl" vid="47">SOCIAL PREVIEW PREVIEW</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8" vid="48">
+                <div class="bg-white brutalist-border p-6 rounded-3xl brutalist-shadow-sm overflow-hidden" vid="49">
+                    <div class="text-xs font-mono bg-gray-900 text-green-400 p-4 rounded-xl mb-4 overflow-x-auto" vid="50">
+                        <meta property="og:title" content="Camp GPE Social Media Toolkit" vid="51"><br vid="52">
+                        <meta property="og:description" content="Access Camp GPE graphics, captions, petitions, and resources." vid="53"><br vid="54">
+                        <meta property="og:image" content="https://girlplusenvironment.org/camp-gpe-og.jpg" vid="55"><br vid="56">
+                        <meta property="og:url" content="https://girlplusenvironment.org/toolkits/camp-gpe" vid="57"><br vid="58">
+                        <meta name="twitter:card" content="summary_large_image" vid="59">
+                    </div>
+                </div>
+                <div class="bg-white brutalist-border rounded-3xl overflow-hidden brutalist-shadow-sm flex flex-col" vid="60">
+                    <div class="bg-gray-200 h-48 border-b-2 border-black flex items-center justify-center" vid="61">
+                        <i class="ph ph-share-network text-5xl opacity-30" vid="62"></i>
+                    </div>
+                    <div class="p-4" vid="63">
+                        <p class="text-xs text-gray-500 mb-1" vid="64">GIRLPLUSENVIRONMENT.ORG</p>
+                        <h4 class="font-bold text-lg mb-1" vid="65">Camp GPE Social Media Toolkit</h4>
+                        <p class="text-sm opacity-80" vid="66">Access Camp GPE graphics, captions, petitions, and resources from Girl Plus Environment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="quick-links" class="py-24 px-6 bg-white border-b-4 border-black" vid="67">
+        <div class="max-w-6xl mx-auto" vid="68">
+            <h2 class="header-font text-5xl mb-12" vid="69">âš¡ QUICK LINKS</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6" vid="70">
+                <a href="#" class="bg-white brutalist-border p-6 rounded-3xl brutalist-shadow-sm brutalist-shadow-hover flex flex-col gap-3 group" vid="71">
+                    <div class="bg-orange-400 w-12 h-12 rounded-xl border-2 border-black flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform" vid="72">
+                        <i class="ph ph-identification-card" vid="73"></i>
+                    </div>
+                    <div vid="74">
+                        <h4 class="font-bold text-lg" vid="75">Event Registration</h4>
+                        <p class="text-xs opacity-70" vid="76">Sign up for the next live session.</p>
+                    </div>
+                </a>
+                <a href="#" class="bg-white brutalist-border p-6 rounded-3xl brutalist-shadow-sm brutalist-shadow-hover flex flex-col gap-3 group" vid="77">
+                    <div class="bg-cyan-300 w-12 h-12 rounded-xl border-2 border-black flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform" vid="78">
+                        <i class="ph ph-globe" vid="79"></i>
+                    </div>
+                    <div vid="80">
+                        <h4 class="font-bold text-lg" vid="81">Campaign Webpage</h4>
+                        <p class="text-xs opacity-70" vid="82">Visit the main GPE campaign site.</p>
+                    </div>
+                </a>
+                <a href="#" class="bg-white brutalist-border p-6 rounded-3xl brutalist-shadow-sm brutalist-shadow-hover flex flex-col gap-3 group" vid="83">
+                    <div class="bg-magenta-400 w-12 h-12 rounded-xl border-2 border-black flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform" vid="84">
+                        <i class="ph ph-pencil-line text-white" vid="85"></i>
+                    </div>
+                    <div vid="86">
+                        <h4 class="font-bold text-lg" vid="87">Extreme Weather</h4>
+                        <p class="text-xs opacity-70" vid="88">Sign our latest national petition.</p>
+                    </div>
+                </a>
+                <a href="#" class="bg-white brutalist-border p-6 rounded-3xl brutalist-shadow-sm brutalist-shadow-hover flex flex-col gap-3 group" vid="89">
+                    <div class="bg-yellow-400 w-12 h-12 rounded-xl border-2 border-black flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform" vid="90">
+                        <i class="ph ph-lightning" vid="91"></i>
+                    </div>
+                    <div vid="92">
+                        <h4 class="font-bold text-lg" vid="93">Energy Bills Petition</h4>
+                        <p class="text-xs opacity-70" vid="94">Help demand relief from rising costs.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="about" class="py-24 px-6 bg-orange-50 border-b-4 border-black" vid="95">
+        <div class="max-w-4xl mx-auto" vid="96">
+            <div class="bg-white brutalist-border p-10 md:p-16 rounded-[48px] brutalist-shadow relative" vid="97">
+                <div class="absolute -top-6 -right-6 bg-magenta-500 brutalist-border px-6 py-2 rotate-6 text-white font-bold" vid="98">ABOUT CAMP GPE</div>
+                <h2 class="header-font text-5xl mb-8 leading-tight" vid="99">SUMMER JUST GOT ACTIVATED.</h2>
+                <div class="space-y-6 text-xl leading-relaxed" vid="100">
+                    <p vid="101">GPE Summer Camp is a summer-long engagement campaign that turns Hot Girl Summer into climate advocacy. Throughout July and August, GPE members will complete challenges that combine storytelling, community action, content creation, and advocacy while earning points for their camp cabins.</p>
+                    <p vid="102">Along the way, members will help raise awareness about the impacts of extreme heat, rising energy costs, and climate justice issues affecting their communities. Participants can earn recognition, prizes, and opportunities to be featured across GPEâ€™s channels.</p>
+                </div>
+                <div class="mt-12 grid grid-cols-2 gap-4" vid="103">
+                    <div class="border-t-2 border-black pt-4" vid="104">
+                        <p class="font-bold uppercase text-sm" vid="105">GOAL</p>
+                        <p vid="106">Mobilize 500+ climate advocates.</p>
+                    </div>
+                    <div class="border-t-2 border-black pt-4" vid="107">
+                        <p class="font-bold uppercase text-sm" vid="108">PARTICIPANTS</p>
+                        <p vid="109">GPE Members &amp; Allies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="media-library" class="py-24 px-6 bg-white border-b-4 border-black" vid="110">
+        <div class="max-w-6xl mx-auto" vid="111">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12" vid="112">
+                <div vid="113">
+                    <h2 class="header-font text-6xl" vid="114">ðŸ–¼ï¸ MEDIA LIBRARY</h2>
+                    <p class="text-xl mt-2 font-bold opacity-70" vid="115">Download graphics, carousels, and stories.</p>
+                </div>
+                <div class="flex gap-2 bg-gray-100 p-2 brutalist-border rounded-2xl overflow-x-auto w-full md:w-auto" vid="116">
+                    <button class="px-6 py-2 rounded-xl font-bold tab-active" onclick="filterMedia('all', this)" vid="117">ALL</button>
+                    <button class="px-6 py-2 rounded-xl font-bold hover:bg-gray-200" onclick="filterMedia('carousel', this)" vid="118">CAROUSELS</button>
+                    <button class="px-6 py-2 rounded-xl font-bold hover:bg-gray-200" onclick="filterMedia('single', this)" vid="119">SINGLE</button>
+                    <button class="px-6 py-2 rounded-xl font-bold hover:bg-gray-200" onclick="filterMedia('story', this)" vid="120">STORIES</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="media-grid" vid="121">
+                
+                <div class="bg-white brutalist-border p-6 rounded-[32px] brutalist-shadow-sm flex flex-col gap-4 media-item" data-type="carousel" vid="122">
+                    <div class="aspect-square bg-gray-200 rounded-2xl border-2 border-black overflow-hidden relative group" vid="123">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity cursor-pointer" onclick="openMediaViewer('Carousel Launch', '6 slides', '1080x1350')" vid="124">
+                            <i class="ph ph-eye text-white text-4xl" vid="125"></i>
+                        </div>
+                        <div class="w-full h-full flex items-center justify-center" vid="126">
+                             <i class="ph ph-files text-6xl text-gray-400" vid="127"></i>
+                        </div>
+                    </div>
+                    <div vid="128">
+                        <span class="bg-purple-100 brutalist-border px-3 py-1 rounded-full text-[10px] font-bold uppercase mb-2 inline-block" vid="129">CAROUSEL â€¢ 6 SLIDES</span>
+                        <h4 class="header-font text-lg" vid="130">CAMP GPE LAUNCH</h4>
+                    </div>
+                    <div class="flex gap-2 mt-auto" vid="131">
+                        <button class="flex-1 bg-black text-white py-2 rounded-xl font-bold text-sm" vid="132">DOWNLOAD</button>
+                        <button class="bg-white brutalist-border p-2 rounded-xl hover:bg-gray-100" title="Copy Link" vid="133"><i class="ph ph-link" vid="134"></i></button>
+                    </div>
+                </div>
+
+                
+                <div class="bg-white brutalist-border p-6 rounded-[32px] brutalist-shadow-sm flex flex-col gap-4 media-item" data-type="single" vid="135">
+                    <div class="aspect-square bg-cyan-100 rounded-2xl border-2 border-black overflow-hidden relative group" vid="136">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity cursor-pointer" onclick="openMediaViewer('Extreme Weather Graphic', 'Single', '1080x1080')" vid="137">
+                            <i class="ph ph-eye text-white text-4xl" vid="138"></i>
+                        </div>
+                        <div class="w-full h-full flex items-center justify-center" vid="139">
+                             <i class="ph ph-sun text-6xl text-orange-500" vid="140"></i>
+                        </div>
+                    </div>
+                    <div vid="141">
+                        <span class="bg-cyan-100 brutalist-border px-3 py-1 rounded-full text-[10px] font-bold uppercase mb-2 inline-block" vid="142">SINGLE GRAPHIC</span>
+                        <h4 class="header-font text-lg" vid="143">EXTREME WEATHER INFO</h4>
+                    </div>
+                    <div class="flex gap-2 mt-auto" vid="144">
+                        <button class="flex-1 bg-black text-white py-2 rounded-xl font-bold text-sm" vid="145">DOWNLOAD</button>
+                        <button class="bg-white brutalist-border p-2 rounded-xl hover:bg-gray-100" vid="146"><i class="ph ph-link" vid="147"></i></button>
+                    </div>
+                </div>
+
+                
+                <div class="bg-white brutalist-border p-6 rounded-[32px] brutalist-shadow-sm flex flex-col gap-4 media-item" data-type="story" vid="148">
+                    <div class="aspect-[9/16] bg-magenta-50 rounded-2xl border-2 border-black overflow-hidden relative group" vid="149">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/40 transition-opacity cursor-pointer" onclick="openMediaViewer('Story Sticker', 'Portrait', '1080x1920')" vid="150">
+                            <i class="ph ph-eye text-white text-4xl" vid="151"></i>
+                        </div>
+                        <div class="w-full h-full flex items-center justify-center" vid="152">
+                             <i class="ph ph-instagram-logo text-6xl text-magenta-500" vid="153"></i>
+                        </div>
+                    </div>
+                    <div vid="154">
+                        <span class="bg-magenta-100 brutalist-border px-3 py-1 rounded-full text-[10px] font-bold uppercase mb-2 inline-block" vid="155">STORY â€¢ PORTRAIT</span>
+                        <h4 class="header-font text-lg" vid="156">CABIN CHECK-IN STICKER</h4>
+                    </div>
+                    <div class="flex gap-2 mt-auto" vid="157">
+                        <button class="flex-1 bg-black text-white py-2 rounded-xl font-bold text-sm" vid="158">DOWNLOAD</button>
+                        <button class="bg-white brutalist-border p-2 rounded-xl hover:bg-gray-100" vid="159"><i class="ph ph-link" vid="160"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="social-posts" class="py-24 px-6 bg-cyan-100 border-b-4 border-black" vid="161">
+        <div class="max-w-6xl mx-auto" vid="162">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12" vid="163">
+                <div vid="164">
+                    <h2 class="header-font text-6xl" vid="165">ðŸ“£ COPY &amp; SHARE</h2>
+                    <p class="text-xl mt-2 font-bold opacity-70" vid="166">Captions ready for your favorite platforms.</p>
+                </div>
+                <div class="flex gap-2 bg-white/50 p-2 brutalist-border rounded-2xl overflow-x-auto w-full md:w-auto" vid="167">
+                    <button class="px-6 py-2 rounded-xl font-bold tab-active" onclick="filterPosts('all', this)" vid="168">ALL</button>
+                    <button class="px-6 py-2 rounded-xl font-bold hover:bg-white/80" onclick="filterPosts('participation', this)" vid="169">MEMBER</button>
+                    <button class="px-6 py-2 rounded-xl font-bold hover:bg-white/80" onclick="filterPosts('activation', this)" vid="170">ACTION</button>
+                    <button class="px-6 py-2 rounded-xl font-bold hover:bg-white/80" onclick="filterPosts('partner', this)" vid="171">PARTNER</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="posts-grid" vid="172">
+                
+                <div class="bg-white brutalist-border p-8 rounded-[40px] brutalist-shadow flex flex-col post-card" data-category="participation" vid="173">
+                    <div class="flex justify-between items-start mb-6" vid="174">
+                        <div vid="175">
+                            <h4 class="header-font text-2xl" vid="176">JOINING CAMP GPE</h4>
+                            <div class="flex gap-2 mt-2" vid="177">
+                                <span class="text-[10px] bg-green-100 brutalist-border px-2 py-0.5 rounded-full font-bold" vid="178">PARTICIPATION</span>
+                                <span class="text-[10px] bg-gray-100 brutalist-border px-2 py-0.5 rounded-full font-bold" vid="179">THREADS, LI, IG</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative bg-gray-50 brutalist-border p-6 rounded-2xl mb-6 flex-1" vid="180">
+                        <p class="font-mono text-sm leading-relaxed whitespace-pre-wrap caption-text" vid="181">Iâ€™m officially joining Camp GPE. â˜€ï¸ðŸ•ï¸
+
+For the next two months, Iâ€™ll be creating content to raise awareness about how extreme heat impacts our communities.
+
+Letâ€™s see which cabin takes home the win. #CampGPE #GirlPlusEnvironment</p>
+                        <div class="mt-4 text-[10px] font-bold opacity-40 uppercase" vid="182">Character Count: <span class="char-count" vid="183">189</span></div>
+                    </div>
+                    <div class="flex flex-wrap gap-3" vid="184">
+                        <button class="bg-yellow-400 brutalist-border px-4 py-2 rounded-xl font-bold text-sm brutalist-shadow-sm hover:translate-y-[-2px]" onclick="copyText(this)" vid="185">COPY TEXT</button>
+                        <div class="relative group" vid="186">
+                            <button class="bg-black text-white px-6 py-2 rounded-xl font-bold text-sm flex items-center gap-2" vid="187">SHARE <i class="ph ph-caret-down" vid="188"></i></button>
+                            <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-48 bg-white brutalist-border rounded-xl brutalist-shadow p-2 z-10" vid="189">
+                                <button class="w-full text-left px-3 py-2 text-xs font-bold hover:bg-cyan-50 rounded-lg flex items-center gap-2" onclick="shareTo('linkedin', this)" vid="190"><i class="ph ph-linkedin-logo" vid="191"></i> LinkedIn</button>
+                                <button class="w-full text-left px-3 py-2 text-xs font-bold hover:bg-cyan-50 rounded-lg flex items-center gap-2" onclick="shareTo('x', this)" vid="192"><i class="ph ph-twitter-logo" vid="193"></i> X (Twitter)</button>
+                                <button class="w-full text-left px-3 py-2 text-xs font-bold hover:bg-cyan-50 rounded-lg flex items-center gap-2" onclick="shareTo('facebook', this)" vid="194"><i class="ph ph-facebook-logo" vid="195"></i> Facebook</button>
+                                <button class="w-full text-left px-3 py-2 text-xs font-bold hover:bg-cyan-50 rounded-lg border-t-2 border-black mt-2 flex items-center gap-2" onclick="shareTo('native', this)" vid="196"><i class="ph ph-share-network" vid="197"></i> Device Share</button>
+                            </div>
+                        </div>
+                        <button class="text-[10px] font-bold underline" onclick="toggleEdit(this)" vid="198">PERSONALIZE</button>
+                    </div>
+                </div>
+
+                
+                <div class="bg-white brutalist-border p-8 rounded-[40px] brutalist-shadow flex flex-col post-card" data-category="activation" vid="199">
+                    <div class="flex justify-between items-start mb-6" vid="200">
+                        <div vid="201">
+                            <h4 class="header-font text-2xl" vid="202">RISING ENERGY BILLS</h4>
+                            <div class="flex gap-2 mt-2" vid="203">
+                                <span class="text-[10px] bg-red-100 brutalist-border px-2 py-0.5 rounded-full font-bold" vid="204">ACTIVATION</span>
+                                <span class="text-[10px] bg-gray-100 brutalist-border px-2 py-0.5 rounded-full font-bold" vid="205">X, LI, FB</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative bg-gray-50 brutalist-border p-6 rounded-2xl mb-6 flex-1" vid="206">
+                        <p class="font-mono text-sm leading-relaxed whitespace-pre-wrap caption-text" vid="207">This weekâ€™s Camp GPE challenge asked us to create a video about rising energy bills and clean energy solutions. 
+
+I shared why this issue matters to me. If you agree, please sign the petition through the link below.
+
+https://actionnetwork.org/letters/energy-relief</p>
+                        <div class="mt-4 text-[10px] font-bold opacity-40 uppercase" vid="208">Character Count: <span class="char-count" vid="209">244</span></div>
+                    </div>
+                    <div class="flex flex-wrap gap-3" vid="210">
+                        <button class="bg-yellow-400 brutalist-border px-4 py-2 rounded-xl font-bold text-sm brutalist-shadow-sm hover:translate-y-[-2px]" onclick="copyText(this)" vid="211">COPY TEXT</button>
+                        <div class="relative group" vid="212">
+                            <button class="bg-black text-white px-6 py-2 rounded-xl font-bold text-sm flex items-center gap-2" vid="213">SHARE <i class="ph ph-caret-down" vid="214"></i></button>
+                            <div class="hidden group-hover:block absolute bottom-full left-0 mb-2 w-48 bg-white brutalist-border rounded-xl brutalist-shadow p-2 z-10" vid="215">
+                                <button class="w-full text-left px-3 py-2 text-xs font-bold hover:bg-cyan-50 rounded-lg flex items-center gap-2" onclick="shareTo('linkedin', this)" vid="216"><i class="ph ph-linkedin-logo" vid="217"></i> LinkedIn</button>
+                                <button class="w-full text-left px-3 py-2 text-xs font-bold hover:bg-cyan-50 rounded-lg flex items-center gap-2" onclick="shareTo('x', this)" vid="218"><i class="ph ph-twitter-logo" vid="219"></i> X (Twitter)</button>
+                                <button class="w-full text-left px-3 py-2 text-xs font-bold hover:bg-cyan-50 rounded-lg flex items-center gap-2" onclick="shareTo('native', this)" vid="220"><i class="ph ph-share-network" vid="221"></i> Device Share</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                 
+                 <div class="bg-white brutalist-border p-8 rounded-[40px] brutalist-shadow flex flex-col post-card" data-category="participation" vid="222">
+                    <div class="flex justify-between items-start mb-6" vid="223">
+                        <div vid="224">
+                            <h4 class="header-font text-2xl" vid="225">CHALLENGE COMPLETE</h4>
+                            <div class="flex gap-2 mt-2" vid="226">
+                                <span class="text-[10px] bg-green-100 brutalist-border px-2 py-0.5 rounded-full font-bold" vid="227">PARTICIPATION</span>
+                                <span class="text-[10px] bg-gray-100 brutalist-border px-2 py-0.5 rounded-full font-bold" vid="228">IG, FB</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative bg-gray-50 brutalist-border p-6 rounded-2xl mb-6 flex-1" vid="229">
+                        <p class="font-mono text-sm leading-relaxed whitespace-pre-wrap caption-text" vid="230">Camp GPE challenge #1 complete âœ… One more point for my cabin. ðŸ•ï¸ Small actions add up. Excited to spend the summer learning, advocating, and connecting with GPE!</p>
+                        <div class="mt-4 text-[10px] font-bold opacity-40 uppercase" vid="231">Character Count: <span class="char-count" vid="232">165</span></div>
+                    </div>
+                    <div class="flex flex-wrap gap-3" vid="233">
+                        <button class="bg-yellow-400 brutalist-border px-4 py-2 rounded-xl font-bold text-sm brutalist-shadow-sm" onclick="copyText(this)" vid="234">COPY TEXT</button>
+                        <button class="bg-black text-white px-6 py-2 rounded-xl font-bold text-sm flex items-center gap-2" vid="235">SHARE</button>
+                    </div>
+                </div>
+                
+                
+                <div class="bg-white brutalist-border p-8 rounded-[40px] brutalist-shadow flex flex-col post-card" data-category="activation" vid="236">
+                    <div class="flex justify-between items-start mb-6" vid="237">
+                        <div vid="238">
+                            <h4 class="header-font text-2xl" vid="239">THE COST OF STAYING COOL</h4>
+                            <div class="flex gap-2 mt-2" vid="240">
+                                <span class="text-[10px] bg-red-100 brutalist-border px-2 py-0.5 rounded-full font-bold" vid="241">ACTIVATION</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative bg-gray-50 brutalist-border p-6 rounded-2xl mb-6 flex-1" vid="242">
+                        <p class="font-mono text-sm leading-relaxed whitespace-pre-wrap caption-text" vid="243">One thing people donâ€™t talk about enough is how expensive it can be to stay cool during extreme heat. Thatâ€™s why Iâ€™m participating in Camp GPE and sharing my experience this summer. ðŸ’š</p>
+                    </div>
+                    <div class="flex flex-wrap gap-3" vid="244">
+                        <button class="bg-yellow-400 brutalist-border px-4 py-2 rounded-xl font-bold text-sm brutalist-shadow-sm" onclick="copyText(this)" vid="245">COPY TEXT</button>
+                        <button class="bg-black text-white px-6 py-2 rounded-xl font-bold text-sm flex items-center gap-2" vid="246">SHARE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="partner-posts" class="py-24 px-6 bg-purple-100 border-b-4 border-black" vid="247">
+        <div class="max-w-6xl mx-auto" vid="248">
+            <div class="mb-16" vid="249">
+                <h2 class="header-font text-6xl mb-4" vid="250">ðŸ¤ PARTNER TOOLKIT</h2>
+                <p class="text-xl font-bold max-w-3xl" vid="251">Organizations and collaborators: use these posts to publicly support Camp GPE and amplify the campaign.</p>
+            </div>
+
+            
+            <div class="bg-white brutalist-border p-8 rounded-[40px] brutalist-shadow mb-12 flex flex-col md:flex-row gap-8" vid="252">
+                <div class="flex-1" vid="253">
+                    <h3 class="header-font text-xl mb-4" vid="254">PERSONALIZE ALL PARTNER POSTS</h3>
+                    <div class="space-y-4" vid="255">
+                        <div vid="256">
+                            <label class="block font-bold text-xs mb-1 uppercase" vid="257">Organization Name</label>
+                            <input type="text" id="partner-name-input" placeholder="e.g. Climate Action Hub" class="w-full brutalist-border p-3 rounded-xl text-sm font-mono focus:ring-2 ring-magenta-500 outline-none" oninput="updatePartnerPlaceholders()" vid="258">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 bg-purple-50 brutalist-border p-6 rounded-3xl" vid="259">
+                    <h4 class="font-bold text-sm mb-4 uppercase" vid="260">Partner Resources</h4>
+                    <div class="grid grid-cols-2 gap-4" vid="261">
+                        <button class="bg-white brutalist-border p-3 rounded-xl flex items-center gap-2 font-bold text-xs" vid="262"><i class="ph ph-download-simple" vid="263"></i> Logo Pack</button>
+                        <button class="bg-white brutalist-border p-3 rounded-xl flex items-center gap-2 font-bold text-xs" vid="264"><i class="ph ph-file-text" vid="265"></i> Brand Guide</button>
+                    </div>
+                    <div class="mt-6" vid="266">
+                        <p class="text-[10px] font-bold uppercase mb-2" vid="267">Campaign Hashtags</p>
+                        <div class="flex flex-wrap gap-2" vid="268">
+                            <span class="text-xs font-mono font-bold" vid="269">#CampGPE</span>
+                            <span class="text-xs font-mono font-bold" vid="270">#ClimateJustice</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" vid="271">
+                
+                <div class="bg-white brutalist-border p-8 rounded-[40px] brutalist-shadow flex flex-col post-card" data-category="partner" vid="272">
+                    <div class="mb-6" vid="273">
+                        <h4 class="header-font text-2xl uppercase" vid="274">Supporting Camp GPE</h4>
+                        <span class="text-[10px] bg-purple-100 brutalist-border px-2 py-0.5 rounded-full font-bold mt-2 inline-block" vid="275">PARTNER</span>
+                    </div>
+                    <div class="bg-gray-50 brutalist-border p-6 rounded-2xl mb-6 flex-1" vid="276">
+                        <p class="font-mono text-sm leading-relaxed whitespace-pre-wrap caption-text" id="partner-caption-1" vid="277"><span class="partner-name" vid="278">[Partner Organization]</span> is proud to support Girl Plus Environmentâ€™s Summer Camp. â˜€ï¸ Throughout July and August, GPE members will be sharing stories and raising awareness about how extreme heat impacts their communities. We canâ€™t wait to see the impact of this yearâ€™s campers! ðŸ’š</p>
+                    </div>
+                    <div class="flex flex-wrap gap-3" vid="279">
+                        <button class="bg-yellow-400 brutalist-border px-4 py-2 rounded-xl font-bold text-sm brutalist-shadow-sm" onclick="copyText(this)" vid="280">COPY TEXT</button>
+                        <button class="bg-black text-white px-6 py-2 rounded-xl font-bold text-sm" vid="281">SHARE</button>
+                    </div>
+                </div>
+
+                
+                <div class="bg-white brutalist-border p-8 rounded-[40px] brutalist-shadow flex flex-col post-card" data-category="partner" vid="282">
+                    <div class="mb-6" vid="283">
+                        <h4 class="header-font text-2xl uppercase" vid="284">Storytelling &amp; Action</h4>
+                        <span class="text-[10px] bg-purple-100 brutalist-border px-2 py-0.5 rounded-full font-bold mt-2 inline-block" vid="285">PARTNER</span>
+                    </div>
+                    <div class="bg-gray-50 brutalist-border p-6 rounded-2xl mb-6 flex-1" vid="286">
+                        <p class="font-mono text-sm leading-relaxed whitespace-pre-wrap caption-text" id="partner-caption-2" vid="287">This summer, Girl Plus Environment is helping members connect climate advocacy with storytelling. <span class="partner-name" vid="288">[Partner Organization]</span> is excited to support these leaders and the vital work they're doing for climate justice. #CampGPE</p>
+                    </div>
+                    <div class="flex flex-wrap gap-3" vid="289">
+                        <button class="bg-yellow-400 brutalist-border px-4 py-2 rounded-xl font-bold text-sm brutalist-shadow-sm" onclick="copyText(this)" vid="290">COPY TEXT</button>
+                        <button class="bg-black text-white px-6 py-2 rounded-xl font-bold text-sm" vid="291">SHARE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="resources" class="py-24 px-6 bg-white border-b-4 border-black" vid="292">
+        <div class="max-w-6xl mx-auto" vid="293">
+            <h2 class="header-font text-6xl mb-12" vid="294">ðŸ“¦ RESOURCE DOWNLOADS</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8" vid="295">
+                <div class="bg-white brutalist-border p-8 rounded-3xl brutalist-shadow-sm flex flex-col gap-4" vid="296">
+                    <div class="text-4xl" vid="297">ðŸ“„</div>
+                    <div vid="298">
+                        <h4 class="header-font text-xl" vid="299">CONCEPT BRIEF</h4>
+                        <p class="text-xs mt-1" vid="300">Full program overview and objectives (PDF).</p>
+                    </div>
+                    <button class="bg-cyan-300 brutalist-border px-4 py-2 rounded-xl font-bold text-sm mt-auto" vid="301">OPEN PDF</button>
+                </div>
+                <div class="bg-white brutalist-border p-8 rounded-3xl brutalist-shadow-sm flex flex-col gap-4" vid="302">
+                    <div class="text-4xl" vid="303">ðŸ”—</div>
+                    <div vid="304">
+                        <h4 class="header-font text-xl" vid="305">SUBMISSION FORM</h4>
+                        <p class="text-xs mt-1" vid="306">Link for members to submit their points.</p>
+                    </div>
+                    <button class="bg-yellow-400 brutalist-border px-4 py-2 rounded-xl font-bold text-sm mt-auto" vid="307">VISIT FORM</button>
+                </div>
+                <div class="bg-white brutalist-border p-8 rounded-3xl brutalist-shadow-sm flex flex-col gap-4" vid="308">
+                    <div class="text-4xl" vid="309">ðŸŽ¨</div>
+                    <div vid="310">
+                        <h4 class="header-font text-xl" vid="311">LOGO PACKAGE</h4>
+                        <p class="text-xs mt-1" vid="312">High-res vector and web-ready GPE logos.</p>
+                    </div>
+                    <button class="bg-magenta-400 brutalist-border px-4 py-2 rounded-xl font-bold text-sm mt-auto" vid="313">DOWNLOAD ZIP</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="bg-magenta-600 text-white py-12 px-8" vid="314">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8" vid="315">
+            <div class="header-font text-4xl" vid="316">GIRL + ENVIRONMENTâ„¢</div>
+            <div class="text-center md:text-right" vid="317">
+                <p class="font-bold text-lg mb-2" vid="318">Hot Girl Summerâ€¦but Make It Climate Advocacy.</p>
+                <div class="flex gap-4 justify-center md:justify-end mt-4" vid="319">
+                    <i class="ph ph-instagram-logo text-3xl cursor-pointer hover:scale-110 transition-transform" vid="320"></i>
+                    <i class="ph ph-tiktok-logo text-3xl cursor-pointer hover:scale-110 transition-transform" vid="321"></i>
+                    <i class="ph ph-twitter-logo text-3xl cursor-pointer hover:scale-110 transition-transform" vid="322"></i>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-12 pt-8 border-t border-white/20 text-sm opacity-70" vid="323">
+            Â© 2024 GIRL PLUS ENVIRONMENT. CAMP GPE PROGRAM. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    
+    <div id="media-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6 modal-overlay" vid="324">
+        <button class="absolute top-6 right-6 text-white text-5xl hover:rotate-90 transition-transform" onclick="closeMediaViewer()" vid="325"><i class="ph ph-x" vid="326"></i></button>
+        <div class="bg-white brutalist-border rounded-[48px] max-w-4xl w-full p-8 brutalist-shadow-lg flex flex-col md:flex-row gap-8" vid="327">
+            <div class="flex-1 aspect-square bg-gray-100 rounded-3xl border-2 border-black flex items-center justify-center overflow-hidden" vid="328">
+                <i class="ph ph-image text-8xl opacity-20" vid="329"></i>
+            </div>
+            <div class="flex-1 flex flex-col" vid="330">
+                <div class="flex gap-2 mb-4" vid="331">
+                    <span id="modal-type" class="bg-gray-100 brutalist-border px-3 py-1 rounded-full text-[10px] font-bold uppercase" vid="332">TYPE</span>
+                    <span id="modal-dims" class="bg-gray-100 brutalist-border px-3 py-1 rounded-full text-[10px] font-bold uppercase" vid="333">1080x1080</span>
+                </div>
+                <h3 id="modal-title" class="header-font text-4xl mb-6" vid="334">ASSET TITLE</h3>
+                <p class="text-sm mb-8 opacity-70" vid="335">Perfect for sharing on Instagram, LinkedIn, or Threads. Includes full-color GPE branding and high-contrast typography.</p>
+                <div class="mt-auto flex flex-col gap-3" vid="336">
+                    <button class="bg-black text-white w-full py-4 rounded-2xl font-bold brutalist-shadow-sm" vid="337">DOWNLOAD ASSET</button>
+                    <button class="bg-white brutalist-border w-full py-4 rounded-2xl font-bold" vid="338">COPY ASSET LINK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script vid="339">
+        
+        const toolkit = {
+            slug: "camp-gpe",
+            canonicalUrl: "https://girlplusenvironment.org/toolkits/camp-gpe",
+            socialPreview: {
+                title: "Camp GPE Social Media Toolkit",
+                image: "https://girlplusenvironment.org/camp-gpe-og.jpg"
+            }
+        };
+
+        
+        function filterMedia(type, btn) {
+            const items = document.querySelectorAll('.media-item');
+            const btns = btn.parentElement.querySelectorAll('button');
+            btns.forEach(b => b.classList.remove('tab-active'));
+            btn.classList.add('tab-active');
+
+            items.forEach(item => {
+                if (type === 'all' || item.dataset.type === type) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function filterPosts(category, btn) {
+            const cards = document.querySelectorAll('.post-card');
+            const btns = btn.parentElement.querySelectorAll('button');
+            btns.forEach(b => b.classList.remove('tab-active'));
+            btn.classList.add('tab-active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2000);
+        }
+
+        function copyText(btn) {
+            const card = btn.closest('.post-card');
+            const text = card.querySelector('.caption-text').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("Copied to clipboard!");
+            });
+        }
+
+        function toggleEdit(btn) {
+            const card = btn.closest('.post-card');
+            const p = card.querySelector('.caption-text');
+            const currentText = p.innerText;
+            
+            if (btn.innerText === "PERSONALIZE") {
+                const textarea = document.createElement('textarea');
+                textarea.className = "w-full h-48 brutalist-border p-3 rounded-xl text-sm font-mono focus:ring-2 ring-magenta-500 outline-none mb-4";
+                textarea.value = currentText;
+                p.style.display = 'none';
+                p.after(textarea);
+                btn.innerText = "SAVE EDITS";
+            } else {
+                const textarea = card.querySelector('textarea');
+                p.innerText = textarea.value;
+                p.style.display = 'block';
+                textarea.remove();
+                btn.innerText = "PERSONALIZE";
+            }
+        }
+
+        
+        function shareTo(platform, btn) {
+            const card = btn.closest('.post-card');
+            const text = card.querySelector('.caption-text').innerText;
+            const fullText = `${text}\n\n${toolkit.canonicalUrl}`;
+            const encodedText = encodeURIComponent(fullText);
+            const encodedUrl = encodeURIComponent(toolkit.canonicalUrl);
+
+            let shareUrl = "";
+
+            switch(platform) {
+                case 'linkedin':
+                    
+                    navigator.clipboard.writeText(text).then(() => {
+                        showToast("Caption copied! Opening LinkedIn...");
+                        setTimeout(() => {
+                            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`, '_blank');
+                        }, 500);
+                    });
+                    return;
+                case 'x':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodedText}`;
+                    break;
+                case 'facebook':
+                    navigator.clipboard.writeText(text).then(() => {
+                        showToast("Caption copied! Opening Facebook...");
+                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank');
+                    });
+                    return;
+                case 'native':
+                    if (navigator.share) {
+                        navigator.share({
+                            title: toolkit.socialPreview.title,
+                            text: text,
+                            url: toolkit.canonicalUrl
+                        }).catch(console.error);
+                    } else {
+                        showToast("Native share not supported on this device.");
+                    }
+                    return;
+            }
+
+            if (shareUrl) window.open(shareUrl, '_blank');
+        }
+
+        
+        function openMediaViewer(title, type, dims) {
+            const modal = document.getElementById('media-modal');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-type').innerText = type;
+            document.getElementById('modal-dims').innerText = dims;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMediaViewer() {
+            document.getElementById('media-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        
+        function updatePartnerPlaceholders() {
+            const val = document.getElementById('partner-name-input').value || "[Partner Organization]";
+            const targets = document.querySelectorAll('.partner-name');
+            targets.forEach(t => t.innerText = val);
+        }
+
+        
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMediaViewer();
+        });
+    </script>
+
+</body></html>
