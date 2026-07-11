@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
+    body { font-family: "Space Mono", monospace; background: #fbd3d3; color: #000; }
+    .header-font { font-family: "Archivo Black", sans-serif; text-transform: uppercase; }
+    .brutalist-border { border: 3px solid #000; }
+    .brutalist-shadow { box-shadow: 8px 8px 0 #000; }
+    .brutalist-shadow-hover { transition: transform .18s ease, box-shadow .18s ease; }
+    .brutalist-shadow-hover:hover { box-shadow: 12px 12px 0 #000; transform: translate(-4px,-4px); }
+    .hero-pattern {
+      background-color: #d53f8c;
+      background-image: radial-gradient(rgba(0,0,0,.2) 2px, transparent 2px);
+      background-size: 30px 30px;
+    }
+    .cute-pattern {
+      background-image: radial-gradient(#a5f3fc 2px, transparent 2px);
+      background-size: 24px 24px;
+    }
+    input, textarea, select {
+      border: 3px solid #000 !important;
+      border-radius: 12px !important;
+      padding: 12px 16px !important;
+      font-family: "Space Mono", monospace;
+      width: 100%;
+      background: #fff;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      background: #fdf2f8;
+    }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    @media (max-width: 767px) {
+      .brutalist-shadow { box-shadow: 5px 5px 0 #000; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="bg-yellow-100 min-h-screen cute-pattern py-14 md:py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <a href="REPLACE-WITH-WIX-LANDING-PAGE-URL"
+         class="mb-10 inline-flex items-center gap-2 header-font hover:-translate-x-1 transition-transform">
+        <i class="ph ph-arrow-left"></i> Back to actions
+      </a>
+
+      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+        <section>
+          <h1 class="header-font text-5xl md:text-8xl mb-8 leading-none">High Energy Bills</h1>
+          <p class="header-font text-xl md:text-2xl text-orange-600 mb-10 italic">
+            Bestie... the math is not mathing.
+          </p>
+
+          <div class="bg-white brutalist-border p-8 md:p-10 rounded-[40px] brutalist-shadow mb-10">
+            <div class="flex items-center gap-5 mb-6">
+              <div class="bg-orange-400 brutalist-border p-4 rounded-2xl text-3xl">
+                <i class="ph ph-money"></i>
+              </div>
+              <h2 class="header-font text-xl">The Problem</h2>
+            </div>
+            <p class="text-lg md:text-xl leading-relaxed">
+              Our energy bills keep going up, but they don't have to. Big utility companies are profiting
+              while families struggle to keep the lights on and the AC running during record heat.
+            </p>
+          </div>
+
+          <div class="bg-white brutalist-border p-8 md:p-10 rounded-[40px] brutalist-shadow">
+            <div class="flex items-center gap-5 mb-6">
+              <div class="bg-cyan-400 brutalist-border p-4 rounded-2xl text-3xl">
+                <i class="ph ph-leaf"></i>
+              </div>
+              <h2 class="header-font text-xl">The Solution</h2>
+            </div>
+            <p class="text-lg md:text-xl leading-relaxed">
+              Clean energy can lower costs, create healthier communities, and make energy more affordable.
+              We need policies that prioritize people over profits.
+            </p>
+          </div>
+        </section>
+
+        <section class="bg-white brutalist-border p-8 md:p-12 rounded-[48px] brutalist-shadow">
+          <h2 class="header-font text-3xl mb-8 text-center">Add Your Name</h2>
+
+          <!-- Replace this demo form with the correct Action Network embed or Wix form. -->
+          <form class="space-y-6" onsubmit="event.preventDefault();">
+            <div>
+              <label class="header-font text-sm mb-2 block">Full Name</label>
+              <input type="text" placeholder="Your name here" required>
+            </div>
+            <div>
+              <label class="header-font text-sm mb-2 block">Email Address</label>
+              <input type="email" placeholder="hello@example.com" required>
+            </div>
+            <div>
+              <label class="header-font text-sm mb-2 block">ZIP Code</label>
+              <input type="text" placeholder="12345" required>
+            </div>
+            <div>
+              <label class="header-font text-sm mb-2 block">A Message for Leaders</label>
+              <textarea rows="4" placeholder="Tell them why this matters to you..."></textarea>
+            </div>
+            <button type="submit"
+                    class="w-full bg-black text-white py-5 px-6 rounded-full header-font text-xl md:text-2xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-4">
+              Sign the Petition <i class="ph ph-pencil-line"></i>
+            </button>
+          </form>
+
+          <p class="text-center mt-6 text-sm opacity-60">
+            Replace this form before publishing. It is visual only.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

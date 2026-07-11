@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
+    body { font-family: "Space Mono", monospace; background: #fbd3d3; color: #000; }
+    .header-font { font-family: "Archivo Black", sans-serif; text-transform: uppercase; }
+    .brutalist-border { border: 3px solid #000; }
+    .brutalist-shadow { box-shadow: 8px 8px 0 #000; }
+    .brutalist-shadow-hover { transition: transform .18s ease, box-shadow .18s ease; }
+    .brutalist-shadow-hover:hover { box-shadow: 12px 12px 0 #000; transform: translate(-4px,-4px); }
+    .hero-pattern {
+      background-color: #d53f8c;
+      background-image: radial-gradient(rgba(0,0,0,.2) 2px, transparent 2px);
+      background-size: 30px 30px;
+    }
+    .cute-pattern {
+      background-image: radial-gradient(#a5f3fc 2px, transparent 2px);
+      background-size: 24px 24px;
+    }
+    input, textarea, select {
+      border: 3px solid #000 !important;
+      border-radius: 12px !important;
+      padding: 12px 16px !important;
+      font-family: "Space Mono", monospace;
+      width: 100%;
+      background: #fff;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      background: #fdf2f8;
+    }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    @media (max-width: 767px) {
+      .brutalist-shadow { box-shadow: 5px 5px 0 #000; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="bg-purple-100 min-h-screen py-14 md:py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <a href="REPLACE-WITH-WIX-LANDING-PAGE-URL"
+         class="mb-10 inline-flex items-center gap-2 header-font hover:-translate-x-1 transition-transform">
+        <i class="ph ph-arrow-left"></i> Back to actions
+      </a>
+
+      <section class="bg-white brutalist-border rounded-[40px] md:rounded-[60px] overflow-hidden brutalist-shadow">
+        <div class="bg-green-400 p-8 md:p-12 border-b-4 border-black">
+          <h1 class="header-font text-3xl md:text-6xl text-white leading-tight"
+              style="-webkit-text-stroke:2px black;">
+            Mobile Climate Adaptation Plan Survey
+          </h1>
+        </div>
+
+        <div class="p-8 md:p-12 grid md:grid-cols-2 gap-12 md:gap-16">
+          <div>
+            <p class="text-lg md:text-xl leading-relaxed mb-8">
+              Real environmental action led by us and for us. Girl Plus Environment is helping Gulf South
+              community-based organizations secure funding for disaster preparedness.
+            </p>
+
+            <div class="bg-purple-200 brutalist-border p-8 rounded-3xl mb-8">
+              <h2 class="header-font text-xl mb-4 flex items-center gap-3">
+                <i class="ph ph-map-pin"></i> Gulf South Focus
+              </h2>
+              <p>
+                We are focusing on communities surrounding the Gulf of Mexico. Join us in protecting our homes.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-4">
+              <span class="bg-white brutalist-border px-4 py-2 rounded-full font-bold">Louisiana</span>
+              <span class="bg-white brutalist-border px-4 py-2 rounded-full font-bold">Mississippi</span>
+              <span class="bg-white brutalist-border px-4 py-2 rounded-full font-bold">Alabama</span>
+              <span class="bg-white brutalist-border px-4 py-2 rounded-full font-bold">Florida</span>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="header-font text-2xl mb-8">Community Feedback Form</h2>
+
+            <!-- Replace this demo form with your Wix form or survey embed. -->
+            <form class="space-y-6" onsubmit="event.preventDefault();">
+              <div>
+                <label class="header-font text-xs block mb-1">Name</label>
+                <input type="text" placeholder="Enter your name">
+              </div>
+              <div>
+                <label class="header-font text-xs block mb-1">Email</label>
+                <input type="email" placeholder="Email address">
+              </div>
+              <div>
+                <label class="header-font text-xs block mb-1">State</label>
+                <select>
+                  <option>Select your state</option>
+                  <option>Louisiana</option>
+                  <option>Mississippi</option>
+                  <option>Alabama</option>
+                  <option>Florida</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label class="header-font text-xs block mb-1">Your Feedback</label>
+                <textarea rows="5" placeholder="What are the biggest climate challenges in your area?"></textarea>
+              </div>
+              <button type="submit"
+                      class="w-full bg-green-400 brutalist-border py-5 px-6 rounded-full header-font text-xl brutalist-shadow-hover flex items-center justify-center gap-3">
+                Submit Feedback <i class="ph ph-paper-plane-right"></i>
+              </button>
+            </form>
+
+            <p class="text-center mt-6 text-sm opacity-60">
+              Replace this form before publishing. It is visual only.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
