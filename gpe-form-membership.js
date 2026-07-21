@@ -213,6 +213,7 @@
       controller = new AbortController();
       setState("checking");
       try {
+        console.log("Calling endpoint:", endpoint);
         var response = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
