@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mobile Climate Adaptation Plan Survey | Girl Plus Environment</title>
+  <meta name="description" content="Girl Plus Environment Mobile Climate Adaptation Plan Survey">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --pink: #fbd3d3;
+      --purple: #ead7ff;
+      --hot-pink: #d53f8c;
+      --green: #54df72;
+      --yellow: #ffe66d;
+      --blue: #a5f3fc;
+      --black: #000;
+      --white: #fff;
+      --error: #b00020;
+    }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
+    body {
+      font-family: "Space Mono", monospace;
+      background: var(--pink);
+      color: var(--black);
+      line-height: 1.5;
+    }
+    button, input, textarea, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .header-font { font-family: "Archivo Black", sans-serif; text-transform: uppercase; letter-spacing: 0; }
+    .page { min-height: 100vh; background: var(--purple); padding: 32px 16px 56px; }
+    .wrap { width: min(1120px, 100%); margin: 0 auto; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; color: #000; text-decoration: none; margin-bottom: 24px; font-weight: 700; }
+    .shell { background: var(--white); border: 3px solid #000; border-radius: 36px; box-shadow: 8px 8px 0 #000; overflow: hidden; }
+    .hero {
+      background-color: var(--green);
+      background-image: radial-gradient(rgba(0,0,0,.22) 2px, transparent 2px);
+      background-size: 28px 28px;
+      border-bottom: 4px solid #000;
+      padding: clamp(24px, 5vw, 52px);
+    }
+    h1 { margin: 0; font-size: clamp(2rem, 8vw, 4.7rem); line-height: .98; color: #fff; -webkit-text-stroke: 2px black; text-wrap: balance; }
+    .intro { display: grid; grid-template-columns: 1fr; gap: 22px; padding: clamp(20px, 4vw, 44px); border-bottom: 3px solid #000; }
+    .intro p { margin: 0; font-size: clamp(1rem, 2vw, 1.18rem); max-width: 72ch; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tag { border: 3px solid #000; border-radius: 999px; background: #fff; padding: 8px 12px; font-weight: 700; }
+    .progress-wrap { background: var(--yellow); border: 3px solid #000; border-radius: 24px; padding: 16px; box-shadow: 5px 5px 0 #000; }
+    .progress-top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-bottom: 10px; }
+    .progress-bar { height: 18px; border: 3px solid #000; border-radius: 999px; background: #fff; overflow: hidden; }
+    .progress-fill { width: 14.285%; height: 100%; background: var(--hot-pink); transition: width .2s ease; }
+    form { padding: clamp(18px, 4vw, 44px); }
+    .step { display: none; }
+    .step.active { display: block; }
+    .step-card { border: 3px solid #000; border-radius: 28px; padding: clamp(16px, 4vw, 32px); box-shadow: 6px 6px 0 #000; background: #fff; }
+    .step-title { margin: 0 0 18px; font-size: clamp(1.45rem, 5vw, 2.5rem); line-height: 1.05; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    .field { min-width: 0; }
+    label, legend { display: block; font-weight: 700; margin-bottom: 8px; }
+    fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+    input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+      width: 100%;
+      max-width: 100%;
+      border: 3px solid #000;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff;
+      color: #000;
+    }
+    textarea { min-height: 118px; resize: vertical; }
+    input:focus, textarea:focus, select:focus, .choice:focus-within {
+      outline: 4px solid var(--blue);
+      outline-offset: 2px;
+      background: #fdf2f8;
+    }
+    .choices { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .choice { display: flex; gap: 10px; align-items: flex-start; border: 3px solid #000; border-radius: 16px; padding: 12px; background: #fff; }
+    .choice input { width: 22px; height: 22px; margin-top: 2px; flex: 0 0 auto; accent-color: var(--hot-pink); }
+    .hint { font-size: .9rem; opacity: .76; margin-top: 6px; }
+    .error { color: var(--error); font-weight: 700; margin-top: 8px; min-height: 1.35em; }
+    .server-error { display: none; border: 3px solid #000; border-radius: 18px; background: #ffd7df; padding: 14px; margin-top: 18px; font-weight: 700; }
+    .membership-status { border: 3px solid #000; border-radius: 16px; background: #f7f7f7; padding: 12px; margin-top: 8px; font-weight: 700; }
+    .membership-status[data-state="checking"] { background: #fff6bf; }
+    .membership-status[data-state*="active"] { background: #d9ffd0; }
+    .membership-status[data-state="nonmember"], .membership-status[data-state="inactive_or_expired_member"] { background: #ffe0f2; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; margin-top: 24px; }
+    .btn {
+      appearance: none;
+      border: 3px solid #000;
+      border-radius: 999px;
+      background: var(--green);
+      color: #000;
+      padding: 14px 20px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 5px 5px 0 #000;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      min-height: 54px;
+    }
+    .btn.secondary { background: #fff; }
+    .btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+    .btn:not(:disabled):hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 #000; }
+    .review { display: grid; gap: 12px; }
+    .review-item { border: 3px solid #000; border-radius: 18px; padding: 12px; background: #f7f0ff; overflow-wrap: anywhere; }
+    .review-item strong { display: block; }
+    .success { display: none; padding: clamp(20px, 4vw, 44px); }
+    .success-card { border: 3px solid #000; border-radius: 30px; background: var(--green); padding: clamp(18px, 4vw, 36px); box-shadow: 7px 7px 0 #000; }
+    .success-card h2 { margin-top: 0; font-size: clamp(1.6rem, 5vw, 3rem); line-height: 1.05; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @media (min-width: 760px) {
+      .page { padding: 56px 28px 80px; }
+      .intro { grid-template-columns: 1.1fr .9fr; align-items: center; }
+      .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .choices.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .choices.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 420px) {
+      .shell { border-radius: 26px; box-shadow: 5px 5px 0 #000; }
+      .step-card, .progress-wrap { box-shadow: 4px 4px 0 #000; }
+      .btn { width: 100%; }
+      .actions { justify-content: stretch; }
+      h1 { -webkit-text-stroke: 1.4px black; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="wrap">
+      <a href="REPLACE-WITH-GPE-ACTIONS-PAGE-URL" class="back-link header-font"><i class="ph ph-arrow-left" aria-hidden="true"></i> Back to actions</a>
+      <section class="shell" aria-labelledby="survey-title">
+        <div class="hero">
+          <h1 id="survey-title" class="header-font">Mobile Climate Adaptation Plan Survey</h1>
+        </div>
+        <div class="intro">
+          <div>
+            <p>Real environmental action led by us and for us. Girl Plus Environment is helping Gulf South community-based organizations secure funding for disaster preparedness.</p>
+            <p class="hint">Fields marked with * are required. Your draft is saved in this browser except for phone and email.</p>
+          </div>
+          <div class="progress-wrap" aria-live="polite">
+            <div class="progress-top">
+              <strong id="stepText">Step 1 of 7</strong>
+              <span id="stepName">Consent</span>
+            </div>
+            <div class="progress-bar" aria-hidden="true"><div id="progressFill" class="progress-fill"></div></div>
+          </div>
+        </div>
+
+        <form id="surveyForm" novalidate>
+          <div id="formStatus" class="sr-only" aria-live="polite"></div>
+          <div id="steps"></div>
+          <div id="serverError" class="server-error" role="alert"></div>
+          <div class="actions">
+            <button class="btn secondary" type="button" id="prevBtn"><i class="ph ph-arrow-left" aria-hidden="true"></i> Previous</button>
+            <button class="btn" type="button" id="nextBtn">Next <i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+            <button class="btn" type="submit" id="submitBtn" hidden>Submit Survey <i class="ph ph-paper-plane-right" aria-hidden="true"></i></button>
+          </div>
+        </form>
+
+        <section id="successView" class="success" tabindex="-1" aria-live="polite">
+          <div class="success-card">
+            <h2 class="header-font">Survey submitted</h2>
+            <p id="successMessage"></p>
+            <a id="successAction" class="btn" hidden></a>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    window.GPE_FORM_CONFIG = window.GPE_FORM_CONFIG || {};
+    window.GPE_FORM_CONFIG.functionBaseUrl =
+      "https://wisvwuysysbitxluajmv.supabase.co/functions/v1";
+    window.GPE_FORM_CONFIG.functions = Object.assign({
+      membershipLookup: "neon-membership-check",
+      campRegistration: "camp-gpe-submit",
+      campChallenges: "camp-gpe-challenges",
+      campChallengeSubmission: "camp-gpe-challenge-submit",
+      climateSurvey: "neon-climate-survey",
+      "neon-membership-check": "neon-membership-check",
+      "camp-gpe-submit": "camp-gpe-submit",
+      "camp-gpe-challenges": "camp-gpe-challenges",
+      "camp-gpe-challenge-submit": "camp-gpe-challenge-submit",
+      "neon-climate-survey": "neon-climate-survey"
+    }, window.GPE_FORM_CONFIG.functions || {});
+    console.log("GPE form configuration", {
+      functionBaseUrl: window.GPE_FORM_CONFIG.functionBaseUrl,
+      functions: window.GPE_FORM_CONFIG.functions
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-choice-controls.js?v=20260721"></script>
+  <script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-form-membership.js?v=20260721"></script>
+  <script>
+    const PUBLIC_CONFIG = window.GPE_FORM_CONFIG || {};
+    const PUBLIC_FUNCTIONS = PUBLIC_CONFIG.functions || {};
+    function configuredFunction(name) {
+      const aliases = {
+        "neon-climate-survey": "climateSurvey",
+        "neon-membership-check": "membershipLookup"
+      };
+      const configured = PUBLIC_FUNCTIONS[name] || PUBLIC_FUNCTIONS[aliases[name]];
+      if (configured) {
+        if (/^https?:\/\//i.test(configured)) return configured;
+        if (PUBLIC_CONFIG.functionBaseUrl) return PUBLIC_CONFIG.functionBaseUrl.replace(/\/$/, "") + "/" + String(configured).replace(/^\//, "");
+        console.error("GPE endpoint could not be resolved because functionBaseUrl is missing:", configured);
+        return "";
+      }
+      if (PUBLIC_CONFIG.functionBaseUrl) return PUBLIC_CONFIG.functionBaseUrl.replace(/\/$/, "") + "/" + String(name).replace(/^\//, "");
+      console.error("GPE endpoint could not be resolved because functionBaseUrl is missing:", name);
+      return "";
+    }
+    const CONFIG = {
+      functionUrl: configuredFunction("neon-climate-survey"),
+      membershipUrl: PUBLIC_CONFIG.membershipUrl || "become-a-member.html#membership",
+      membershipCheckUrl: configuredFunction("neon-membership-check"),
+      hubLoginUrl: PUBLIC_CONFIG.hubLoginUrl || "https://members.girlplusenvironment.org/login"
+    };
+    const STATES = [["AL","Alabama"],["AK","Alaska"],["AZ","Arizona"],["AR","Arkansas"],["CA","California"],["CO","Colorado"],["CT","Connecticut"],["DE","Delaware"],["DC","District of Columbia"],["FL","Florida"],["GA","Georgia"],["HI","Hawaii"],["ID","Idaho"],["IL","Illinois"],["IN","Indiana"],["IA","Iowa"],["KS","Kansas"],["KY","Kentucky"],["LA","Louisiana"],["ME","Maine"],["MD","Maryland"],["MA","Massachusetts"],["MI","Michigan"],["MN","Minnesota"],["MS","Mississippi"],["MO","Missouri"],["MT","Montana"],["NE","Nebraska"],["NV","Nevada"],["NH","New Hampshire"],["NJ","New Jersey"],["NM","New Mexico"],["NY","New York"],["NC","North Carolina"],["ND","North Dakota"],["OH","Ohio"],["OK","Oklahoma"],["OR","Oregon"],["PA","Pennsylvania"],["RI","Rhode Island"],["SC","South Carolina"],["SD","South Dakota"],["TN","Tennessee"],["TX","Texas"],["UT","Utah"],["VT","Vermont"],["VA","Virginia"],["WA","Washington"],["WV","West Virginia"],["WI","Wisconsin"],["WY","Wyoming"],["AS","American Samoa"],["FM","Federated States of Micronesia"],["GU","Guam"],["MH","Marshall Islands"],["MP","Northern Mariana Islands"],["PW","Palau"],["PR","Puerto Rico"],["UM","U.S. Minor Outlying Islands"],["VI","Virgin Islands"],["AA","Armed Forces Americas"],["AE","Armed Forces Europe, the Middle East, an"],["AP","Armed Forces Pacific"],["AB","Alberta"],["BC","British Columbia"],["MB","Manitoba"],["NB","New Brunswick"],["NL","Newfoundland and Labrador"],["NS","Nova Scotia"],["NT","Northwest Territories"],["NU","Nunavut Territory"],["ON","Ontario"],["PE","Prince Edward Island"],["QC","Quebec"],["SK","Saskatchewan"],["YT","Yukon Territory"]];
+    const FIELD_DEFS = [
+      {key:"consent", step:0, type:"checkbox-single", required:true, neonSurveyFieldId:37, neonName:"surveyFields[0].value", label:"By checking this box, you’re giving consent to share your information within our organization and with our organizational partners. Your responses will be de-identified, and used to inform the development of a community climate adaptation plan.", options:[["37","I consent"]]},
+      {key:"firstName", step:1, type:"text", required:false, neonName:"account.name.firstName", label:"First Name"},
+      {key:"lastName", step:1, type:"text", required:false, neonName:"account.name.lastName", label:"Last Name"},
+      {key:"phoneNumber", step:1, type:"tel", required:true, neonSurveyFieldId:44, neonName:"surveyFields[1].value", label:"Phone Number"},
+      {key:"emailAddress", step:1, type:"email", required:true, neonSurveyFieldId:45, neonName:"surveyFields[2].value", label:"Email Address"},
+      {key:"age", step:1, type:"text", required:true, neonName:"surveyPayload.age", label:"Age"},
+      {key:"city", step:2, type:"text", required:false, neonName:"account.address.city", label:"City"},
+      {key:"stateOrProvince", step:2, type:"select", required:false, neonName:"account.address.stateOrProvince", label:"State/Province", options:STATES},
+      {key:"zipCode", step:2, type:"text", required:true, neonName:"account.address.zipCode", label:"Zip"},
+      {key:"raceEthnicity", step:2, type:"text", required:true, neonSurveyFieldId:47, neonName:"surveyFields[3].value", label:"Race/Ethnicity"},
+      {key:"gender", step:2, type:"text", required:true, neonSurveyFieldId:46, neonName:"surveyFields[4].value", label:"Gender"},
+      {key:"educationLevel", step:2, type:"select", required:false, neonSurveyFieldId:42, neonName:"surveyFields[5].value", label:"Highest Education Level Completed", options:[["186","HS Diploma/GED"],["187","Bachelor's Degree"],["188","Master's Degree"],["189","PhD/Doctorate"],["190","None of the Above"],["191","Prefer Not to Say"]]},
+      {key:"currentIncome", step:2, type:"select", required:false, neonSurveyFieldId:43, neonName:"surveyFields[6].value", label:"Current Income", options:[["192","Less than $15,000"],["193","$15,000 - $49,999"],["194","$50,000 - $75,000"],["195","More than $75,000"]]},
+      {key:"climateEventsConcerned", step:3, type:"checkbox", max:3, required:true, neonSurveyFieldId:39, neonName:"surveyFields[7].value", label:"Which of the following climate events are you most concerned about? (Please choose no more than 3)", options:[["39","Extreme heat"],["171","Flooding events"],["172","Major storms and hurricanes"],["173","Impacts on mental health and well-being"],["174","Loss of financial stability due to a climate event"],["175","Access to clean drinking water"],["176","Contaminated soil"]]},
+      {key:"climateIssuesAffected", step:3, type:"checkbox", required:true, neonSurveyFieldId:40, neonName:"surveyFields[8].value", label:"Which of the following climate-related issues have affected you or your household in the past 5 years? (Select all that apply)", options:[["40","Flooding or heavy rain"],["178","Extreme heat"],["179","Hurricanes or tropical storms"],["180","Power outages"],["181","Poor air quality"],["182","Mold or water damage in home"],["183","Rising utility costs"],["184","None of the above"],["185","Other (please specify)"]]},
+      {key:"climateIssuesOther", step:3, type:"text", required:false, neonSurveyFieldId:41, neonName:"surveyFields[9].value", label:"Please specify if you selected \"Other\""},
+      {key:"impactFrequency", step:3, type:"select", required:true, neonSurveyFieldId:21, neonName:"surveyFields[10].value", label:"How often do these climate impacts affect your daily life?", options:[["99","Very often"],["100","Sometimes"],["101","Rarely"],["102","Never"]]},
+      {key:"lifeAreasAffected", step:3, type:"checkbox", max:3, required:true, neonSurveyFieldId:22, neonName:"surveyFields[11].value", label:"Which areas of your life have been most affected? (Select up to 3)", options:[["22","Housing or home safety"],["104","Health or medical needs"],["105","Transportation"],["106","Employment or income"],["107","Childcare or schools"],["108","Food access"],["109","Elder or disability care"]]},
+      {key:"safetyConfidence", step:4, type:"select", required:true, neonSurveyFieldId:23, neonName:"surveyFields[12].value", label:"During extreme weather (heat, storms, flooding), how confident are you that you can stay safe?", options:[["110","Very confident"],["111","Somewhat confident"],["112","Not very confident"],["113","Not confident at all"]]},
+      {key:"preparednessBarriers", step:4, type:"checkbox", required:true, neonSurveyFieldId:24, neonName:"surveyFields[13].value", label:"What makes it harder for you or your community to prepare for or recover from climate events? (Select all that apply)", options:[["24","Cost of repairs or supplies"],["115","Limited transportation"],["116","Health conditions or disability"],["117","Language barriers"],["118","Lack of information"],["119","Housing conditions (renting, older homes, mobile homes)"],["120","Feeling unheard by decision-makers"],["121","Other (please specify)"]]},
+      {key:"preparednessBarriersOther", step:4, type:"text", required:false, neonSurveyFieldId:25, neonName:"surveyFields[14].value", label:"Please specify if you selected \"Other\""},
+      {key:"mostImpactedGroups", step:4, type:"checkbox", required:true, neonSurveyFieldId:26, neonName:"surveyFields[15].value", label:"Which groups in your community do you believe are most impacted by climate change? (Select all that apply)", options:[["26","Seniors"],["123","Children"],["124","People with disabilities"],["125","Low-income households"],["126","Black or historically marginalized communities"],["127","Outdoor workers"],["128","Renters"],["129","People without reliable transportation"]]},
+      {key:"cityPriorities", step:5, type:"checkbox", max:3, required:true, neonSurveyFieldId:27, neonName:"surveyFields[16].value", label:"Which actions should the city prioritize FIRST to protect your community? (Select up to 3)", options:[["27","Flood prevention and drainage improvements"],["131","Cooling centers or heat relief"],["132","Emergency preparedness and evacuation support"],["133","Affordable home repairs or weatherization"],["134","Reliable public transportation"],["135","Tree planting and shade"],["136","Clean energy or utility cost relief"],["137","Better communication before emergencies"]]},
+      {key:"longTermInvestments", step:5, type:"checkbox", max:3, required:true, neonSurveyFieldId:28, neonName:"surveyFields[17].value", label:"What long-term investments would help your community be more resilient in the future? (Select up to 3)", options:[["28","Stronger housing standards"],["139","Job training in climate-resilient industries"],["140","Improved infrastructure (roads, drainage, utilities)"],["141","Community-based emergency hubs"],["142","Environmental education and outreach"],["143","Support for small businesses"],["144","Protection of coastal and natural areas"],["145","Other"]]},
+      {key:"longTermInvestmentsOther", step:5, type:"text", required:false, neonSurveyFieldId:29, neonName:"surveyFields[18].value", label:"Please specify if you selected \"Other\""},
+      {key:"concernsHeard", step:5, type:"select", required:true, neonSurveyFieldId:30, neonName:"surveyFields[19].value", label:"Do you feel your community’s concerns are heard when the city plans for emergencies or climate issues?", options:[["146","Yes"],["147","Sometimes"],["148","No"],["149","Unsure"]]},
+      {key:"communicationPreference", step:5, type:"checkbox", required:true, neonSurveyFieldId:31, neonName:"surveyFields[20].value", label:"How would you prefer to receive information about climate risks and city plans? (Select all that apply)", options:[["31","Text messages"],["151","Social media"],["152","Community meetings"],["153","Faith-based or community organizations"],["154","Local radio or TV"],["155","Flyers or mail"],["156","Word of mouth"],["157","Other"]]},
+      {key:"communicationPreferenceOther", step:5, type:"text", required:false, neonSurveyFieldId:32, neonName:"surveyFields[21].value", label:"Please specify if you selected \"Other\""},
+      {key:"oneChange", step:5, type:"textarea", required:false, neonSurveyFieldId:33, neonName:"surveyFields[22].value", label:"What is one change the city could make to better protect your community from climate impacts?"},
+      {key:"planUpdates", step:5, type:"radio", required:true, neonSurveyFieldId:34, neonName:"surveyFields[23].value", label:"Would you like to be informed about the process of creating a Mobile Climate Adaptation Plan?", options:[["34","Yes"],["159","No"]]},
+      {key:"gpeUpdates", step:5, type:"radio", required:true, neonSurveyFieldId:36, neonName:"surveyFields[24].value", label:"Would you like to stay up to date on GPE happenings, events, and actions?", options:[["36","Yes"],["161","No"]]}
+    ];
+    const STEPS = ["Consent","About You","Where You Live","Climate Experiences","Preparedness and Community Needs","Priorities and Communication","Review and Submit"];
+    const DRAFT_KEY = "gpeClimateSurveyDraft";
+    const SENSITIVE_KEYS = new Set(["phoneNumber","emailAddress"]);
+    let currentStep = 0;
+    let submitting = false;
+    const values = {};
+    const errors = {};
+
+    function el(tag, attrs = {}, children = []) {
+      const node = document.createElement(tag);
+      Object.entries(attrs).forEach(([key, value]) => {
+        if (key === "class") node.className = value;
+        else if (key === "text") node.textContent = value;
+        else if (key === "html") node.innerHTML = value;
+        else if (value !== false && value != null) node.setAttribute(key, value === true ? "" : value);
+      });
+      children.forEach((child) => node.append(child));
+      return node;
+    }
+    function initialValue(field) { return field.type === "checkbox" ? [] : ""; }
+    FIELD_DEFS.forEach((field) => { values[field.key] = initialValue(field); });
+    try {
+      const draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}");
+      Object.keys(draft).forEach((key) => { if (key in values && !SENSITIVE_KEYS.has(key)) values[key] = draft[key]; });
+    } catch (_) {}
+
+    function renderSteps() {
+      const root = document.getElementById("steps");
+      root.innerHTML = "";
+      STEPS.forEach((name, index) => {
+        const step = el("section", {class: "step", "data-step": index, "aria-labelledby": `step-${index}-title`});
+        const card = el("div", {class: "step-card"});
+        card.append(el("h2", {class: "step-title header-font", id: `step-${index}-title`, text: name}));
+        if (index === 6) {
+          card.append(el("div", {id: "reviewPanel", class: "review"}));
+        } else {
+          const grid = el("div", {class: "grid two"});
+          FIELD_DEFS.filter((field) => field.step === index).forEach((field) => grid.append(renderField(field)));
+          card.append(grid);
+        }
+        step.append(card);
+        root.append(step);
+      });
+    }
+    function renderField(field) {
+      const id = `field-${field.key}`;
+      const wrap = el("div", {class: "field"});
+      if (["checkbox","radio","checkbox-single"].includes(field.type)) {
+        const fs = el("fieldset", {"aria-describedby": `${id}-error ${id}-hint`});
+        fs.append(el("legend", {text: `${field.label}${field.required ? " *" : ""}`}));
+        if (field.max) fs.append(el("div", {id: `${id}-hint`, class: "hint", text: `Choose up to ${field.max}.`}));
+        const choices = el("div", {class: `choices ${field.options.length > 6 ? "two" : ""}`});
+        field.options.forEach(([value, label], optionIndex) => {
+          const inputId = `${id}-${optionIndex}`;
+          const input = el("input", {id: inputId, name: field.key, value, type: field.type === "radio" ? "radio" : "checkbox"});
+          input.addEventListener("change", () => updateChoice(field));
+          choices.append(el("label", {class: "choice", for: inputId}, [input, el("span", {text: label})]));
+        });
+        fs.append(choices, el("div", {id: `${id}-error`, class: "error", role: "alert"}));
+        wrap.append(fs);
+        return wrap;
+      }
+      const label = el("label", {for: id, text: `${field.label}${field.required ? " *" : ""}`});
+      let input;
+      if (field.type === "select") {
+        input = el("select", {id, name: field.key, "aria-describedby": `${id}-error`}, [el("option", {value: "", text: "Select"})]);
+        field.options.forEach(([value, labelText]) => input.append(el("option", {value, text: labelText})));
+      } else if (field.type === "textarea") {
+        input = el("textarea", {id, name: field.key, rows: 5, "aria-describedby": `${id}-error`});
+      } else {
+        input = el("input", {id, name: field.key, type: field.type, "aria-describedby": `${id}-error`});
+      }
+      if (field.key === "emailAddress") {
+        input.setAttribute("autocomplete", "email");
+        input.setAttribute("data-membership-email", "true");
+      }
+      input.addEventListener("input", () => {
+        values[field.key] = input.value;
+        validateField(field);
+        saveDraft();
+      });
+      wrap.append(label, input, el("div", {id: `${id}-error`, class: "error", role: "alert"}));
+      if (field.key === "emailAddress") wrap.append(el("div", {id: "membershipPreflightStatus", class: "membership-status", hidden: true, "aria-live": "polite"}));
+      return wrap;
+    }
+    function updateChoice(field) {
+      const selected = [...document.querySelectorAll(`[name="${field.key}"]:checked`)].map((input) => input.value);
+      values[field.key] = field.type === "radio" || field.type === "checkbox-single" ? selected[0] || "" : selected;
+      if (field.max && Array.isArray(values[field.key]) && values[field.key].length > field.max) {
+        const last = document.querySelector(`[name="${field.key}"]:checked:last-of-type`);
+        if (last) last.checked = false;
+        values[field.key] = [...document.querySelectorAll(`[name="${field.key}"]:checked`)].map((input) => input.value).slice(0, field.max);
+      }
+      validateField(field);
+      saveDraft();
+    }
+    function syncInputs() {
+      FIELD_DEFS.forEach((field) => {
+        if (["checkbox","radio","checkbox-single"].includes(field.type)) {
+          document.querySelectorAll(`[name="${field.key}"]`).forEach((input) => {
+            input.checked = Array.isArray(values[field.key]) ? values[field.key].includes(input.value) : values[field.key] === input.value;
+          });
+        } else {
+          const input = document.querySelector(`[name="${field.key}"]`);
+          if (input) input.value = values[field.key] || "";
+        }
+      });
+    }
+    function validateField(field) {
+      const value = values[field.key];
+      let message = "";
+      if (field.required && (Array.isArray(value) ? value.length === 0 : String(value || "").trim() === "")) message = "This field is required.";
+      if (!message && field.type === "email" && value && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value)) message = "Enter a valid email address.";
+      if (!message && field.max && Array.isArray(value) && value.length > field.max) message = `Choose no more than ${field.max}.`;
+      errors[field.key] = message;
+      const err = document.getElementById(`field-${field.key}-error`);
+      if (err) err.textContent = message;
+      return !message;
+    }
+    function validateStep(index) {
+      if (index === 6) return FIELD_DEFS.every(validateField);
+      return FIELD_DEFS.filter((field) => field.step === index).every(validateField);
+    }
+    function saveDraft() {
+      const draft = {};
+      Object.entries(values).forEach(([key, value]) => { if (!SENSITIVE_KEYS.has(key)) draft[key] = value; });
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+    }
+    function labelFor(field, value) {
+      if (Array.isArray(value)) return value.map((v) => labelFor(field, v)).join(", ");
+      return (field.options || []).find(([optionValue]) => optionValue === value)?.[1] || value || "Not answered";
+    }
+    function renderReview() {
+      const panel = document.getElementById("reviewPanel");
+      panel.innerHTML = "";
+      FIELD_DEFS.forEach((field) => {
+        panel.append(el("div", {class: "review-item"}, [
+          el("strong", {text: `${field.label}${field.required ? " *" : ""}`}),
+          el("span", {text: labelFor(field, values[field.key])})
+        ]));
+      });
+    }
+    function showStep(index) {
+      currentStep = Math.max(0, Math.min(index, STEPS.length - 1));
+      document.querySelectorAll(".step").forEach((step) => step.classList.toggle("active", Number(step.dataset.step) === currentStep));
+      document.getElementById("stepText").textContent = `Step ${currentStep + 1} of ${STEPS.length}`;
+      document.getElementById("stepName").textContent = STEPS[currentStep];
+      document.getElementById("progressFill").style.width = `${((currentStep + 1) / STEPS.length) * 100}%`;
+      document.getElementById("prevBtn").disabled = currentStep === 0 || submitting;
+      document.getElementById("nextBtn").hidden = currentStep === STEPS.length - 1;
+      document.getElementById("submitBtn").hidden = currentStep !== STEPS.length - 1;
+      if (currentStep === 6) renderReview();
+      document.getElementById(`step-${currentStep}-title`).focus?.();
+      document.getElementById("formStatus").textContent = `${STEPS[currentStep]}, step ${currentStep + 1} of ${STEPS.length}`;
+      window.scrollTo({top: 0, behavior: "smooth"});
+    }
+    function getOrCreateSubmissionId() {
+      const key = "gpeClimateSurveySubmissionId";
+      let id = sessionStorage.getItem(key);
+      if (!id) {
+        id = crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        sessionStorage.setItem(key, id);
+      }
+      return id;
+    }
+    function buildPayload() {
+      const answers = {};
+      FIELD_DEFS.forEach((field) => {
+        answers[field.key] = {
+          value: values[field.key],
+          label: field.label,
+          type: field.type,
+          required: field.required,
+          neonSurveyFieldId: field.neonSurveyFieldId || null,
+          neonName: field.neonName,
+          optionLabels: Array.isArray(values[field.key]) ? values[field.key].map((v) => labelFor(field, v)) : labelFor(field, values[field.key])
+        };
+      });
+      return {
+        idempotencyKey: getOrCreateSubmissionId(),
+        surveyId: 2,
+        formId: 47,
+        sourceUrl: location.href,
+        submittedAt: new Date().toISOString(),
+        account: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.emailAddress,
+          phone: values.phoneNumber,
+          address: {
+            city: values.city,
+            stateOrProvince: values.stateOrProvince,
+            zipCode: values.zipCode
+          }
+        },
+        answers
+      };
+    }
+    async function submitForm(event) {
+      event.preventDefault();
+      if (submitting || !validateStep(6)) {
+        const firstError = document.querySelector(".error:not(:empty)");
+        firstError?.scrollIntoView({block: "center"});
+        return;
+      }
+      submitting = true;
+      document.getElementById("submitBtn").disabled = true;
+      document.getElementById("serverError").style.display = "none";
+      try {
+        if (!CONFIG.functionUrl) throw new Error("Survey submission is not configured yet. Please try again later.");
+        console.log("Calling endpoint:", CONFIG.functionUrl);
+        const response = await fetch(CONFIG.functionUrl, {
+          method: "POST",
+          headers: {"Content-Type": "application/json", "Idempotency-Key": getOrCreateSubmissionId()},
+          body: JSON.stringify(buildPayload())
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.message || "We could not submit the survey. Please try again.");
+        localStorage.removeItem(DRAFT_KEY);
+        sessionStorage.removeItem("gpeClimateSurveySubmissionId");
+        showSuccess(result);
+      } catch (error) {
+        const box = document.getElementById("serverError");
+        box.textContent = error.message || "We could not submit the survey. Please try again.";
+        box.style.display = "block";
+        box.focus?.();
+      } finally {
+        submitting = false;
+        document.getElementById("submitBtn").disabled = false;
+      }
+    }
+    function showSuccess(result) {
+      document.getElementById("surveyForm").style.display = "none";
+      document.getElementById("successView").style.display = "block";
+      const message = document.getElementById("successMessage");
+      const action = document.getElementById("successAction");
+      const outcome = result.membershipOutcome || "submission_saved_neon_sync_pending";
+      if (outcome === "active_member_needs_hub_invite") {
+        message.textContent = "Your feedback is in — and your membership is confirmed. Check your email for your secure GPE Hub invitation. Be sure to check Spam or Promotions.";
+      } else if (outcome === "active_member_existing_hub_user") {
+        message.textContent = "Your feedback is in. Your membership is already connected to the GPE Hub.";
+        action.href = result.hubLoginUrl || CONFIG.hubLoginUrl;
+        action.textContent = "Go to GPE Hub";
+        action.hidden = false;
+      } else if (outcome === "nonmember") {
+        message.textContent = "Your feedback is in. GPE Hub access is a member benefit. Complete your membership and we’ll send your Hub invitation automatically.";
+        action.href = result.membershipUrl || CONFIG.membershipUrl;
+        action.textContent = "Become a Member";
+        action.hidden = false;
+      } else if (outcome === "ambiguous_account") {
+        message.textContent = "Your feedback is in. We need to manually confirm your membership record before sending Hub access.";
+      } else {
+        message.textContent = "Your feedback is in. We saved your survey and will finish syncing it if any connected service needs a retry.";
+      }
+      document.getElementById("successView").focus();
+    }
+    renderSteps();
+    syncInputs();
+    showStep(0);
+    window.GPEChoiceControls?.initialize(document.getElementById("surveyForm"));
+    if (window.GPEFormMembership) {
+      window.GPEFormMembership.init({
+        form: document.getElementById("surveyForm"),
+        emailInput: document.querySelector('[data-membership-email]'),
+        statusEl: document.getElementById("membershipPreflightStatus"),
+        firstNameInput: document.querySelector('[name="firstName"]'),
+        lastNameInput: document.querySelector('[name="lastName"]'),
+        endpoint: CONFIG.membershipCheckUrl
+      });
+    }
+    document.getElementById("prevBtn").addEventListener("click", () => showStep(currentStep - 1));
+    document.getElementById("nextBtn").addEventListener("click", () => { if (validateStep(currentStep)) showStep(currentStep + 1); });
+    document.getElementById("surveyForm").addEventListener("submit", submitForm);
+  </script>
+</body>
+</html>

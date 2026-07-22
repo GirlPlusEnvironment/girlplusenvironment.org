@@ -1,0 +1,1451 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <title>Stop Trump’s $700 Million Coal Slush Fund | Girl Plus Environment</title>
+
+  <meta
+    name="description"
+    content="Tell Congress to stop wasting taxpayer dollars on dirty coal and put people before polluters."
+  >
+
+  <meta
+    property="og:title"
+    content="Stop Trump’s $700 Million Coal Slush Fund"
+  >
+
+  <meta
+    property="og:description"
+    content="Tell Congress to stop the coal slush fund and invest in affordable clean energy instead."
+  >
+
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://actionnetwork.org">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
+
+  <style>
+    :root {
+      --pink: #fbd3d3;
+      --red-light: #fef2f2;
+      --red-soft: #fecaca;
+      --red: #ef4444;
+      --red-dark: #dc2626;
+      --orange: #f97316;
+      --cyan: #22d3ee;
+      --yellow: #fef9c3;
+      --black: #000000;
+      --white: #ffffff;
+      --gray: #f5f5f5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      background: var(--red-light);
+    }
+
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      color: var(--black);
+      background: var(--red-light);
+      font-family: "Space Mono", monospace;
+    }
+
+    body,
+    input,
+    textarea,
+    select,
+    button {
+      font-family: "Space Mono", monospace;
+    }
+
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    .header-font {
+      font-family: "Archivo Black", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .coal-page {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding:
+        max(3.5rem, env(safe-area-inset-top))
+        max(1.5rem, env(safe-area-inset-right))
+        max(5rem, env(safe-area-inset-bottom))
+        max(1.5rem, env(safe-area-inset-left));
+      overflow: hidden;
+      background: var(--red-light);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .factory-decoration {
+      position: absolute;
+      top: -5rem;
+      right: -5rem;
+      z-index: 0;
+      color: var(--red-soft);
+      font-size: clamp(14rem, 30vw, 25rem);
+      line-height: 1;
+      opacity: 0.4;
+      pointer-events: none;
+      transform: rotate(12deg);
+      user-select: none;
+    }
+
+    .page-inner {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 1152px);
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin: 0 0 2.5rem;
+      color: var(--black);
+      font-family: "Archivo Black", sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.2;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform 180ms ease;
+    }
+
+    .back-link:hover {
+      transform: translateX(-5px);
+    }
+
+    .back-link:focus-visible {
+      outline: 4px solid var(--red);
+      outline-offset: 5px;
+    }
+
+    .campaign-header {
+      max-width: 1080px;
+      margin: 0 auto 4rem;
+      text-align: center;
+    }
+
+    .campaign-title {
+      margin: 0 0 1.25rem;
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(3.25rem, 8.4vw, 7rem);
+      line-height: 0.92;
+      letter-spacing: -0.055em;
+      text-transform: uppercase;
+      overflow-wrap: break-word;
+    }
+
+    .campaign-pill {
+      display: inline-block;
+      max-width: 100%;
+      padding: 0.65rem 1.5rem;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--black);
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(0.8rem, 2vw, 1.2rem);
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(420px, 0.92fr);
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .content-column,
+    .form-column {
+      min-width: 0;
+    }
+
+    .content-card {
+      margin: 0 0 2.5rem;
+      padding: 2.5rem;
+      border: 3px solid var(--black);
+      border-radius: 2.5rem;
+      background: var(--white);
+      box-shadow: 8px 8px 0 var(--black);
+    }
+
+    .content-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .content-card-header {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-icon {
+      display: grid;
+      flex: 0 0 auto;
+      width: 66px;
+      height: 66px;
+      place-items: center;
+      border: 3px solid var(--black);
+      border-radius: 1rem;
+      color: var(--white);
+      font-size: 2rem;
+    }
+
+    .content-icon--red {
+      background: var(--red);
+    }
+
+    .content-icon--orange {
+      background: var(--orange);
+    }
+
+    .content-card-title {
+      margin: 0;
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.15rem, 2.3vw, 1.45rem);
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .content-card p {
+      margin: 0;
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      line-height: 1.7;
+    }
+
+    .content-card p + p {
+      margin-top: 1rem;
+    }
+
+    .coal-callout {
+      margin-top: 1.5rem;
+      padding: 1rem 1.1rem;
+      border: 2px solid var(--black);
+      border-radius: 1rem;
+      background: var(--yellow);
+      font-family: "Archivo Black", sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      text-transform: uppercase;
+    }
+
+    .petition-card {
+      width: 100%;
+      min-width: 0;
+      padding: 3rem;
+      border: 3px solid var(--black);
+      border-radius: 3rem;
+      background: var(--white);
+      box-shadow: 8px 8px 0 var(--black);
+    }
+
+    .petition-heading {
+      margin: 0 0 0.8rem;
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.8rem, 3.8vw, 2.5rem);
+      line-height: 1;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .petition-intro {
+      max-width: 440px;
+      margin: 0 auto 1.5rem;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .expert-note {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      margin: 0 0 1.5rem;
+      padding: 1rem;
+      border: 2px solid var(--black);
+      border-radius: 1rem;
+      background: var(--red-light);
+      font-size: 0.74rem;
+      line-height: 1.5;
+    }
+
+    .expert-note i {
+      flex: 0 0 auto;
+      margin-top: 0.1rem;
+      font-size: 1.2rem;
+    }
+
+    .action-network-shell {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .widget-loading {
+      display: flex;
+      min-height: 190px;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    /*
+     * Required because the display:flex rule would otherwise override
+     * the browser's normal [hidden] behavior.
+     */
+    .widget-loading[hidden] {
+      display: none !important;
+    }
+
+    .widget-loading-inner {
+      max-width: 330px;
+    }
+
+    .loading-icon {
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      font-size: 2.3rem;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: scale(0.9);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /*
+     * ACTION NETWORK PETITION
+     */
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner * {
+      box-sizing: border-box !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      color: var(--black) !important;
+      background: transparent !important;
+      font-family: "Space Mono", monospace !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .can_embed,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #can_embed_form,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      form,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .clearfix {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      font-family: "Space Mono", monospace !important;
+      box-shadow: none !important;
+    }
+
+    /*
+     * Remove campaign material duplicated by the custom page.
+     */
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #can_embed_form
+      > h2,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #can_embed_form
+      > h3,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #can_embed_form
+      > h4,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .entry-title,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .action_description,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .action_target,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .action_owner,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .action_owner_box,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .action_info,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .action_letter,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .action_status_tracker,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .action_sidebar
+      > h4,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .spam_flag {
+      display: none !important;
+    }
+
+    /*
+     * Hide remembered-user avatar and greeting.
+     */
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #action_welcome_message,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .action_welcome_message {
+      display: none !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      ul,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      ol {
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      list-style: none !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      li {
+      max-width: 100% !important;
+      margin: 0 0 1rem !important;
+      padding: 0 !important;
+      list-style: none !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      label {
+      display: block !important;
+      margin: 0 0 0.45rem !important;
+      color: var(--black) !important;
+      font-family: "Archivo Black", sans-serif !important;
+      font-size: 0.72rem !important;
+      font-weight: 400 !important;
+      line-height: 1.35 !important;
+      text-transform: uppercase !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="hidden"]),
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      textarea,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      select {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-height: 52px !important;
+      margin: 0 0 1rem !important;
+      padding: 0.8rem 0.95rem !important;
+      border: 3px solid var(--black) !important;
+      border-radius: 0.85rem !important;
+      outline: none !important;
+      color: var(--black) !important;
+      background: var(--white) !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 16px !important;
+      line-height: 1.4 !important;
+      box-shadow: none !important;
+      appearance: auto !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      textarea {
+      min-height: 130px !important;
+      resize: vertical !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):focus,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      textarea:focus,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      select:focus {
+      background: var(--red-light) !important;
+      box-shadow: 4px 4px 0 var(--black) !important;
+      transform: translate(-2px, -2px) !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      input::placeholder,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      textarea::placeholder {
+      color: #525252 !important;
+      opacity: 1 !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      input[type="checkbox"],
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      input[type="radio"] {
+      width: 21px !important;
+      height: 21px !important;
+      min-width: 21px !important;
+      margin: 0.05rem 0.6rem 0 0 !important;
+      padding: 0 !important;
+      accent-color: var(--red) !important;
+      vertical-align: top !important;
+    }
+
+    /*
+     * Expert / grasstops fields.
+     */
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .checkbox_group_wrap {
+      margin: 0 0 1rem !important;
+      padding: 1rem !important;
+      border: 2px solid var(--black) !important;
+      border-radius: 1rem !important;
+      background: var(--yellow) !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .checkbox_group_wrap
+      .control-label {
+      margin-bottom: 0.8rem !important;
+      font-size: 0.74rem !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .checkbox_group_wrap
+      .checkbox {
+      display: flex !important;
+      align-items: flex-start !important;
+      margin: 0 !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      text-transform: none !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      input[type="submit"],
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      button[type="submit"],
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .button,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .btn,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .submit_button {
+      display: flex !important;
+      width: 100% !important;
+      min-height: 64px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 1.15rem 0 0 !important;
+      padding: 1rem 1.25rem !important;
+      border: 3px solid var(--black) !important;
+      border-radius: 999px !important;
+      color: var(--white) !important;
+      background: var(--black) !important;
+      font-family: "Archivo Black", sans-serif !important;
+      font-size: clamp(1rem, 2.8vw, 1.25rem) !important;
+      line-height: 1.15 !important;
+      text-align: center !important;
+      text-decoration: none !important;
+      text-transform: uppercase !important;
+      cursor: pointer !important;
+      box-shadow: none !important;
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease !important;
+      white-space: normal !important;
+      appearance: none !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      input[type="submit"]:hover,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      button[type="submit"]:hover,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .button:hover,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .btn:hover {
+      color: var(--white) !important;
+      background: var(--red) !important;
+      box-shadow: 5px 5px 0 var(--black) !important;
+      transform: translate(-3px, -3px) !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      input[type="submit"]:focus-visible,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      button[type="submit"]:focus-visible,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .button:focus-visible {
+      outline: 4px solid var(--orange) !important;
+      outline-offset: 3px !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      a {
+      color: var(--black) !important;
+      font-weight: 700 !important;
+      text-decoration: underline !important;
+      text-decoration-thickness: 2px !important;
+      text-underline-offset: 3px !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      a:hover {
+      background: var(--red-soft) !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #d_sharing,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .js-d_sharing,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .international_link-wrap,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 1.25rem 0 0 !important;
+      padding: 1rem !important;
+      border: 2px solid var(--black) !important;
+      border-radius: 1rem !important;
+      background: var(--gray) !important;
+      font-size: 0.7rem !important;
+      line-height: 1.5 !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap {
+      display: block !important;
+      min-height: 52px !important;
+      margin: 0 0 1rem !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      line-height: normal !important;
+      position: relative !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      select,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-container,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-choice,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-selection {
+      width: 100% !important;
+      min-height: 52px !important;
+      box-sizing: border-box !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      select,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-choice,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-selection {
+      display: flex !important;
+      align-items: center !important;
+      padding: 0.85rem 2.75rem 0.85rem 1rem !important;
+      border: 3px solid var(--black) !important;
+      border-radius: 0.85rem !important;
+      background: var(--white) !important;
+      color: var(--black) !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 16px !important;
+      line-height: 1.35 !important;
+      appearance: auto !important;
+      overflow: hidden !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-chosen,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-selection__rendered {
+      display: block !important;
+      padding: 0 !important;
+      line-height: 1.35 !important;
+      color: var(--black) !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 100% !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-arrow,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-selection__arrow {
+      display: block !important;
+      position: absolute !important;
+      right: 1rem !important;
+      top: 50% !important;
+      width: 1rem !important;
+      height: 1rem !important;
+      transform: translateY(-50%) !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-arrow b,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_drop_wrap
+      .select2-selection__arrow b {
+      border-color: var(--black) transparent transparent transparent !important;
+      border-style: solid !important;
+      border-width: 7px 6px 0 6px !important;
+      display: block !important;
+      margin-top: 4px !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #d_sharing
+      ul,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #d_sharing
+      li {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #d_sharing
+      li
+      + li {
+      margin-top: 0.65rem !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #d_sharing
+      label {
+      display: flex !important;
+      align-items: flex-start !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 0.7rem !important;
+      font-weight: 400 !important;
+      line-height: 1.5 !important;
+      text-transform: none !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #edit_d_sharing_opts,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      #edit_d_sharing_opts-close {
+      display: inline-block !important;
+      margin-top: 0.35rem !important;
+      cursor: pointer !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .error,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      label.error,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .js-error_message,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .error_message {
+      display: block !important;
+      margin: 0.4rem 0 0.8rem !important;
+      padding: 0.75rem !important;
+      border: 2px solid var(--black) !important;
+      border-radius: 0.75rem !important;
+      color: var(--black) !important;
+      background: #fca5a5 !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 0.75rem !important;
+      font-weight: 700 !important;
+      line-height: 1.45 !important;
+      text-transform: none !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .floatlabel-wrapper {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .floatlabel-label {
+      color: var(--black) !important;
+      background: var(--white) !important;
+      font-family: "Archivo Black", sans-serif !important;
+      font-size: 0.64rem !important;
+      text-transform: uppercase !important;
+    }
+
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .country_wrap,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .zip_code_wrap,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .first_name_wrap,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .last_name_wrap,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .email_wrap,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .address1_wrap,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .city_wrap,
+    #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+      .state_wrap {
+      float: none !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-right: 0 !important;
+      margin-left: 0 !important;
+    }
+
+    .privacy-note {
+      margin: 1.4rem 0 0;
+      font-size: 0.68rem;
+      line-height: 1.55;
+      text-align: center;
+      opacity: 0.68;
+    }
+
+    @media (max-width: 960px) {
+      .campaign-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 3.5rem;
+      }
+
+      .form-column {
+        width: min(100%, 660px);
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .coal-page {
+        padding:
+          max(2rem, env(safe-area-inset-top))
+          max(1rem, env(safe-area-inset-right))
+          max(3.5rem, env(safe-area-inset-bottom))
+          max(1rem, env(safe-area-inset-left));
+      }
+
+      .factory-decoration {
+        top: -2rem;
+        right: -6rem;
+        font-size: 18rem;
+      }
+
+      .back-link {
+        margin-bottom: 2rem;
+        font-size: 0.78rem;
+      }
+
+      .campaign-header {
+        margin-bottom: 3rem;
+      }
+
+      .campaign-title {
+        font-size: clamp(2.8rem, 14vw, 5rem);
+        line-height: 0.94;
+      }
+
+      .campaign-pill {
+        padding: 0.65rem 1rem;
+        font-size: 0.74rem;
+      }
+
+      .content-card {
+        padding: 1.5rem;
+        border-radius: 2rem;
+        box-shadow: 5px 5px 0 var(--black);
+      }
+
+      .content-card-header {
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .content-icon {
+        width: 54px;
+        height: 54px;
+        font-size: 1.6rem;
+      }
+
+      .petition-card {
+        padding: 1.5rem;
+        border-radius: 2rem;
+        box-shadow: 5px 5px 0 var(--black);
+      }
+
+      #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+        input[type="submit"],
+      #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+        button[type="submit"],
+      #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+        .button,
+      #can-petition-area-stop-trumps-700-million-coal-slush-fund-partner
+        .btn {
+        min-height: 58px !important;
+        font-size: 1rem !important;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .campaign-title {
+        font-size: 2.55rem;
+      }
+
+      .content-card,
+      .petition-card {
+        padding: 1.2rem;
+      }
+
+      .expert-note {
+        font-size: 0.67rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="coal-page">
+
+    <div class="factory-decoration" aria-hidden="true">
+      <i class="ph ph-factory"></i>
+    </div>
+
+    <div class="page-inner">
+
+      <a
+        href="https://www.girlplusenvironment.org/take-action"
+        target="_top"
+        class="back-link"
+        id="back-to-actions"
+      >
+        <i class="ph ph-arrow-left" aria-hidden="true"></i>
+        <span>Back to actions</span>
+      </a>
+
+      <section class="campaign-header" aria-labelledby="coal-campaign-title">
+        <h1 class="campaign-title">
+          <span id="coal-campaign-title" class="sr-only">Stop Trump’s $700 Million Coal Slush Fund</span>
+          Stop Trump’s<br>
+          $700 Million<br>
+          Coal Slush Fund
+        </h1>
+
+        <div class="campaign-pill">
+          Tell Congress: Put People Before Polluters
+        </div>
+      </section>
+
+      <div class="campaign-grid">
+
+        <section class="content-column" aria-label="Campaign information">
+
+          <article class="content-card">
+            <div class="content-card-header">
+
+              <div class="content-icon content-icon--red" aria-hidden="true">
+                <i class="ph ph-currency-dollar"></i>
+              </div>
+
+              <h2 class="content-card-title">
+                The Problem
+              </h2>
+            </div>
+
+            <p>
+              The Trump administration has announced a $700 million
+              taxpayer-funded slush fund for the coal industry to keep aging
+              coal plants running, reopen retired facilities, build new coal
+              plants, and construct new coal export infrastructure.
+            </p>
+
+            <div class="coal-callout">
+              Coal? In this economy? Hell no.
+            </div>
+          </article>
+
+          <article class="content-card">
+            <div class="content-card-header">
+
+              <div class="content-icon content-icon--orange" aria-hidden="true">
+                <i class="ph ph-wind"></i>
+              </div>
+
+              <h2 class="content-card-title">
+                The Real Solution
+              </h2>
+            </div>
+
+            <p>
+              Instead of investing in affordable clean energy solutions that
+              lower costs and create jobs, the administration is forcing
+              taxpayers to prop up an industry that is expensive, unhealthy,
+              and fueling the climate crisis.
+            </p>
+
+            <p>
+              Leave fossils in the ground, out of our lungs, and very far
+              away from the White House. Jkjkjk… mostly.
+            </p>
+          </article>
+        </section>
+
+        <section class="form-column" aria-labelledby="petition-heading">
+          <div class="petition-card">
+
+            <h2 id="petition-heading" class="petition-heading">
+              Add Your Name
+            </h2>
+
+            <p class="petition-intro">
+              Tell Congress to stop wasting taxpayer dollars on dirty coal and
+              put people before polluters.
+            </p>
+
+            <div class="expert-note">
+              <i class="ph ph-users-three" aria-hidden="true"></i>
+
+              <span>
+                Community leaders, educators, health professionals, academics,
+                and other experts can identify their constituency below.
+              </span>
+            </div>
+
+            <div class="action-network-shell">
+
+              <div
+                id="widget-loading"
+                class="widget-loading"
+                aria-live="polite"
+              >
+                <div class="widget-loading-inner">
+                  <i
+                    class="ph ph-factory loading-icon"
+                    aria-hidden="true"
+                  ></i>
+
+                  <p class="header-font">
+                    Loading the petition...
+                  </p>
+                </div>
+              </div>
+
+              <div
+                id="can-petition-area-stop-trumps-700-million-coal-slush-fund-partner"
+                aria-live="polite"
+              ></div>
+
+            </div>
+
+            <p class="privacy-note">
+              Your information is processed through Action Network. You may
+              receive email updates from Stand Strong for Climate Coalition
+              according to the preferences displayed in the form.
+            </p>
+
+            <form id="gpe-completion-claim" class="mt-6 bg-white brutalist-border rounded-3xl p-5">
+              <label class="header-font text-sm" for="gpe-completion-email">Report this action for Camp points review</label>
+              <input id="gpe-completion-email" name="email" type="email" required autocomplete="email" placeholder="Email used for GPE" style="width:100%;margin:.75rem 0;padding:.85rem;border:3px solid #000;border-radius:16px;">
+              <textarea name="notes" placeholder="Optional note for Team GPE" style="width:100%;min-height:90px;padding:.85rem;border:3px solid #000;border-radius:16px;"></textarea>
+              <button type="submit" class="header-font" style="margin-top:.75rem;padding:.85rem 1rem;border:3px solid #000;border-radius:999px;background:#22d3ee;color:#000;">I completed this action</button>
+              <p id="gpe-completion-status" class="privacy-note" hidden tabindex="-1"></p>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const TAKE_ACTION_URL =
+        "https://www.girlplusenvironment.org/take-action";
+
+      const PETITION_URL =
+        "https://actionnetwork.org/petitions/stop-trumps-700-million-coal-slush-fund-partner?source=Girl%20Plus%20Environment";
+      const COMPLETION_ENDPOINT =
+        "https://wisvwuysysbitxluajmv.supabase.co/functions/v1/camp-gpe-challenge-submit";
+
+      const WIDGET_SCRIPT_URL =
+        "https://actionnetwork.org/widgets/v5/petition/stop-trumps-700-million-coal-slush-fund-partner?format=js&source=Girl%20Plus%20Environment";
+
+      const widgetId =
+        "can-petition-area-stop-trumps-700-million-coal-slush-fund-partner";
+
+      const widget = document.getElementById(widgetId);
+      const loader = document.getElementById("widget-loading");
+      const backLink = document.getElementById("back-to-actions");
+      const completionForm = document.getElementById("gpe-completion-claim");
+      const completionStatus = document.getElementById("gpe-completion-status");
+
+      /*
+       * Force Wix to leave the HTML embed and navigate the full browser
+       * window back to the Take Action page.
+       */
+      if (backLink) {
+        backLink.addEventListener("click", function (event) {
+          event.preventDefault();
+
+          try {
+            window.top.location.href = TAKE_ACTION_URL;
+          } catch (error) {
+            window.location.href = TAKE_ACTION_URL;
+          }
+        });
+      }
+
+      if (!widget || !loader) {
+        return;
+      }
+
+      if (completionForm && completionStatus) {
+        completionForm.addEventListener("submit", async function (event) {
+          event.preventDefault();
+          const button = completionForm.querySelector('button[type="submit"]');
+          const originalText = button.textContent;
+          button.disabled = true;
+          button.textContent = "Sending...";
+          completionStatus.hidden = true;
+          try {
+            const formData = new FormData(completionForm);
+            const response = await fetch(COMPLETION_ENDPOINT, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Idempotency-Key": crypto.randomUUID ? crypto.randomUUID() : String(Date.now())
+              },
+              body: JSON.stringify({
+                fields: {
+                  email: String(formData.get("email") || "").trim(),
+                  actions: ["other"],
+                  otherAction: "Coal slush fund Action Network petition",
+                  socialLinks: PETITION_URL,
+                  notes: String(formData.get("notes") || "").trim(),
+                  sourcePage: "coal-slush-fund-action",
+                  actionSlug: "stop-trumps-700-million-coal-slush-fund-partner"
+                }
+              })
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.message || "Completion claim could not be saved.");
+            completionStatus.textContent = data.message || "Your completion claim has been received for Team GPE review. Approved actions will be added to your points.";
+            completionStatus.hidden = false;
+            completionStatus.focus();
+            completionForm.reset();
+          } catch (error) {
+            completionStatus.textContent = error.message || "Completion claim could not be saved.";
+            completionStatus.hidden = false;
+            completionStatus.focus();
+          } finally {
+            button.disabled = false;
+            button.textContent = originalText;
+          }
+        });
+      }
+
+      let observer = null;
+      let pollingInterval = null;
+      let timeoutId = null;
+      let failureDisplayed = false;
+
+      function widgetHasLoaded() {
+        return Boolean(
+          widget.querySelector(
+            [
+              "form",
+              "input",
+              "textarea",
+              "select",
+              "button",
+              ".can_embed",
+              "#can_embed_form"
+            ].join(",")
+          )
+        );
+      }
+
+      function stopWatching() {
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+
+        if (pollingInterval) {
+          window.clearInterval(pollingInterval);
+          pollingInterval = null;
+        }
+
+        if (timeoutId) {
+          window.clearTimeout(timeoutId);
+          timeoutId = null;
+        }
+      }
+
+      function hideLoader() {
+        if (!widgetHasLoaded()) {
+          return false;
+        }
+
+        loader.hidden = true;
+        loader.setAttribute("aria-hidden", "true");
+        stopWatching();
+
+        return true;
+      }
+
+      function openPetition(event) {
+        if (event) {
+          event.preventDefault();
+        }
+
+        try {
+          window.top.location.href = PETITION_URL;
+        } catch (error) {
+          window.location.href = PETITION_URL;
+        }
+      }
+
+      function showFailure(message) {
+        if (failureDisplayed || widgetHasLoaded()) {
+          hideLoader();
+          return;
+        }
+
+        failureDisplayed = true;
+        stopWatching();
+
+        loader.hidden = false;
+        loader.removeAttribute("aria-hidden");
+
+        loader.innerHTML = `
+          <div class="widget-loading-inner">
+            <i
+              class="ph ph-warning-circle"
+              aria-hidden="true"
+              style="
+                display:inline-block;
+                margin-bottom:.8rem;
+                font-size:2.2rem;
+              "
+            ></i>
+
+            <p
+              class="header-font"
+              style="margin:0 0 .75rem;"
+            >
+              The petition could not load here.
+            </p>
+
+            <p
+              style="
+                margin:0 0 1rem;
+                font-size:.8rem;
+                line-height:1.55;
+              "
+            >
+              ${message}
+            </p>
+
+            <a
+              href="${PETITION_URL}"
+              target="_top"
+              id="petition-fallback-link"
+              style="
+                display:inline-flex;
+                align-items:center;
+                justify-content:center;
+                gap:.5rem;
+                padding:.8rem 1rem;
+                border:3px solid #000;
+                border-radius:999px;
+                color:#fff;
+                background:#000;
+                font-family:'Archivo Black',sans-serif;
+                font-size:.78rem;
+                text-decoration:none;
+                text-transform:uppercase;
+              "
+            >
+              Open the Petition
+              <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
+            </a>
+          </div>
+        `;
+
+        const fallbackLink =
+          document.getElementById("petition-fallback-link");
+
+        if (fallbackLink) {
+          fallbackLink.addEventListener("click", openPetition);
+        }
+      }
+
+      function beginWatchingWidget() {
+        if (hideLoader()) {
+          return;
+        }
+
+        observer = new MutationObserver(function () {
+          hideLoader();
+        });
+
+        observer.observe(widget, {
+          childList: true,
+          subtree: true
+        });
+
+        pollingInterval = window.setInterval(function () {
+          hideLoader();
+        }, 250);
+
+        timeoutId = window.setTimeout(function () {
+          if (widgetHasLoaded()) {
+            hideLoader();
+            return;
+          }
+
+          showFailure(
+            "Open the secure Action Network petition directly to add your name."
+          );
+        }, 12000);
+      }
+
+      function loadActionNetworkWidget() {
+        /*
+         * Prevent accidentally loading the same widget script twice
+         * if Wix reruns the embedded HTML.
+         */
+        const existingScript = document.querySelector(
+          'script[data-gpe-action-network-widget="coal-petition"]'
+        );
+
+        if (existingScript) {
+          beginWatchingWidget();
+          return;
+        }
+
+        const script = document.createElement("script");
+
+        script.src = WIDGET_SCRIPT_URL;
+        script.async = true;
+        script.dataset.gpeActionNetworkWidget = "coal-petition";
+
+        script.addEventListener("load", function () {
+          beginWatchingWidget();
+        });
+
+        script.addEventListener("error", function () {
+          showFailure(
+            "The embedded form was blocked or Action Network could not be reached."
+          );
+        });
+
+        document.body.appendChild(script);
+
+        /*
+         * Begin watching immediately because Action Network may populate
+         * the target before the script's load event fires.
+         */
+        beginWatchingWidget();
+      }
+
+      loadActionNetworkWidget();
+    })();
+  </script>
+</body>
+</html>

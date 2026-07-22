@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Extreme Weather | Girl Plus Environment</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Load Action Network's base form styles first -->
+  <link
+    href="https://actionnetwork.org/css/style-embed-whitelabel-v3.css"
+    rel="stylesheet"
+    type="text/css"
+  >
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Space Mono", monospace;
+      background: #ecfeff;
+      color: #000;
+    }
+
+    .header-font {
+      font-family: "Archivo Black", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .brutalist-border {
+      border: 3px solid #000;
+    }
+
+    .brutalist-shadow {
+      box-shadow: 8px 8px 0 #000;
+    }
+
+    .brutalist-shadow-hover {
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .brutalist-shadow-hover:hover {
+      box-shadow: 12px 12px 0 #000;
+      transform: translate(-4px, -4px);
+    }
+
+    .hero-pattern {
+      background-color: #d53f8c;
+      background-image:
+        radial-gradient(rgba(0, 0, 0, 0.2) 2px, transparent 2px);
+      background-size: 30px 30px;
+    }
+
+    .cute-pattern {
+      background-image:
+        radial-gradient(#a5f3fc 2px, transparent 2px);
+      background-size: 24px 24px;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* =========================================================
+       ACTION NETWORK FORM RESET
+       The embed is injected into this wrapper by Action Network.
+       ========================================================= */
+
+    #gpe-action-network-form {
+      width: 100%;
+      min-width: 0;
+    }
+
+    #gpe-action-network-form,
+    #gpe-action-network-form * {
+      box-sizing: border-box;
+    }
+
+    #gpe-action-network-form #can_embed_form {
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      color: #000 !important;
+      font-family: "Space Mono", monospace !important;
+    }
+
+    /*
+      Remove Action Network's duplicate campaign title and description
+      because the GPE page already contains the campaign content.
+    */
+
+    #gpe-action-network-form #can_embed_form > h2,
+    #gpe-action-network-form #can_embed_form > h3,
+    #gpe-action-network-form #can_embed_form .entry-title,
+    #gpe-action-network-form #can_embed_form #action_welcome_message,
+    #gpe-action-network-form #can_embed_form .action_description,
+    #gpe-action-network-form #can_embed_form .can_embed_form_inner > h2 {
+      display: none !important;
+    }
+
+    #gpe-action-network-form #can_embed_form form,
+    #gpe-action-network-form #can_embed_form .can_embed_form_inner,
+    #gpe-action-network-form #can_embed_form .can_thank_you_wrap,
+    #gpe-action-network-form #can_embed_form .can_thank_you-block {
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+
+    #gpe-action-network-form #can_embed_form ul,
+    #gpe-action-network-form #can_embed_form ol {
+      margin: 0 !important;
+      padding: 0 !important;
+      list-style: none !important;
+    }
+
+    #gpe-action-network-form #can_embed_form li {
+      width: 100% !important;
+      margin: 0 0 18px !important;
+      padding: 0 !important;
+      list-style: none !important;
+    }
+
+    #gpe-action-network-form #can_embed_form .core_field,
+    #gpe-action-network-form #can_embed_form .form_builder_output,
+    #gpe-action-network-form #can_embed_form .floatlabel-wrapper {
+      width: 100% !important;
+      margin: 0 0 18px !important;
+      padding: 0 !important;
+      background: transparent !important;
+    }
+
+    /* =========================================================
+       LABELS
+       ========================================================= */
+
+    #gpe-action-network-form #can_embed_form label,
+    #gpe-action-network-form #can_embed_form .control-label,
+    #gpe-action-network-form #can_embed_form .floatlabel-label,
+    #gpe-action-network-form #can_embed_form .can_select_label {
+      display: block !important;
+      margin: 0 0 8px !important;
+      padding: 0 !important;
+      color: #000 !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      line-height: 1.4 !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+    }
+
+    /*
+      Action Network often uses empty labels with placeholders.
+      Do not create blank vertical space for those labels.
+    */
+
+    #gpe-action-network-form #can_embed_form label:empty,
+    #gpe-action-network-form #can_embed_form .control-label.disabled:empty {
+      display: none !important;
+      margin: 0 !important;
+    }
+
+    /* =========================================================
+       INPUTS, SELECTS AND TEXTAREAS
+       ========================================================= */
+
+    #gpe-action-network-form #can_embed_form input[type="text"],
+    #gpe-action-network-form #can_embed_form input[type="email"],
+    #gpe-action-network-form #can_embed_form input[type="tel"],
+    #gpe-action-network-form #can_embed_form input[type="number"],
+    #gpe-action-network-form #can_embed_form input[type="password"],
+    #gpe-action-network-form #can_embed_form input[type="search"],
+    #gpe-action-network-form #can_embed_form input[type="url"],
+    #gpe-action-network-form #can_embed_form textarea,
+    #gpe-action-network-form #can_embed_form select,
+    #gpe-action-network-form #can_embed_form .can_select {
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      min-height: 56px !important;
+      margin: 0 !important;
+      padding: 13px 16px !important;
+      appearance: none;
+      -webkit-appearance: none;
+      background: #fff !important;
+      color: #000 !important;
+      border: 3px solid #000 !important;
+      border-radius: 12px !important;
+      box-shadow: none !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 16px !important;
+      font-weight: 400 !important;
+      line-height: 1.4 !important;
+      opacity: 1 !important;
+      transition:
+        background-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.15s ease;
+    }
+
+    #gpe-action-network-form #can_embed_form textarea {
+      min-height: 150px !important;
+      resize: vertical !important;
+    }
+
+    #gpe-action-network-form #can_embed_form select,
+    #gpe-action-network-form #can_embed_form .can_select {
+      padding-right: 48px !important;
+      background-color: #fff !important;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #000 50%),
+        linear-gradient(135deg, #000 50%, transparent 50%) !important;
+      background-position:
+        calc(100% - 21px) 24px,
+        calc(100% - 15px) 24px !important;
+      background-size: 6px 6px, 6px 6px !important;
+      background-repeat: no-repeat !important;
+    }
+
+    #gpe-action-network-form #can_embed_form input::placeholder,
+    #gpe-action-network-form #can_embed_form textarea::placeholder {
+      color: #525252 !important;
+      font-family: "Space Mono", monospace !important;
+      opacity: 1 !important;
+    }
+
+    #gpe-action-network-form #can_embed_form input[type="text"]:focus,
+    #gpe-action-network-form #can_embed_form input[type="email"]:focus,
+    #gpe-action-network-form #can_embed_form input[type="tel"]:focus,
+    #gpe-action-network-form #can_embed_form input[type="number"]:focus,
+    #gpe-action-network-form #can_embed_form input[type="password"]:focus,
+    #gpe-action-network-form #can_embed_form input[type="search"]:focus,
+    #gpe-action-network-form #can_embed_form input[type="url"]:focus,
+    #gpe-action-network-form #can_embed_form textarea:focus,
+    #gpe-action-network-form #can_embed_form select:focus {
+      outline: none !important;
+      background: #fdf2f8 !important;
+      border-color: #000 !important;
+      box-shadow: 5px 5px 0 #000 !important;
+      transform: translate(-2px, -2px);
+    }
+
+    /* Remove Action Network's interior field decorations */
+
+    #gpe-action-network-form #can_embed_form .floatlabel-wrapper::before,
+    #gpe-action-network-form #can_embed_form .floatlabel-wrapper::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    /* =========================================================
+       CHECKBOXES
+       ========================================================= */
+
+    #gpe-action-network-form #can_embed_form input[type="checkbox"] {
+      position: relative !important;
+      display: inline-grid !important;
+      place-content: center;
+      flex: 0 0 auto;
+      width: 24px !important;
+      height: 24px !important;
+      min-height: 24px !important;
+      margin: 1px 10px 0 0 !important;
+      padding: 0 !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      background: #fff !important;
+      border: 3px solid #000 !important;
+      border-radius: 5px !important;
+      box-shadow: none !important;
+      cursor: pointer;
+      vertical-align: top;
+    }
+
+    #gpe-action-network-form #can_embed_form input[type="checkbox"]::before {
+      content: "";
+      width: 11px;
+      height: 11px;
+      background: #d53f8c;
+      transform: scale(0);
+      transition: transform 0.12s ease;
+    }
+
+    #gpe-action-network-form #can_embed_form input[type="checkbox"]:checked::before {
+      transform: scale(1);
+    }
+
+    #gpe-action-network-form #can_embed_form input[type="checkbox"]:focus-visible {
+      outline: 3px solid #fff !important;
+      outline-offset: 2px !important;
+      box-shadow: 0 0 0 5px #000 !important;
+    }
+
+    #gpe-action-network-form #can_embed_form #d_sharing label,
+    #gpe-action-network-form #can_embed_form .js-d_sharing label {
+      display: flex !important;
+      align-items: flex-start !important;
+      gap: 0 !important;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       SUBMIT BUTTON
+       ========================================================= */
+
+    #gpe-action-network-form #can_embed_form input[type="submit"],
+    #gpe-action-network-form #can_embed_form button[type="submit"],
+    #gpe-action-network-form #can_embed_form .button,
+    #gpe-action-network-form #can_embed_form .btn,
+    #gpe-action-network-form #can_embed_form .can_button {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      min-height: 60px !important;
+      margin: 6px 0 0 !important;
+      padding: 15px 22px !important;
+      background: #d53f8c !important;
+      color: #fff !important;
+      border: 3px solid #000 !important;
+      border-radius: 999px !important;
+      box-shadow: 6px 6px 0 #000 !important;
+      font-family: "Archivo Black", sans-serif !important;
+      font-size: 17px !important;
+      font-weight: 400 !important;
+      line-height: 1.2 !important;
+      letter-spacing: 0.02em !important;
+      text-align: center !important;
+      text-decoration: none !important;
+      text-transform: uppercase !important;
+      cursor: pointer !important;
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background-color 0.15s ease !important;
+    }
+
+    #gpe-action-network-form #can_embed_form input[type="submit"]:hover,
+    #gpe-action-network-form #can_embed_form button[type="submit"]:hover,
+    #gpe-action-network-form #can_embed_form .button:hover,
+    #gpe-action-network-form #can_embed_form .btn:hover,
+    #gpe-action-network-form #can_embed_form .can_button:hover {
+      background: #be185d !important;
+      box-shadow: 3px 3px 0 #000 !important;
+      transform: translate(3px, 3px) !important;
+    }
+
+    #gpe-action-network-form #can_embed_form input[type="submit"]:focus-visible,
+    #gpe-action-network-form #can_embed_form button[type="submit"]:focus-visible {
+      outline: 4px solid #fff !important;
+      outline-offset: 3px !important;
+    }
+
+    /* =========================================================
+       SUBSCRIPTION AND DISCLOSURE TEXT
+       ========================================================= */
+
+    #gpe-action-network-form #can_embed_form #d_sharing,
+    #gpe-action-network-form #can_embed_form .js-d_sharing {
+      margin: 22px 0 0 !important;
+      padding: 16px !important;
+      background: #cffafe !important;
+      border: 2px solid #000 !important;
+      border-radius: 12px !important;
+      color: #000 !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 12px !important;
+      line-height: 1.55 !important;
+    }
+
+    #gpe-action-network-form #can_embed_form #d_sharing li,
+    #gpe-action-network-form #can_embed_form .js-d_sharing li {
+      margin: 0 0 10px !important;
+      font-size: 12px !important;
+      line-height: 1.55 !important;
+    }
+
+    #gpe-action-network-form #can_embed_form #d_sharing li:last-child,
+    #gpe-action-network-form #can_embed_form .js-d_sharing li:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    #gpe-action-network-form #can_embed_form a {
+      color: #9d174d !important;
+      font-weight: 700 !important;
+      text-decoration: underline !important;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+
+    #gpe-action-network-form #can_embed_form em {
+      color: inherit !important;
+      font-style: normal !important;
+      font-weight: 700 !important;
+    }
+
+    /* =========================================================
+       INTERNATIONAL LOCATION LINK
+       ========================================================= */
+
+    #gpe-action-network-form #can_embed_form .international_link-wrap,
+    #gpe-action-network-form #can_embed_form .country_drop_wrap {
+      display: block !important;
+      width: 100% !important;
+      margin: 8px 0 18px !important;
+    }
+
+    #gpe-action-network-form #can_embed_form .country_drop_wrap.hide {
+      display: none !important;
+    }
+
+    #gpe-action-network-form #can_embed_form .international_link {
+      display: inline-block !important;
+      font-size: 13px !important;
+    }
+
+    /* =========================================================
+       ERRORS
+       ========================================================= */
+
+    #gpe-action-network-form #can_embed_form .error,
+    #gpe-action-network-form #can_embed_form label.error,
+    #gpe-action-network-form #can_embed_form #error_message,
+    #gpe-action-network-form #can_embed_form .js-error_message {
+      display: block !important;
+      margin: 8px 0 0 !important;
+      padding: 10px 12px !important;
+      background: #fee2e2 !important;
+      color: #991b1b !important;
+      border: 2px solid #991b1b !important;
+      border-radius: 8px !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      line-height: 1.4 !important;
+    }
+
+    #gpe-action-network-form #can_embed_form input.error,
+    #gpe-action-network-form #can_embed_form textarea.error,
+    #gpe-action-network-form #can_embed_form select.error {
+      border-color: #991b1b !important;
+      background: #fff7f7 !important;
+    }
+
+    /*
+      Avoid displaying an empty error container as a red box.
+    */
+
+    #gpe-action-network-form #can_embed_form #error_message:empty,
+    #gpe-action-network-form #can_embed_form .js-error_message:empty {
+      display: none !important;
+    }
+
+    /* =========================================================
+       ACTION NETWORK THANK-YOU / SECOND STEP
+       ========================================================= */
+
+    #gpe-action-network-form #can_embed_form .can_thank_you_wrap,
+    #gpe-action-network-form #can_embed_form .can_thank_you-block {
+      color: #000 !important;
+      font-family: "Space Mono", monospace !important;
+    }
+
+    #gpe-action-network-form #can_embed_form .can_thank_you_wrap h1,
+    #gpe-action-network-form #can_embed_form .can_thank_you_wrap h2,
+    #gpe-action-network-form #can_embed_form .can_thank_you_wrap h3,
+    #gpe-action-network-form #can_embed_form .can_thank_you-block h1,
+    #gpe-action-network-form #can_embed_form .can_thank_you-block h2,
+    #gpe-action-network-form #can_embed_form .can_thank_you-block h3 {
+      display: block !important;
+      margin: 0 0 18px !important;
+      color: #000 !important;
+      font-family: "Archivo Black", sans-serif !important;
+      line-height: 1.05 !important;
+      text-transform: uppercase !important;
+    }
+
+    #gpe-action-network-form #can_embed_form .can_thank_you_wrap p,
+    #gpe-action-network-form #can_embed_form .can_thank_you-block p {
+      color: #000 !important;
+      font-family: "Space Mono", monospace !important;
+      line-height: 1.65 !important;
+    }
+
+    /* Hide unexpected Action Network branding inside the white-label embed */
+
+    #gpe-action-network-form #can_embed_form .powered_by,
+    #gpe-action-network-form #can_embed_form .can_embed_form_powered_by,
+    #gpe-action-network-form #can_embed_form .action_network_logo {
+      display: none !important;
+    }
+
+    /* Loading state before the external script finishes */
+
+    .form-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 120px;
+      padding: 24px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .form-loading i {
+      font-size: 24px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .brutalist-shadow {
+        box-shadow: 5px 5px 0 #000;
+      }
+
+      #gpe-action-network-form #can_embed_form input[type="submit"],
+      #gpe-action-network-form #can_embed_form button[type="submit"],
+      #gpe-action-network-form #can_embed_form .button,
+      #gpe-action-network-form #can_embed_form .btn,
+      #gpe-action-network-form #can_embed_form .can_button {
+        min-height: 56px !important;
+        box-shadow: 4px 4px 0 #000 !important;
+        font-size: 15px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="bg-cyan-50 min-h-screen py-14 md:py-20 px-6 relative overflow-hidden">
+
+    <div
+      class="absolute -top-20 -right-20 text-cyan-200 text-[16rem] md:text-[25rem] opacity-30 rotate-12 pointer-events-none"
+      aria-hidden="true"
+    >
+      <i class="ph ph-cloud-rain"></i>
+    </div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+<a
+  id="back-to-actions"
+  href="https://www.girlplusenvironment.org/take-action/"
+  target="_top"
+  class="mb-10 inline-flex items-center gap-2 header-font hover:-translate-x-1 transition-transform"
+>
+  <i class="ph ph-arrow-left" aria-hidden="true"></i>
+  Back to actions
+</a>
+
+      <div class="text-center mb-14 md:mb-16">
+        <h1 class="header-font text-5xl md:text-9xl mb-4 leading-none">
+          Extreme Weather
+        </h1>
+
+        <div class="bg-black text-white px-6 md:px-8 py-2 inline-block rounded-full header-font text-base md:text-xl">
+          We're getting soaked (literally!)
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-10">
+        <article class="bg-white brutalist-border p-8 rounded-3xl brutalist-shadow">
+          <div class="text-5xl mb-6" aria-hidden="true">🔥</div>
+          <h2 class="header-font text-xl mb-4">On Fire</h2>
+          <p>
+            Heatwaves are hitting record highs in our neighborhoods, and the
+            concrete jungle makes it even worse.
+          </p>
+        </article>
+
+        <article class="bg-[#fb923c] brutalist-border p-8 rounded-3xl brutalist-shadow text-white">
+          <div class="text-5xl mb-6" aria-hidden="true">🌊</div>
+          <h2 class="header-font text-xl mb-4">Flooded</h2>
+          <p>
+            One storm should not destroy our homes. Our infrastructure was not
+            built for this climate reality.
+          </p>
+        </article>
+
+        <article class="bg-white brutalist-border p-8 rounded-3xl brutalist-shadow">
+          <div class="text-5xl mb-6" aria-hidden="true">🧬</div>
+          <h2 class="header-font text-xl mb-4">The Science</h2>
+          <p>
+            Climate change is driving more dangerous heat, flooding, wildfire,
+            and other extreme weather.
+          </p>
+        </article>
+      </div>
+
+      <section class="mt-16 md:mt-20 bg-[#22d3ee] brutalist-border rounded-[48px] p-8 md:p-12 brutalist-shadow">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+
+          <div class="md:sticky md:top-10">
+            <h2
+              class="header-font text-4xl md:text-5xl mb-6 text-white"
+              style="-webkit-text-stroke: 1px black;"
+            >
+              Make Some Noise!
+            </h2>
+
+            <p class="text-xl font-bold mb-8">
+              Call on Congress to support bold climate action that protects
+              our health and our future.
+            </p>
+
+            <p class="mb-8 leading-relaxed">
+              Across the country, communities are facing record heat,
+              devastating wildfires, severe floods, and other extreme weather
+              disasters that are becoming more frequent and destructive.
+            </p>
+
+            <div class="flex gap-4" aria-hidden="true">
+              <div class="bg-white brutalist-border w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-3xl">
+                <i class="ph ph-sun"></i>
+              </div>
+
+              <div class="bg-white brutalist-border w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-3xl">
+                <i class="ph ph-wind"></i>
+              </div>
+
+              <div class="bg-white brutalist-border w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center text-3xl">
+                <i class="ph ph-drop"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white brutalist-border p-6 md:p-10 rounded-[40px] min-w-0">
+            <div class="mb-7">
+              <p class="header-font text-sm text-pink-700 mb-2">
+                Take Action
+              </p>
+
+              <h3 class="header-font text-2xl md:text-3xl leading-tight">
+                Tell Congress to act now
+              </h3>
+            </div>
+
+            <div id="gpe-action-network-form">
+              <div class="form-loading" id="form-loading-message">
+                <i class="ph ph-circle-notch" aria-hidden="true"></i>
+                Loading the action form…
+              </div>
+
+              <div
+                id="can-letter-area-extreme-weather-puts-our-communities-at-risk-its-time-for-bold-climate-action-2"
+                style="width: 100%;"
+              ></div>
+            </div>
+
+            <form id="gpe-completion-claim" class="mt-6 bg-white brutalist-border rounded-3xl p-5">
+              <label class="header-font text-sm" for="gpe-completion-email">Report this action for Camp points review</label>
+              <input id="gpe-completion-email" name="email" type="email" required autocomplete="email" placeholder="Email used for GPE" style="width:100%;margin:.75rem 0;padding:.85rem;border:3px solid #000;border-radius:16px;">
+              <textarea name="notes" placeholder="Optional note for Team GPE" style="width:100%;min-height:90px;padding:.85rem;border:3px solid #000;border-radius:16px;"></textarea>
+              <button type="submit" class="header-font" style="margin-top:.75rem;padding:.85rem 1rem;border:3px solid #000;border-radius:999px;background:#22d3ee;color:#000;">I completed this action</button>
+              <p id="gpe-completion-status" class="mt-3 font-bold" hidden tabindex="-1"></p>
+            </form>
+
+            <script src="https://actionnetwork.org/widgets/v6/letter/extreme-weather-puts-our-communities-at-risk-its-time-for-bold-climate-action-2?format=js&source=Girl%20Plus%20Environment"></script>
+
+            <script>
+              (function () {
+                const formAreaId =
+                  "can-letter-area-extreme-weather-puts-our-communities-at-risk-its-time-for-bold-climate-action-2";
+
+                const formArea = document.getElementById(formAreaId);
+                const loadingMessage =
+                  document.getElementById("form-loading-message");
+                const completionForm =
+                  document.getElementById("gpe-completion-claim");
+                const completionStatus =
+                  document.getElementById("gpe-completion-status");
+                const actionUrl =
+                  "https://actionnetwork.org/letters/extreme-weather-puts-our-communities-at-risk-its-time-for-bold-climate-action-2?source=Girl%20Plus%20Environment";
+                const completionEndpoint =
+                  "https://wisvwuysysbitxluajmv.supabase.co/functions/v1/camp-gpe-challenge-submit";
+
+                if (!formArea || !loadingMessage) {
+                  return;
+                }
+
+                if (completionForm && completionStatus) {
+                  completionForm.addEventListener("submit", async function (event) {
+                    event.preventDefault();
+                    const button = completionForm.querySelector('button[type="submit"]');
+                    const originalText = button.textContent;
+                    button.disabled = true;
+                    button.textContent = "Sending...";
+                    completionStatus.hidden = true;
+                    try {
+                      const formData = new FormData(completionForm);
+                      const response = await fetch(completionEndpoint, {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                          "Idempotency-Key": crypto.randomUUID ? crypto.randomUUID() : String(Date.now())
+                        },
+                        body: JSON.stringify({
+                          fields: {
+                            email: String(formData.get("email") || "").trim(),
+                            actions: ["other"],
+                            otherAction: "Extreme weather Action Network letter",
+                            socialLinks: actionUrl,
+                            notes: String(formData.get("notes") || "").trim(),
+                            sourcePage: "extreme-weather-action",
+                            actionSlug: "extreme-weather-puts-our-communities-at-risk-its-time-for-bold-climate-action-2"
+                          }
+                        })
+                      });
+                      const data = await response.json().catch(() => ({}));
+                      if (!response.ok) throw new Error(data.message || "Completion claim could not be saved.");
+                      completionStatus.textContent = data.message || "Your completion claim has been received for Team GPE review. Approved actions will be added to your points.";
+                      completionStatus.hidden = false;
+                      completionStatus.focus();
+                      completionForm.reset();
+                    } catch (error) {
+                      completionStatus.textContent = error.message || "Completion claim could not be saved.";
+                      completionStatus.hidden = false;
+                      completionStatus.focus();
+                    } finally {
+                      button.disabled = false;
+                      button.textContent = originalText;
+                    }
+                  });
+                }
+
+                function removeLoadingMessageWhenReady() {
+                  const injectedForm = formArea.querySelector(
+                    "#can_embed_form, form"
+                  );
+
+                  if (injectedForm) {
+                    loadingMessage.remove();
+                    return true;
+                  }
+
+                  return false;
+                }
+
+                if (!removeLoadingMessageWhenReady()) {
+                  const observer = new MutationObserver(function () {
+                    if (removeLoadingMessageWhenReady()) {
+                      observer.disconnect();
+                    }
+                  });
+
+                  observer.observe(formArea, {
+                    childList: true,
+                    subtree: true
+                  });
+
+                  /*
+                    Remove the loading notice if Action Network fails to load,
+                    so the page never remains stuck with a spinner forever.
+                  */
+                  window.setTimeout(function () {
+                    observer.disconnect();
+
+                    if (document.body.contains(loadingMessage)) {
+                      loadingMessage.innerHTML =
+                        '<i class="ph ph-warning-circle" aria-hidden="true"></i>' +
+                        "<span>The action form could not load. Please refresh the page and try again.</span>";
+                    }
+                  }, 12000);
+                }
+              })();
+            </script>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+    <script>
+  (function () {
+    const backLink = document.getElementById("back-to-actions");
+
+    if (!backLink) {
+      return;
+    }
+
+    const allowedTrackingParams = [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_content",
+      "utm_term",
+      "gclid",
+      "fbclid"
+    ];
+
+    const currentParams = new URLSearchParams(window.location.search);
+    const trackingParams = new URLSearchParams();
+
+    allowedTrackingParams.forEach((key) => {
+      const value = currentParams.get(key);
+
+      if (value) {
+        trackingParams.set(key, value);
+      }
+    });
+
+    const destination =
+      "https://www.girlplusenvironment.org/take-action/";
+
+    const query = trackingParams.toString();
+
+    backLink.href = query
+      ? destination + "?" + query
+      : destination;
+
+    backLink.target = "_top";
+  })();
+</script>
+</body>
+  
+
+</html>

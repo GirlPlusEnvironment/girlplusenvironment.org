@@ -1,8 +1,12 @@
 
-<html vid="0"><head vid="1">
+<!doctype html>
+<html lang="en" vid="0"><head vid="1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet" vid="3">
     <script src="https://unpkg.com/@phosphor-icons/web" vid="4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
     <style vid="5">
         body {
             font-family: 'Space Mono', monospace;
@@ -1303,12 +1307,6 @@ body {
 body > * {
   max-width: 100%;
 }
-.camp-gpe-form-wrap {
-  height: 1320px;
-  max-height: 1320px;
-  overflow: hidden;
-  position: relative;
-}
 @media (max-width: 767px) {
   .fixed {
     position: relative !important;
@@ -1385,18 +1383,138 @@ body > * {
     padding-left: 0 !important;
     padding-top: 1rem !important;
   }
-  .camp-gpe-form-wrap {
-    height: 760px !important;
-    max-height: 760px !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch;
-  }
-  .camp-gpe-form-wrap iframe {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
 }
+  .camp-form-modal[hidden] { display: none; }
+  .camp-form-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 4vw, 2rem);
+    background: rgba(0,0,0,.72);
+    overflow: hidden;
+  }
+  .camp-form-dialog {
+    width: min(920px, calc(100vw - 2rem));
+    max-height: calc(100dvh - clamp(2rem, 8vw, 4rem));
+    overflow: auto;
+    margin: 0 auto;
+    background: #fff;
+    border: 4px solid #000;
+    border-radius: 40px;
+    box-shadow: 8px 8px 0 #000;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    scroll-padding: 2rem;
+  }
+  .camp-form-dialog > .flex:first-child { padding-top: .25rem; }
+  .camp-form-dialog form, .camp-form-dialog [data-challenge-form-modal-mount] { padding-bottom: .5rem; }
+  .camp-form-dialog button:focus-visible,
+  .camp-form-dialog input:focus-visible,
+  .camp-form-dialog textarea:focus-visible,
+  .camp-form-dialog select:focus-visible {
+    outline: 4px solid #67e8f9;
+    outline-offset: 3px;
+  }
+  .camp-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .camp-form-field { display: grid; gap: .45rem; margin-bottom: 1rem; }
+  .camp-form-field input, .camp-form-field textarea, .camp-form-field select {
+    width: 100%;
+    border: 3px solid #000;
+    border-radius: 18px;
+    padding: .85rem 1rem;
+    background: #fff;
+    line-height: 1.35;
+  }
+  .camp-form-field textarea { min-height: 110px; resize: vertical; }
+  [data-open-camp-modal="challenge"] { min-height: 60px; display: inline-flex; align-items: center; justify-content: center; line-height: 1.05; }
+  .camp-form-status, .camp-form-message {
+    border: 3px solid #000;
+    border-radius: 18px;
+    padding: .85rem 1rem;
+    margin-top: .5rem;
+    font-weight: 700;
+    background: #fff7cc;
+  }
+  .camp-form-status[data-state*="active"], .camp-form-message.success { background: #d9ffd0; }
+  .camp-form-status[data-state="nonmember"], .camp-form-status[data-state="inactive_or_expired_member"], .camp-form-message { background: #ffe0e0; }
+  .camp-honeypot { position: absolute; left: -10000px; }
+  .camp-challenge-embed {
+    max-width: 900px;
+    margin: 6rem auto 0;
+    position: relative;
+    background:
+      linear-gradient(rgba(255, 255, 255, .64), rgba(255, 255, 255, .64)),
+      linear-gradient(#fde8ef 0 0);
+  }
+  .camp-challenge-embed::before {
+    content: "READY TO SUBMIT?";
+    position: absolute;
+    left: 50%;
+    top: -3.4rem;
+    transform: translateX(-50%) rotate(-2deg);
+    background: #000;
+    color: #fff;
+    border: 4px solid #000;
+    border-radius: 999px;
+    box-shadow: 6px 6px 0 #67e8f9;
+    padding: .8rem 1.4rem;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.35rem);
+    white-space: nowrap;
+  }
+  .camp-challenge-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 5rem auto 0;
+    max-width: 900px;
+    color: #000;
+  }
+  .camp-challenge-divider::before,
+  .camp-challenge-divider::after {
+    content: "";
+    height: 4px;
+    flex: 1;
+    background: #000;
+  }
+  .camp-challenge-divider span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    border: 4px solid #000;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 5px 5px 0 #000;
+    transform: rotate(-8deg);
+    font-size: 1.65rem;
+  }
+  .camp-challenge-embed .camp-challenge-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    background: #fde047;
+    border: 3px solid #000;
+    border-radius: 999px;
+    box-shadow: 4px 4px 0 #000;
+    padding: .55rem 1rem;
+    font-weight: 900;
+    transform: rotate(2deg);
+  }
+  .camp-challenge-embed .camp-form-field {
+    margin-bottom: 1.75rem;
+  }
+  .camp-challenge-embed .camp-form-grid {
+    gap: 1.35rem;
+  }
+  .camp-challenge-embed button[type="submit"] {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 760px) { .camp-form-modal { align-items: center; padding: 1rem; } .camp-form-grid { grid-template-columns: 1fr; } .camp-form-dialog { width: calc(100vw - 2rem); max-height: calc(100dvh - 2rem); border-radius: 28px; box-shadow: 6px 6px 0 #000; padding: 1.25rem; } }
   </style></head>
 <body class="antialiased overflow-x-hidden" vid="6">
 
@@ -1417,6 +1535,12 @@ body > * {
             <p class="header-font text-3xl text-black mb-16 max-w-4xl mx-auto leading-tight" vid="25">
                 Trade friendship bracelets for petitions, campfire stories for climate storytelling, and summer boredom for community action.
             </p>
+
+            <div class="flex flex-col md:flex-row gap-4 justify-center mb-12">
+                <button type="button" data-open-camp-modal="registration" class="bg-yellow-400 brutalist-border px-8 py-4 rounded-full header-font text-xl brutalist-shadow brutalist-shadow-hover">JOIN CAMP GPE</button>
+                <button type="button" data-open-camp-modal="challenge" class="bg-cyan-300 brutalist-border px-8 py-4 rounded-full header-font text-xl brutalist-shadow brutalist-shadow-hover">SUBMIT CHALLENGE</button>
+                <a href="https://members.girlplusenvironment.org/leaderboard" class="bg-black text-white brutalist-border px-8 py-4 rounded-full header-font text-xl brutalist-shadow brutalist-shadow-hover">VIEW LEADERBOARD</a>
+            </div>
 
             <div class="bg-white brutalist-border rounded-[40px] p-10 brutalist-shadow max-w-5xl mx-auto relative text-left" vid="26">
                 <div class="absolute -top-8 -right-8 bg-yellow-400 brutalist-border rounded-full w-20 h-20 flex items-center justify-center text-black text-4xl -rotate-12" vid="27">
@@ -1778,12 +1902,12 @@ body > * {
             <h2 class="header-font text-6xl mb-16 text-center" vid="262">💚 RESOURCES TO EXPLORE</h2>
             <div class="grid md:grid-cols-3 gap-8" vid="263">
                 
-                <a href="https://girlplusenvironment.app.neoncrm.com/forms/camp-gpe-challenge-submissions" class="bg-cyan-200 brutalist-border p-8 rounded-3xl brutalist-shadow brutalist-shadow-hover transition-all cursor-pointer group block" vid="264">
+                <div class="bg-cyan-200 brutalist-border p-8 rounded-3xl brutalist-shadow brutalist-shadow-hover transition-all cursor-pointer group block text-left" vid="264">
                     <div class="bg-white border-2 border-black w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:rotate-12 transition-transform" vid="265">📄</div>
                     <h3 class="header-font text-2xl mb-4" vid="266">📄 CHALLENGE SUBMISSION</h3>
-                    <p class="text-sm mb-8" vid="267">Upload your videos and screenshots to earn cabin points.</p>
-                    <div class="bg-black text-white px-6 py-2 rounded-full inline-block font-bold" vid="268">SUBMIT NOW</div>
-                </a>
+                    <p class="text-sm mb-8" vid="267">Submit completed challenges to earn cabin points.</p>
+                    <button type="button" data-open-camp-modal="challenge" class="bg-black text-white px-6 py-2 rounded-full inline-block font-bold" vid="268">OPEN SUBMISSION FORM</button>
+                </div>
                 
                 <a href="#camp-schedule" class="bg-magenta-200 brutalist-border p-8 rounded-3xl brutalist-shadow brutalist-shadow-hover transition-all cursor-pointer group block" vid="269">
                     <div class="bg-white border-2 border-black w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:rotate-12 transition-transform" vid="270">🗓️</div>
@@ -1792,12 +1916,12 @@ body > * {
                     <div class="bg-black text-white px-6 py-2 rounded-full inline-block font-bold" vid="273">VIEW CALENDAR</div>
                 </a>
                 
-                <div class="bg-yellow-200 brutalist-border p-8 rounded-3xl brutalist-shadow brutalist-shadow-hover transition-all group" vid="274">
+                <a href="https://members.girlplusenvironment.org/leaderboard" class="bg-yellow-200 brutalist-border p-8 rounded-3xl brutalist-shadow brutalist-shadow-hover transition-all group block" vid="274">
                     <div class="bg-white border-2 border-black w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:rotate-12 transition-transform" vid="275">🏆</div>
                     <h3 class="header-font text-2xl mb-4" vid="276">LIVE LEADERBOARD</h3>
-                    <p class="text-sm mb-8" vid="277">Coming Soon.</p>
-                    <div class="bg-black text-white px-6 py-2 rounded-full inline-block font-bold" vid="278">COMING SOON</div>
-                </div>
+                    <p class="text-sm mb-8" vid="277">See how cabins are climbing the board inside the GPE Hub.</p>
+                    <div class="bg-black text-white px-6 py-2 rounded-full inline-block font-bold" vid="278">VIEW LEADERBOARD</div>
+                </a>
                 
                 <div class="bg-orange-200 brutalist-border p-8 rounded-3xl brutalist-shadow brutalist-shadow-hover transition-all group" vid="279">
                     <div class="bg-white border-2 border-black w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:rotate-12 transition-transform" vid="280">📚</div>
@@ -1817,14 +1941,293 @@ body > * {
                     </div>
                 </a>
             </div>
-          <!-- Camp GPE Registration Form -->
-        <div class="mt-12 mb-6 bg-cyan-50 brutalist-border rounded-[40px] p-5 brutalist-shadow camp-gpe-form-wrap">
-          <script src="https://girlplusenvironment.app.neoncrm.com/forms/share/Rk9STS1FTUJFRFNIQVJJTkctQ09ERTE1"></script>
-        </div>
+            <div class="camp-challenge-divider" aria-hidden="true"><span>🌸</span></div>
+            <div id="challenge" class="camp-challenge-embed brutalist-border p-8 md:p-12 rounded-[48px] brutalist-shadow">
+              <div class="text-center mb-10">
+                <div class="camp-challenge-kicker mb-6"><span aria-hidden="true">⭐</span><span>Earn cabin points</span></div>
+                <h2 class="header-font text-5xl md:text-7xl mb-4">SUBMIT A CHALLENGE</h2>
+                <p class="text-xl font-bold max-w-3xl mx-auto">Share what you completed for Camp GPE. Team GPE reviews submissions before points appear on the leaderboard.</p>
+              </div>
+              <form data-gpe-camp-form data-source="camp_gpe_challenge" data-function-name="camp-gpe-challenge-submit" data-membership-function-name="neon-membership-check" data-challenges-function-name="camp-gpe-challenges" data-challenge-template-source novalidate>
+                <div class="camp-form-grid">
+                  <div class="camp-form-field"><label class="header-font text-sm" for="challenge-first">First Name</label><input id="challenge-first" name="firstName" autocomplete="given-name"></div>
+                  <div class="camp-form-field"><label class="header-font text-sm" for="challenge-last">Last Name</label><input id="challenge-last" name="lastName" autocomplete="family-name"></div>
+                  <div class="camp-form-field"><label class="header-font text-sm" for="challenge-email">Email *</label><input id="challenge-email" name="email" type="email" required autocomplete="email" data-membership-email><div class="camp-form-status" data-membership-status hidden></div></div>
+                </div>
+                <fieldset class="camp-form-field" data-challenge-options><legend class="header-font text-sm">Completed Camp challenges</legend><div class="camp-form-status" data-challenge-loading>Loading Camp challenges...</div></fieldset>
+                <fieldset class="camp-form-field"><legend class="header-font text-sm">Which actions did you take?</legend><label><input type="checkbox" name="actions" value="petition"> Filled out a petition</label><label><input type="checkbox" name="actions" value="share_petition"> Shared petition on social media</label><label><input type="checkbox" name="actions" value="feed_post"> Made an in-feed post amplifying the challenge</label><label><input type="checkbox" name="actions" value="shared_friend"> Shared challenge with a friend</label><label><input type="checkbox" name="actions" value="other"> Other</label></fieldset>
+                <div class="camp-form-field"><label class="header-font text-sm" for="challenge-other-action">Other action</label><input id="challenge-other-action" name="otherAction"></div>
+                <div class="camp-form-field"><label class="header-font text-sm" for="challenge-screens">Upload screenshot(s)</label><textarea id="challenge-screens" name="screenshotLinks" placeholder="Paste links to uploaded screenshots."></textarea></div>
+                <div class="camp-form-grid"><div class="camp-form-field"><label class="header-font text-sm" for="challenge-instagram">Instagram Handle</label><input id="challenge-instagram" name="instagram"></div><div class="camp-form-field"><label class="header-font text-sm" for="challenge-linkedin">LinkedIn URL</label><input id="challenge-linkedin" name="linkedin" type="url"></div><div class="camp-form-field"><label class="header-font text-sm" for="challenge-tiktok">TikTok Handle</label><input id="challenge-tiktok" name="tiktok"></div></div>
+                <div class="camp-form-field"><label class="header-font text-sm" for="challenge-links">Share Links to Social Media Posts</label><textarea id="challenge-links" name="socialLinks"></textarea></div>
+                <div class="camp-form-field"><label class="header-font text-sm" for="challenge-notes">Notes</label><textarea id="challenge-notes" name="notes"></textarea></div>
+                <div class="camp-honeypot"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
+                <div class="camp-form-message" data-form-error hidden></div>
+                <button type="submit" class="bg-cyan-300 brutalist-border px-10 py-4 rounded-full header-font text-xl brutalist-shadow brutalist-shadow-hover">SUBMIT CHALLENGE</button>
+                <div class="camp-form-message success" data-form-success hidden tabindex="-1"></div>
+              </form>
+            </div>
         </div>
     </div>
 
+    <div class="camp-form-modal" id="camp-registration-modal" role="dialog" aria-modal="true" aria-labelledby="camp-registration-title" hidden>
+      <div class="camp-form-dialog">
+        <div class="flex items-start justify-between gap-6 mb-8">
+          <div><h2 id="camp-registration-title" class="header-font text-4xl mb-2">Join Camp GPE</h2><p class="font-bold">Register for Camp GPE and join the summer climate advocacy experience.</p></div>
+          <button type="button" data-close-camp-modal class="bg-black text-white brutalist-border px-5 py-3 rounded-full header-font">CLOSE</button>
+        </div>
+        <form data-gpe-camp-form data-source="camp_gpe" data-function-name="camp-gpe-submit" data-membership-function-name="neon-membership-check" novalidate>
+          <div class="camp-form-grid">
+            <div class="camp-form-field"><label class="header-font text-sm" for="camp-first">First Name *</label><input id="camp-first" name="firstName" autocomplete="given-name" required></div>
+            <div class="camp-form-field"><label class="header-font text-sm" for="camp-last">Last Name *</label><input id="camp-last" name="lastName" autocomplete="family-name" required></div>
+            <div class="camp-form-field"><label class="header-font text-sm" for="camp-email">Email *</label><input id="camp-email" name="email" type="email" autocomplete="email" required data-membership-email><div class="camp-form-status" data-membership-status hidden></div></div>
+            <div class="camp-form-field"><label class="header-font text-sm" for="camp-phone">Phone Number</label><input id="camp-phone" name="phone" autocomplete="tel"></div>
+            <div class="camp-form-field"><label class="header-font text-sm" for="camp-instagram">Instagram Handle</label><input id="camp-instagram" name="instagram"></div>
+            <div class="camp-form-field"><label class="header-font text-sm" for="camp-tiktok">TikTok Handle</label><input id="camp-tiktok" name="tiktok"></div>
+            <div class="camp-form-field"><label class="header-font text-sm" for="camp-linkedin">LinkedIn URL</label><input id="camp-linkedin" name="linkedin" type="url"></div>
+            <fieldset class="camp-form-field"><legend class="header-font text-sm">Open to Collaborations?</legend><label><input type="radio" name="openToCollaborations" value="yes"> Yes</label><label><input type="radio" name="openToCollaborations" value="no"> No</label></fieldset>
+          </div>
+          <div class="camp-form-field"><label class="header-font text-sm" for="camp-other">Other Accounts?</label><textarea id="camp-other" name="otherAccounts"></textarea></div>
+          <div class="camp-form-field bg-cyan-50">
+            <label class="flex items-start gap-3 font-bold" for="camp-membership-consent">
+              <input id="camp-membership-consent" name="membershipConsent" value="consent" type="checkbox">
+              <span>Become a Girl Plus Environment member with this Camp registration. GPE membership is free.</span>
+            </label>
+          </div>
+          <div class="camp-honeypot"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <div class="camp-form-message" data-form-error hidden></div>
+          <button type="submit" class="bg-yellow-400 brutalist-border px-10 py-4 rounded-full header-font text-xl brutalist-shadow brutalist-shadow-hover">JOIN CAMP GPE</button>
+          <div class="camp-form-message success" data-form-success hidden tabindex="-1"></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="camp-form-modal" id="camp-challenge-modal" role="dialog" aria-modal="true" aria-labelledby="camp-challenge-title" hidden>
+      <div class="camp-form-dialog">
+        <div class="flex items-start justify-between gap-6 mb-8">
+          <div>
+            <h2 id="camp-challenge-title" class="header-font text-4xl mb-2">Submit a Challenge</h2>
+            <p class="font-bold">Share your completed Camp GPE action without leaving this page.</p>
+          </div>
+          <button type="button" data-close-camp-modal class="bg-black text-white brutalist-border px-5 py-3 rounded-full header-font">CLOSE</button>
+        </div>
+        <div data-challenge-form-modal-mount></div>
+      </div>
+    </div>
+
 <script>
+window.GPE_FORM_CONFIG = window.GPE_FORM_CONFIG || {};
+window.GPE_FORM_CONFIG.functionBaseUrl =
+  "https://wisvwuysysbitxluajmv.supabase.co/functions/v1";
+window.GPE_FORM_CONFIG.functions = Object.assign({
+  membershipLookup: "neon-membership-check",
+  campRegistration: "camp-gpe-submit",
+  campChallenges: "camp-gpe-challenges",
+  campChallengeSubmission: "camp-gpe-challenge-submit",
+  "neon-membership-check": "neon-membership-check",
+  "camp-gpe-submit": "camp-gpe-submit",
+  "camp-gpe-challenges": "camp-gpe-challenges",
+  "camp-gpe-challenge-submit": "camp-gpe-challenge-submit"
+}, window.GPE_FORM_CONFIG.functions || {});
+console.log("GPE form configuration", {
+  functionBaseUrl: window.GPE_FORM_CONFIG.functionBaseUrl,
+  functions: window.GPE_FORM_CONFIG.functions
+});
+</script>
+<script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-choice-controls.js?v=20260721"></script>
+<script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-form-membership.js?v=20260721"></script>
+
+<script>
+(function () {
+  function makeId() {
+    return crypto.randomUUID
+      ? crypto.randomUUID()
+      : String(Date.now()) + "-" + Math.random().toString(16).slice(2);
+  }
+
+  function endpointFor(form, key) {
+    const config = window.GPE_FORM_CONFIG || {};
+    const functions = config.functions || {};
+    const aliases = {
+      membershipFunctionName: "membershipLookup",
+      functionName: form.dataset.source === "camp_gpe_challenge" ? "campChallengeSubmission" : "campRegistration",
+      challengesFunctionName: "campChallenges"
+    };
+    const name = form.dataset[key];
+    const configured = functions[name] || functions[aliases[key]];
+
+    if (configured) {
+      if (/^https?:\/\//i.test(configured)) return configured;
+      if (config.functionBaseUrl) return config.functionBaseUrl.replace(/\/$/, "") + "/" + String(configured).replace(/^\//, "");
+      console.error("GPE endpoint could not be resolved because functionBaseUrl is missing:", configured);
+      return "";
+    }
+
+    if (name && config.functionBaseUrl) {
+      return config.functionBaseUrl.replace(/\/$/, "") + "/" + String(name).replace(/^\//, "");
+    }
+
+    if (name) console.error("GPE endpoint could not be resolved because functionBaseUrl is missing:", name);
+    return "";
+  }
+
+    function collect(form) {
+      const fields = {};
+      new FormData(form).forEach((value, key) => {
+        if (key === "website") return;
+        if (fields[key]) fields[key] = Array.isArray(fields[key]) ? fields[key].concat(value) : [fields[key], value];
+        else fields[key] = value;
+      });
+      return fields;
+    }
+    function showMessage(el, text) { el.textContent = text; el.hidden = false; el.focus?.(); }
+    function challengeMeta(input) {
+      return [
+        input.dataset.points ? input.dataset.points + " point" + (input.dataset.points === "1" ? "" : "s") : "",
+        "proof optional"
+      ].filter(Boolean).join(" · ");
+    }
+    async function loadChallengeOptions(form) {
+      const target = form.querySelector("[data-challenge-options]");
+      if (!target) return;
+      const loading = target.querySelector("[data-challenge-loading]");
+      const endpoint = endpointFor(form, "challengesFunctionName");
+      if (!endpoint) {
+        if (loading) loading.textContent = "Camp challenges are not connected yet. Try again later.";
+        return;
+      }
+      try {
+        console.log("Calling endpoint:", endpoint);
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({})
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.message || "Could not load Camp challenges.");
+        const challenges = Array.isArray(data.challenges) ? data.challenges : [];
+        if (challenges.length === 0) {
+          if (loading) loading.textContent = "No Camp challenges are open right now. You can still describe another action below.";
+          return;
+        }
+        if (loading) loading.remove();
+        challenges.forEach((challenge) => {
+          const label = document.createElement("label");
+          label.className = "block bg-cyan-50 brutalist-border rounded-2xl p-4 mb-3";
+          label.innerHTML = '<span class="flex items-start gap-3"><input type="checkbox" name="challengeIds" value="' + String(challenge.id).replace(/"/g, "&quot;") + '" data-requires-proof="' + Boolean(challenge.requires_proof) + '" data-points="' + (challenge.point_value ?? "") + '"><span><strong class="header-font text-base">' + String(challenge.title || "Camp challenge") + '</strong><span class="block text-sm font-bold">' + String(challenge.short_description || "") + '</span><span class="block text-xs font-bold uppercase mt-2">' + [challenge.point_value != null ? challenge.point_value + " point" + (challenge.point_value === 1 ? "" : "s") : "points pending", "proof optional"].join(" · ") + '</span></span></span>';
+          target.appendChild(label);
+        });
+      } catch (error) {
+        if (loading) loading.textContent = error.message || "Camp challenges could not be loaded. Try again later.";
+      }
+    }
+    function cloneChallengeFormForModal() {
+      const source = document.querySelector("[data-challenge-template-source]");
+      const mount = document.querySelector("[data-challenge-form-modal-mount]");
+      if (!source || !mount || mount.children.length) return;
+      const clone = source.cloneNode(true);
+      clone.removeAttribute("data-challenge-template-source");
+      clone.dataset.modalClone = "true";
+      clone.querySelectorAll("[id]").forEach((node) => {
+        const oldId = node.id;
+        const newId = oldId.replace(/^challenge-/, "challenge-modal-");
+        node.id = newId;
+        clone.querySelectorAll('label[for="' + oldId + '"]').forEach((label) => label.setAttribute("for", newId));
+      });
+      clone.querySelectorAll("[data-challenge-options] label").forEach((node) => node.remove());
+      const loading = clone.querySelector("[data-challenge-loading]");
+      if (loading) loading.textContent = "Loading Camp challenges...";
+      mount.appendChild(clone);
+    }
+    let lastFocus = null;
+    function openModal(kind) {
+      const modal = document.getElementById(kind === "challenge" ? "camp-challenge-modal" : "camp-registration-modal");
+      if (!modal) return;
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      modal.querySelector("input, select, textarea, button")?.focus();
+      document.body.style.overflow = "hidden";
+    }
+    function closeModal(modal) {
+      if (!modal) return;
+      modal.hidden = true;
+      document.body.style.overflow = "";
+      lastFocus?.focus?.();
+    }
+    document.querySelectorAll("[data-open-camp-modal]").forEach((button) => button.addEventListener("click", () => openModal(button.dataset.openCampModal)));
+    document.querySelectorAll("[data-close-camp-modal]").forEach((button) => button.addEventListener("click", () => closeModal(button.closest(".camp-form-modal"))));
+    document.querySelectorAll(".camp-form-modal").forEach((modal) => {
+      modal.addEventListener("click", (event) => { if (event.target === modal) closeModal(modal); });
+      modal.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeModal(modal);
+        if (event.key !== "Tab") return;
+        const focusable = Array.from(modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter((node) => node.offsetParent !== null);
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
+    });
+    cloneChallengeFormForModal();
+    document.querySelectorAll("[data-gpe-camp-form]").forEach((form) => {
+      window.GPEChoiceControls?.initialize(form);
+      if (form.dataset.source === "camp_gpe_challenge") loadChallengeOptions(form);
+      const email = form.querySelector("[data-membership-email]");
+      const status = form.querySelector("[data-membership-status]");
+      if (email && status && window.GPEFormMembership) {
+        window.GPEFormMembership.init({ form, emailInput: email, statusEl: status, firstNameInput: form.querySelector('[name="firstName"]'), lastNameInput: form.querySelector('[name="lastName"]'), endpoint: endpointFor(form, "membershipFunctionName") });
+      }
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const error = form.querySelector("[data-form-error]");
+        const success = form.querySelector("[data-form-success]");
+        error.hidden = true;
+        success.hidden = true;
+        if (!form.checkValidity()) { showMessage(error, "Please complete the required fields before submitting."); return; }
+        const button = form.querySelector('button[type="submit"]');
+        const originalText = button.textContent;
+        button.disabled = true;
+        button.textContent = "SUBMITTING...";
+        try {
+          const endpoint = endpointFor(form, "functionName");
+          if (!endpoint) throw new Error("This form is not connected yet. Please try again later.");
+          const membershipRequest = window.GPEFormMembership?.membershipRequestForForm(form, form.dataset.source);
+          if (form.dataset.source !== "camp_gpe_challenge" && membershipRequest && !membershipRequest.consent) {
+            showMessage(error, "Please confirm membership consent before continuing.");
+            return;
+          }
+          if (form.dataset.source === "camp_gpe_challenge") {
+            const accessTokenPromise = window.GPEFormMembership?.accessTokenForForm?.(form);
+            const accessToken = accessTokenPromise ? await accessTokenPromise.catch(() => "") : "";
+            if (accessToken) form.dataset.gpeAccessToken = accessToken;
+            else delete form.dataset.gpeAccessToken;
+          }
+          const headers = { "Content-Type": "application/json", "Idempotency-Key": form.dataset.idempotencyKey || (form.dataset.idempotencyKey = makeId()) };
+          if (form.dataset.source === "camp_gpe_challenge" && form.dataset.gpeAccessToken) headers.Authorization = "Bearer " + form.dataset.gpeAccessToken;
+          console.log("Calling endpoint:", endpoint);
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers,
+            body: JSON.stringify({ fields: collect(form), membershipRequest, website: form.querySelector('[name="website"]')?.value || "" })
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.message || "Submission failed.");
+          showMessage(success, data.message || (data.partialSuccess ? "Your Camp submission is saved. Some membership or Hub follow-up may need Team GPE review." : data.registrationState === "already_registered" ? "You're already signed up for Camp GPE with this email." : form.dataset.source === "camp_gpe_challenge" ? "Your submission has been received and will be reviewed by Team GPE. Approved actions will be added to your points." : "You're in. Your Camp GPE registration is saved."));
+        } catch (errorMessage) {
+          showMessage(error, errorMessage.message || "Submission could not be completed. Your answers are still here.");
+        } finally {
+          button.disabled = false;
+          button.textContent = originalText;
+        }
+      });
+    });
+  })();
   function sendHeightToWix() {
     const height = document.documentElement.scrollHeight;
     window.parent.postMessage({ type: 'resize', height: height + 120 }, '*');

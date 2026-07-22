@@ -1,0 +1,1520 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <title>Tell Congress: We Need Relief From High Energy Bills | Girl Plus Environment</title>
+
+  <meta
+    name="description"
+    content="Tell Congress to support relief from high energy bills and invest in affordable, reliable clean energy."
+  >
+
+  <meta
+    property="og:title"
+    content="Tell Congress: We Need Relief From High Energy Bills"
+  >
+
+  <meta
+    property="og:description"
+    content="Tell Congress to support relief from high energy bills and invest in affordable, reliable clean energy."
+  >
+
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://actionnetwork.org">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
+
+  <style>
+    :root {
+      --pink: #fbd3d3;
+      --dark-pink: #d53f8c;
+      --orange: #fb923c;
+      --cyan: #22d3ee;
+      --yellow: #fef9c3;
+      --black: #000000;
+      --white: #ffffff;
+      --gray: #f5f5f5;
+      --error: #fca5a5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      background: var(--yellow);
+    }
+
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      color: var(--black);
+      background: var(--yellow);
+      font-family: "Space Mono", monospace;
+    }
+
+    body,
+    input,
+    textarea,
+    select,
+    button {
+      font-family: "Space Mono", monospace;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    .header-font {
+      font-family: "Archivo Black", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .cute-pattern {
+      background-color: var(--yellow);
+      background-image:
+        radial-gradient(var(--cyan) 2px, transparent 2px);
+      background-position: 0 0;
+      background-size: 24px 24px;
+    }
+
+    .page-shell {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding:
+        max(3.5rem, env(safe-area-inset-top))
+        max(1.5rem, env(safe-area-inset-right))
+        max(4rem, env(safe-area-inset-bottom))
+        max(1.5rem, env(safe-area-inset-left));
+    }
+
+    .page-inner {
+      width: min(100%, 1152px);
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin: 0 0 2.5rem;
+      color: var(--black);
+      font-family: "Archivo Black", sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform 180ms ease;
+    }
+
+    .back-link:hover {
+      transform: translateX(-4px);
+    }
+
+    .back-link:focus-visible {
+      outline: 4px solid var(--dark-pink);
+      outline-offset: 5px;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(420px, 0.88fr);
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .content-column,
+    .action-column {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 0 0 1.2rem;
+      padding: 0.65rem 1rem;
+      border: 3px solid var(--black);
+      border-radius: 999px;
+      background: var(--cyan);
+      box-shadow: 4px 4px 0 var(--black);
+      font-family: "Archivo Black", sans-serif;
+      font-size: 0.8rem;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .page-title {
+      max-width: 760px;
+      margin: 0 0 1.5rem;
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(3rem, 7.2vw, 6.9rem);
+      line-height: 0.88;
+      letter-spacing: -0.055em;
+      text-transform: uppercase;
+      overflow-wrap: break-word;
+    }
+
+    .page-subtitle {
+      max-width: 700px;
+      margin: 0 0 2.75rem;
+      color: #ea580c;
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.75rem);
+      font-style: italic;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .info-card {
+      position: relative;
+      margin: 0 0 2.25rem;
+      padding: 2rem;
+      overflow: hidden;
+      border: 3px solid var(--black);
+      border-radius: 2.5rem;
+      background: var(--white);
+      box-shadow: 8px 8px 0 var(--black);
+    }
+
+    .info-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .icon-box {
+      display: grid;
+      flex: 0 0 auto;
+      width: 64px;
+      height: 64px;
+      place-items: center;
+      border: 3px solid var(--black);
+      border-radius: 1rem;
+      font-size: 2rem;
+    }
+
+    .icon-box--orange {
+      background: var(--orange);
+    }
+
+    .icon-box--cyan {
+      background: var(--cyan);
+    }
+
+    .info-heading {
+      margin: 0;
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .info-copy {
+      margin: 0;
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      line-height: 1.7;
+    }
+
+    .solution-list {
+      display: grid;
+      gap: 1rem;
+      margin: 1.5rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .solution-list li {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 0.8rem;
+      align-items: start;
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .solution-list-icon {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      place-items: center;
+      border: 2px solid var(--black);
+      border-radius: 50%;
+      background: var(--pink);
+      font-weight: 700;
+    }
+
+    .action-card {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+      padding: 2rem;
+      border: 3px solid var(--black);
+      border-radius: 3rem;
+      background: var(--white);
+      box-shadow: 8px 8px 0 var(--black);
+    }
+
+    .action-card-heading {
+      margin: 0 0 0.7rem;
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.8rem, 3.6vw, 2.5rem);
+      line-height: 1;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .action-card-intro {
+      max-width: 450px;
+      margin: 0 auto 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .letter-note {
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+      margin: 0 0 1.5rem;
+      padding: 0.95rem 1rem;
+      border: 2px solid var(--black);
+      border-radius: 1rem;
+      background: var(--pink);
+      font-size: 0.76rem;
+      line-height: 1.5;
+    }
+
+    .letter-note i {
+      flex: 0 0 auto;
+      margin-top: 0.1rem;
+      font-size: 1.2rem;
+    }
+
+    .action-network-shell {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .widget-loading {
+      display: flex;
+      min-height: 190px;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    /*
+     * Required because display:flex can override the default behavior
+     * of the HTML hidden attribute.
+     */
+    .widget-loading[hidden] {
+      display: none !important;
+    }
+
+    .widget-loading-inner {
+      max-width: 330px;
+    }
+
+    .loading-icon {
+      display: inline-block;
+      margin-bottom: 0.8rem;
+      font-size: 2.2rem;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: scale(0.9);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /*
+     * ACTION NETWORK LETTER WIDGET
+     */
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner * {
+      box-sizing: border-box !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      color: var(--black) !important;
+      background: transparent !important;
+      font-family: "Space Mono", monospace !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .can_embed,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #can_embed_form,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      form,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .clearfix {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      font-family: "Space Mono", monospace !important;
+      box-shadow: none !important;
+    }
+
+    /*
+     * Hide only duplicated campaign presentation. Keep all form stages,
+     * address matching, targets, validation and letter-writing controls.
+     */
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #can_embed_form
+      > h2,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #can_embed_form
+      > h3,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #can_embed_form
+      > h4,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .entry-title,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .action_description,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .action_owner,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .action_owner_box,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .action_info,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .action_status_tracker,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .action_sidebar
+      > h4,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .spam_flag {
+      display: none !important;
+    }
+
+    /*
+     * Hide remembered-user greeting without removing the actual form.
+     */
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #action_welcome_message,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .action_welcome_message {
+      display: none !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      ul,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      ol {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      list-style: none !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      li {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 0 1rem !important;
+      padding: 0 !important;
+      list-style: none !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      label {
+      display: block !important;
+      margin: 0 0 0.45rem !important;
+      color: var(--black) !important;
+      font-family: "Archivo Black", sans-serif !important;
+      font-size: 0.72rem !important;
+      font-weight: 400 !important;
+      line-height: 1.35 !important;
+      text-transform: uppercase !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="hidden"]),
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      textarea,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      select {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-height: 52px !important;
+      margin: 0 0 1rem !important;
+      padding: 0.8rem 0.95rem !important;
+      border: 3px solid var(--black) !important;
+      border-radius: 0.85rem !important;
+      outline: none !important;
+      color: var(--black) !important;
+      background: var(--white) !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 16px !important;
+      font-weight: 400 !important;
+      line-height: 1.4 !important;
+      box-shadow: none !important;
+      appearance: auto !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      textarea {
+      min-height: 170px !important;
+      resize: vertical !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):focus,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      textarea:focus,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      select:focus {
+      background: #fdf2f8 !important;
+      box-shadow: 4px 4px 0 var(--black) !important;
+      transform: translate(-2px, -2px) !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      input::placeholder,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      textarea::placeholder {
+      color: #525252 !important;
+      opacity: 1 !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      input[type="checkbox"],
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      input[type="radio"] {
+      width: 20px !important;
+      height: 20px !important;
+      min-width: 20px !important;
+      margin: 0.05rem 0.55rem 0 0 !important;
+      padding: 0 !important;
+      accent-color: var(--black) !important;
+      vertical-align: top !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      input[type="submit"],
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      button[type="submit"],
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .button,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .btn,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .submit_button {
+      display: flex !important;
+      width: 100% !important;
+      min-height: 62px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 1.15rem 0 0 !important;
+      padding: 1rem 1.25rem !important;
+      border: 3px solid var(--black) !important;
+      border-radius: 999px !important;
+      color: var(--white) !important;
+      background: var(--black) !important;
+      font-family: "Archivo Black", sans-serif !important;
+      font-size: clamp(1rem, 2.8vw, 1.25rem) !important;
+      font-weight: 400 !important;
+      line-height: 1.15 !important;
+      text-align: center !important;
+      text-decoration: none !important;
+      text-transform: uppercase !important;
+      cursor: pointer !important;
+      box-shadow: none !important;
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease !important;
+      white-space: normal !important;
+      appearance: none !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      input[type="submit"]:hover,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      button[type="submit"]:hover,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .button:hover,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .btn:hover {
+      color: var(--black) !important;
+      background: var(--orange) !important;
+      box-shadow: 5px 5px 0 var(--black) !important;
+      transform: translate(-3px, -3px) !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      input[type="submit"]:focus-visible,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      button[type="submit"]:focus-visible,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .button:focus-visible {
+      outline: 4px solid var(--cyan) !important;
+      outline-offset: 3px !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      a {
+      color: var(--black) !important;
+      font-weight: 700 !important;
+      text-decoration: underline !important;
+      text-decoration-thickness: 2px !important;
+      text-underline-offset: 3px !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      a:hover {
+      background: var(--cyan) !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #d_sharing,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .js-d_sharing,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .international_link-wrap,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 1.25rem 0 0 !important;
+      padding: 1rem !important;
+      border: 2px solid var(--black) !important;
+      border-radius: 1rem !important;
+      background: var(--gray) !important;
+      font-size: 0.72rem !important;
+      line-height: 1.5 !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap {
+      display: block !important;
+      min-height: 52px !important;
+      margin: 0 0 1rem !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      line-height: normal !important;
+      position: relative !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      select,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-container,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-choice,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-selection {
+      width: 100% !important;
+      min-height: 52px !important;
+      box-sizing: border-box !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      select,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-choice,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-selection {
+      display: flex !important;
+      align-items: center !important;
+      padding: 0.85rem 2.75rem 0.85rem 1rem !important;
+      border: 3px solid var(--black) !important;
+      border-radius: 0.85rem !important;
+      background: var(--white) !important;
+      color: var(--black) !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 16px !important;
+      line-height: 1.35 !important;
+      appearance: auto !important;
+      overflow: hidden !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-chosen,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-selection__rendered {
+      display: block !important;
+      padding: 0 !important;
+      line-height: 1.35 !important;
+      color: var(--black) !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 100% !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-arrow,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-selection__arrow {
+      display: block !important;
+      position: absolute !important;
+      right: 1rem !important;
+      top: 50% !important;
+      width: 1rem !important;
+      height: 1rem !important;
+      transform: translateY(-50%) !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-arrow b,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_drop_wrap
+      .select2-selection__arrow b {
+      border-color: var(--black) transparent transparent transparent !important;
+      border-style: solid !important;
+      border-width: 7px 6px 0 6px !important;
+      display: block !important;
+      margin-top: 4px !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #d_sharing
+      ul,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #d_sharing
+      li {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #d_sharing
+      li
+      + li {
+      margin-top: 0.65rem !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #d_sharing
+      label {
+      display: flex !important;
+      align-items: flex-start !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 0.72rem !important;
+      font-weight: 400 !important;
+      line-height: 1.5 !important;
+      text-transform: none !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #edit_d_sharing_opts,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      #edit_d_sharing_opts-close {
+      display: inline-block !important;
+      margin-top: 0.35rem !important;
+      cursor: pointer !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .error,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      label.error,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .js-error_message,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .error_message {
+      display: block !important;
+      margin: 0.4rem 0 0.8rem !important;
+      padding: 0.75rem !important;
+      border: 2px solid var(--black) !important;
+      border-radius: 0.75rem !important;
+      color: var(--black) !important;
+      background: var(--error) !important;
+      font-family: "Space Mono", monospace !important;
+      font-size: 0.75rem !important;
+      font-weight: 700 !important;
+      line-height: 1.45 !important;
+      text-transform: none !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .floatlabel-wrapper {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .floatlabel-label {
+      color: var(--black) !important;
+      background: var(--white) !important;
+      font-family: "Archivo Black", sans-serif !important;
+      font-size: 0.64rem !important;
+      text-transform: uppercase !important;
+    }
+
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .country_wrap,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .zip_code_wrap,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .first_name_wrap,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .last_name_wrap,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .email_wrap,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .address1_wrap,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .city_wrap,
+    #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+      .state_wrap {
+      float: none !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-right: 0 !important;
+      margin-left: 0 !important;
+    }
+
+    .privacy-note {
+      margin: 1.4rem 0 0;
+      font-size: 0.7rem;
+      line-height: 1.55;
+      text-align: center;
+      opacity: 0.68;
+    }
+
+    @media (max-width: 960px) {
+      .page-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 3.25rem;
+      }
+
+      .action-column {
+        width: min(100%, 660px);
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .page-shell {
+        padding:
+          max(2rem, env(safe-area-inset-top))
+          max(1rem, env(safe-area-inset-right))
+          max(3rem, env(safe-area-inset-bottom))
+          max(1rem, env(safe-area-inset-left));
+      }
+
+      .back-link {
+        margin-bottom: 2rem;
+        font-size: 0.8rem;
+      }
+
+      .page-title {
+        font-size: clamp(3rem, 16vw, 5.2rem);
+        line-height: 0.9;
+      }
+
+      .page-subtitle {
+        margin-bottom: 2rem;
+      }
+
+      .info-card {
+        padding: 1.5rem;
+        border-radius: 2rem;
+        box-shadow: 5px 5px 0 var(--black);
+      }
+
+      .info-card-header {
+        align-items: flex-start;
+      }
+
+      .icon-box {
+        width: 54px;
+        height: 54px;
+        font-size: 1.65rem;
+      }
+
+      .action-card {
+        padding: 1.45rem;
+        border-radius: 2rem;
+        box-shadow: 5px 5px 0 var(--black);
+      }
+
+      .action-card-heading {
+        font-size: clamp(1.65rem, 9vw, 2.2rem);
+      }
+
+      #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+        input[type="submit"],
+      #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+        button[type="submit"],
+      #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+        .button,
+      #can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner
+        .btn {
+        min-height: 58px !important;
+        font-size: 1rem !important;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .page-title {
+        font-size: 2.75rem;
+      }
+
+      .info-card,
+      .action-card {
+        padding: 1.2rem;
+      }
+
+      .letter-note {
+        font-size: 0.68rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page-shell cute-pattern">
+    <div class="page-inner">
+
+      <a
+        href="https://www.girlplusenvironment.org/take-action"
+        target="_top"
+        class="back-link"
+        id="back-to-actions"
+      >
+        <i class="ph ph-arrow-left" aria-hidden="true"></i>
+        <span>Back to actions</span>
+      </a>
+
+      <div class="page-grid">
+        <section class="content-column" aria-labelledby="page-title">
+
+          <div class="eyebrow">
+            <i class="ph ph-lightning" aria-hidden="true"></i>
+            Hot Girls Hate High Energy Bills
+          </div>
+
+          <h1 id="page-title" class="page-title">
+            High Energy Bills
+          </h1>
+
+          <p class="page-subtitle">
+            Bestie... the math is not mathing.
+          </p>
+
+          <article class="info-card">
+            <div class="info-card-header">
+              <div class="icon-box icon-box--orange" aria-hidden="true">
+                <i class="ph ph-money"></i>
+              </div>
+
+              <h2 class="info-heading">
+                The Problem
+              </h2>
+            </div>
+
+            <p class="info-copy">
+              Energy bills are skyrocketing while families struggle to keep
+              the lights on and the air conditioning running during record
+              heat. An aging electrical grid and policies that delay affordable
+              clean energy are making an already expensive problem worse.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="info-card-header">
+              <div class="icon-box icon-box--cyan" aria-hidden="true">
+                <i class="ph ph-leaf"></i>
+              </div>
+
+              <h2 class="info-heading">
+                The Solution
+              </h2>
+            </div>
+
+            <p class="info-copy">
+              Tell Congress to support the Energy Bills Relief Act and make it
+              easier to build the clean, reliable energy families need.
+            </p>
+
+            <ul class="solution-list">
+              <li>
+                <span class="solution-list-icon" aria-hidden="true">
+                  <i class="ph ph-check"></i>
+                </span>
+
+                <span>
+                  Modernize and strengthen the electrical grid.
+                </span>
+              </li>
+
+              <li>
+                <span class="solution-list-icon" aria-hidden="true">
+                  <i class="ph ph-check"></i>
+                </span>
+
+                <span>
+                  Protect families from data centers driving up energy costs.
+                </span>
+              </li>
+
+              <li>
+                <span class="solution-list-icon" aria-hidden="true">
+                  <i class="ph ph-check"></i>
+                </span>
+
+                <span>
+                  Stop subsidizing expensive fossil-fuel plants ready for retirement.
+                </span>
+              </li>
+
+              <li>
+                <span class="solution-list-icon" aria-hidden="true">
+                  <i class="ph ph-check"></i>
+                </span>
+
+                <span>
+                  Help households save money through energy efficiency.
+                </span>
+              </li>
+
+              <li>
+                <span class="solution-list-icon" aria-hidden="true">
+                  <i class="ph ph-check"></i>
+                </span>
+
+                <span>
+                  Expand help for families at risk of losing heat or air conditioning.
+                </span>
+              </li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="action-column" aria-labelledby="action-heading">
+          <div class="action-card">
+
+            <h2 id="action-heading" class="action-card-heading">
+              Tell Congress
+            </h2>
+
+            <p class="action-card-intro">
+              Enter your information to find your lawmakers and start writing
+              your letter.
+            </p>
+
+            <div class="letter-note">
+              <i
+                class="ph ph-envelope-simple-open"
+                aria-hidden="true"
+              ></i>
+
+              <span>
+                This is a letter campaign. After entering your information,
+                you will be able to review and personalize the message before
+                sending it to Congress.
+              </span>
+            </div>
+
+            <div class="action-network-shell">
+
+              <div
+                id="widget-loading"
+                class="widget-loading"
+                aria-live="polite"
+              >
+                <div class="widget-loading-inner">
+                  <i
+                    class="ph ph-lightning loading-icon"
+                    aria-hidden="true"
+                  ></i>
+
+                  <p class="header-font">
+                    Loading the action...
+                  </p>
+                </div>
+              </div>
+
+              <div
+                id="can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner"
+                aria-live="polite"
+              ></div>
+
+            </div>
+
+            <p class="privacy-note">
+              Your information is processed through Action Network. You may
+              receive email updates from the campaign sponsor according to the
+              preferences shown in the form.
+            </p>
+
+            <form id="gpe-completion-claim" class="mt-6 bg-white brutalist-border rounded-3xl p-5">
+              <label class="header-font text-sm" for="gpe-completion-email">Report this action for Camp points review</label>
+              <input id="gpe-completion-email" name="email" type="email" required autocomplete="email" placeholder="Email used for GPE" style="width:100%;margin:.75rem 0;padding:.85rem;border:3px solid #000;border-radius:16px;">
+              <textarea name="notes" placeholder="Optional note for Team GPE" style="width:100%;min-height:90px;padding:.85rem;border:3px solid #000;border-radius:16px;"></textarea>
+              <button type="submit" class="header-font" style="margin-top:.75rem;padding:.85rem 1rem;border:3px solid #000;border-radius:999px;background:#22d3ee;color:#000;">I completed this action</button>
+              <p id="gpe-completion-status" class="privacy-note" hidden tabindex="-1"></p>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const TAKE_ACTION_URL =
+        "https://www.girlplusenvironment.org/take-action";
+
+      const ACTION_URL =
+        "https://actionnetwork.org/letters/tell-congress-we-need-relief-from-high-energy-bills-partner/?source=GPE";
+      const COMPLETION_ENDPOINT =
+        "https://wisvwuysysbitxluajmv.supabase.co/functions/v1/camp-gpe-challenge-submit";
+
+      const WIDGET_SCRIPT_URL =
+        "https://actionnetwork.org/widgets/v5/letter/tell-congress-we-need-relief-from-high-energy-bills-partner?format=js&source=GPE";
+
+      const widgetId =
+        "can-letter-area-tell-congress-we-need-relief-from-high-energy-bills-partner";
+
+      const widget = document.getElementById(widgetId);
+      const loader = document.getElementById("widget-loading");
+      const backLink = document.getElementById("back-to-actions");
+      const completionForm = document.getElementById("gpe-completion-claim");
+      const completionStatus = document.getElementById("gpe-completion-status");
+
+      /*
+       * Navigate the full Wix browser window rather than opening the
+       * Take Action page inside this HTML embed.
+       */
+      function navigateTop(url) {
+        try {
+          window.top.location.href = url;
+        } catch (error) {
+          window.location.href = url;
+        }
+      }
+
+      if (backLink) {
+        backLink.addEventListener("click", function (event) {
+          event.preventDefault();
+          navigateTop(TAKE_ACTION_URL);
+        });
+      }
+
+      if (!widget || !loader) {
+        return;
+      }
+
+      if (completionForm && completionStatus) {
+        completionForm.addEventListener("submit", async function (event) {
+          event.preventDefault();
+          const button = completionForm.querySelector('button[type="submit"]');
+          const originalText = button.textContent;
+          button.disabled = true;
+          button.textContent = "Sending...";
+          completionStatus.hidden = true;
+          try {
+            const formData = new FormData(completionForm);
+            const response = await fetch(COMPLETION_ENDPOINT, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Idempotency-Key": crypto.randomUUID ? crypto.randomUUID() : String(Date.now())
+              },
+              body: JSON.stringify({
+                fields: {
+                  email: String(formData.get("email") || "").trim(),
+                  actions: ["other"],
+                  otherAction: "High energy bills Action Network letter",
+                  socialLinks: ACTION_URL,
+                  notes: String(formData.get("notes") || "").trim(),
+                  sourcePage: "high-energy-bills-action",
+                  actionSlug: "tell-congress-we-need-relief-from-high-energy-bills-partner"
+                }
+              })
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.message || "Completion claim could not be saved.");
+            completionStatus.textContent = data.message || "Your completion claim has been received for Team GPE review. Approved actions will be added to your points.";
+            completionStatus.hidden = false;
+            completionStatus.focus();
+            completionForm.reset();
+          } catch (error) {
+            completionStatus.textContent = error.message || "Completion claim could not be saved.";
+            completionStatus.hidden = false;
+            completionStatus.focus();
+          } finally {
+            button.disabled = false;
+            button.textContent = originalText;
+            reportEmbedHeight();
+          }
+        });
+      }
+
+      let observer = null;
+      let pollingInterval = null;
+      let timeoutId = null;
+      let failureDisplayed = false;
+
+      /*
+       * Action Network sometimes first inserts a wrapper and then inserts
+       * the actual form afterward. Look for usable form controls rather
+       * than relying only on the outer wrapper.
+       */
+      function widgetHasLoaded() {
+        return Boolean(
+          widget.querySelector(
+            [
+              "form",
+              "#can_embed_form",
+              "input:not([type='hidden'])",
+              "textarea",
+              "select",
+              "button",
+              "input[type='submit']"
+            ].join(",")
+          )
+        );
+      }
+
+      function stopWatching() {
+        if (observer) {
+          observer.disconnect();
+          observer = null;
+        }
+
+        if (pollingInterval) {
+          window.clearInterval(pollingInterval);
+          pollingInterval = null;
+        }
+
+        if (timeoutId) {
+          window.clearTimeout(timeoutId);
+          timeoutId = null;
+        }
+      }
+
+      function hideLoader() {
+        if (!widgetHasLoaded()) {
+          return false;
+        }
+
+        loader.hidden = true;
+        loader.setAttribute("aria-hidden", "true");
+        stopWatching();
+
+        /*
+         * Report the new embed height after Action Network expands.
+         */
+        window.setTimeout(reportEmbedHeight, 100);
+        window.setTimeout(reportEmbedHeight, 500);
+        window.setTimeout(reportEmbedHeight, 1200);
+
+        return true;
+      }
+
+      function openAction(event) {
+        if (event) {
+          event.preventDefault();
+        }
+
+        navigateTop(ACTION_URL);
+      }
+
+      function showFailure(message) {
+        if (failureDisplayed) {
+          return;
+        }
+
+        if (widgetHasLoaded()) {
+          hideLoader();
+          return;
+        }
+
+        failureDisplayed = true;
+        stopWatching();
+
+        loader.hidden = false;
+        loader.removeAttribute("aria-hidden");
+
+        loader.innerHTML = `
+          <div class="widget-loading-inner">
+            <i
+              class="ph ph-warning-circle"
+              aria-hidden="true"
+              style="
+                display:inline-block;
+                margin-bottom:.8rem;
+                font-size:2.2rem;
+              "
+            ></i>
+
+            <p
+              class="header-font"
+              style="margin:0 0 .75rem;"
+            >
+              The action could not load here.
+            </p>
+
+            <p
+              style="
+                margin:0 0 1rem;
+                font-size:.8rem;
+                line-height:1.55;
+              "
+            >
+              ${message}
+            </p>
+
+            <a
+              href="${ACTION_URL}"
+              target="_top"
+              id="action-fallback-link"
+              style="
+                display:inline-flex;
+                align-items:center;
+                justify-content:center;
+                gap:.5rem;
+                padding:.8rem 1rem;
+                border:3px solid #000;
+                border-radius:999px;
+                color:#fff;
+                background:#000;
+                font-family:'Archivo Black',sans-serif;
+                font-size:.78rem;
+                text-decoration:none;
+                text-transform:uppercase;
+              "
+            >
+              Open the Action
+              <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
+            </a>
+          </div>
+        `;
+
+        const fallbackLink =
+          document.getElementById("action-fallback-link");
+
+        if (fallbackLink) {
+          fallbackLink.addEventListener("click", openAction);
+        }
+
+        reportEmbedHeight();
+      }
+
+      function beginWatchingWidget() {
+        if (hideLoader()) {
+          return;
+        }
+
+        if (!observer) {
+          observer = new MutationObserver(function () {
+            hideLoader();
+            reportEmbedHeight();
+          });
+
+          observer.observe(widget, {
+            childList: true,
+            subtree: true,
+            attributes: true
+          });
+        }
+
+        if (!pollingInterval) {
+          pollingInterval = window.setInterval(function () {
+            hideLoader();
+          }, 250);
+        }
+
+        if (!timeoutId) {
+          timeoutId = window.setTimeout(function () {
+            if (widgetHasLoaded()) {
+              hideLoader();
+              return;
+            }
+
+            showFailure(
+              "Open the secure Action Network form directly to contact Congress."
+            );
+          }, 12000);
+        }
+      }
+
+      function loadActionNetworkWidget() {
+        /*
+         * Prevent duplicate Action Network scripts if Wix reloads or
+         * reinserts this HTML.
+         */
+        const existingScript = document.querySelector(
+          'script[data-gpe-action-network-widget="energy-bills-letter"]'
+        );
+
+        if (existingScript) {
+          beginWatchingWidget();
+          return;
+        }
+
+        const script = document.createElement("script");
+
+        script.src = WIDGET_SCRIPT_URL;
+        script.async = true;
+        script.dataset.gpeActionNetworkWidget = "energy-bills-letter";
+
+        script.addEventListener("load", function () {
+          beginWatchingWidget();
+        });
+
+        script.addEventListener("error", function () {
+          showFailure(
+            "The embedded form was blocked or Action Network could not be reached."
+          );
+        });
+
+        document.body.appendChild(script);
+
+        /*
+         * Watch immediately because the widget can populate before the
+         * external script's load event is reported.
+         */
+        beginWatchingWidget();
+      }
+
+      /*
+       * Helps Wix resize its HTML component as the multi-step letter form
+       * changes height.
+       */
+      function reportEmbedHeight() {
+        try {
+          const page = document.querySelector(".page-shell");
+
+          if (!page) {
+            return;
+          }
+
+          const height = Math.ceil(
+            Math.max(
+              page.scrollHeight,
+              page.getBoundingClientRect().height,
+              document.documentElement.scrollHeight,
+              document.body.scrollHeight
+            )
+          );
+
+          window.parent.postMessage(
+            {
+              type: "gpe-embed-height",
+              page: "high-energy-bills-action",
+              height: height
+            },
+            "*"
+          );
+        } catch (error) {
+          console.warn("Unable to report embed height.", error);
+        }
+      }
+
+      window.addEventListener("load", reportEmbedHeight);
+      window.addEventListener("resize", reportEmbedHeight);
+
+      if ("ResizeObserver" in window) {
+        const resizeObserver = new ResizeObserver(function () {
+          reportEmbedHeight();
+        });
+
+        resizeObserver.observe(document.body);
+      }
+
+      loadActionNetworkWidget();
+    })();
+  </script>
+</body>
+</html>
