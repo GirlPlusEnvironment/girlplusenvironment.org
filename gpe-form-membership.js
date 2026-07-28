@@ -212,7 +212,7 @@
       var panel = ensurePanel();
       var authPanel = ensureAuthPanel();
       if (panel) {
-        var showPanel = state === "new_person" || state === "nonmember" || state === "inactive_or_expired_member" || state === "expired_member" || state === "existing_constituent_without_membership" || state === "existing_constituent_no_membership" || state === "hub_user_no_active_membership";
+        var showPanel = state === "new_person" || state === "nonmember" || state === "inactive_or_expired_member" || state === "expired_member" || state === "existing_constituent_without_membership" || state === "existing_constituent_no_membership" || state === "hub_user_no_active_membership" || state === "ambiguous_account" || state === "ambiguous_match" || state === "lookup_failed" || state === "lookup_unavailable";
         var label = panel.querySelector("[data-gpe-membership-request-label]");
         if (label) label.textContent = panelLabelFor(state);
         panel.hidden = !showPanel;
