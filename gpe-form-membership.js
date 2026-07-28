@@ -52,6 +52,38 @@
     };
   }
 
+  var canonicalFieldsHtml = [
+    '<fieldset class="gpe-membership-canonical-fields" data-gpe-membership-canonical hidden>',
+    '<legend>Membership questions</legend>',
+    '<label>I identify as a Black or Brown girl, woman, femme, or gender-expansive person. * <input type="checkbox" name="eligibilityAffirmed" value="yes" data-gpe-membership-required></label>',
+    '<label>Age range * <select name="ageRange" data-gpe-membership-required><option value="">Select one</option><option value="under_18">Under 18</option><option value="18_24">18-24</option><option value="25_34">25-34</option><option value="35_44">35-44</option><option value="45_plus">45+</option><option value="prefer_not_to_say">Prefer not to say</option></select></label>',
+    '<fieldset><legend>Race/ethnicity *</legend><label><input type="checkbox" name="raceEthnicity" value="black_african_american" data-gpe-membership-required-group="raceEthnicity"> Black or African American</label><label><input type="checkbox" name="raceEthnicity" value="latina_latine_hispanic" data-gpe-membership-required-group="raceEthnicity"> Latina, Latine, or Hispanic</label><label><input type="checkbox" name="raceEthnicity" value="indigenous_native" data-gpe-membership-required-group="raceEthnicity"> Indigenous or Native</label><label><input type="checkbox" name="raceEthnicity" value="asian_pacific_islander" data-gpe-membership-required-group="raceEthnicity"> Asian or Pacific Islander</label><label><input type="checkbox" name="raceEthnicity" value="middle_eastern_north_african" data-gpe-membership-required-group="raceEthnicity"> Middle Eastern or North African</label><label><input type="checkbox" name="raceEthnicity" value="multiracial" data-gpe-membership-required-group="raceEthnicity"> Multiracial</label><label><input type="checkbox" name="raceEthnicity" value="self_describe" data-gpe-membership-required-group="raceEthnicity"> Self-describe</label></fieldset>',
+    '<label>Race/ethnicity self-description <input name="raceEthnicityOther"></label>',
+    '<fieldset><legend>Gender identity</legend><label><input type="checkbox" name="genderIdentity" value="girl"> Girl</label><label><input type="checkbox" name="genderIdentity" value="woman"> Woman</label><label><input type="checkbox" name="genderIdentity" value="femme"> Femme</label><label><input type="checkbox" name="genderIdentity" value="gender_expansive"> Gender-expansive</label><label><input type="checkbox" name="genderIdentity" value="nonbinary"> Nonbinary</label><label><input type="checkbox" name="genderIdentity" value="self_describe"> Self-describe</label><label><input type="checkbox" name="genderIdentity" value="prefer_not_to_say"> Prefer not to say</label></fieldset>',
+    '<label>Gender self-description <input name="genderIdentityOther"></label>',
+    '<fieldset><legend>Climate interests</legend><label><input type="checkbox" name="climateInterests" value="energy_justice"> Energy justice</label><label><input type="checkbox" name="climateInterests" value="extreme_weather"> Extreme weather</label><label><input type="checkbox" name="climateInterests" value="clean_beauty"> Clean beauty justice</label><label><input type="checkbox" name="climateInterests" value="climate_mental_health"> Climate mental health</label><label><input type="checkbox" name="climateInterests" value="green_jobs"> Green jobs</label><label><input type="checkbox" name="climateInterests" value="community_advocacy"> Community advocacy</label></fieldset>',
+    '<fieldset><legend>Communication preferences</legend><label><input type="checkbox" name="communicationPreferences" value="email"> Email</label><label><input type="checkbox" name="communicationPreferences" value="sms"> SMS/text</label><label><input type="checkbox" name="communicationPreferences" value="events"> Events</label><label><input type="checkbox" name="communicationPreferences" value="office_hours"> Office Hours</label></fieldset>',
+    '<label><input type="checkbox" name="interestedInOfficeHours" value="yes"> I am interested in attending GPE Office Hours.</label>',
+    '<label><input type="checkbox" name="emailConsent" value="yes" data-gpe-membership-required> I agree to receive GPE membership emails. *</label>',
+    '<label><input type="checkbox" name="smsConsent" value="yes"> I agree to receive SMS/text updates where available.</label>',
+    '<label><input type="checkbox" name="termsConsent" value="yes" data-gpe-membership-required> I agree to GPE membership terms and privacy expectations. *</label>',
+    '</fieldset>'
+  ].join("");
+
+  function setCanonicalRequired(panel, enabled) {
+    if (!panel) return;
+    panel.querySelectorAll("[data-gpe-membership-required]").forEach(function (field) {
+      if (enabled) field.setAttribute("required", "required");
+      else field.removeAttribute("required");
+    });
+  }
+
+  function selectedValues(form, name) {
+    return Array.from(form.querySelectorAll('[name="' + name + '"]:checked')).map(function (input) {
+      return input.value;
+    });
+  }
+
   function initMembershipPreflight(options) {
     var form = options.form;
     var emailInput = options.emailInput;
@@ -84,7 +116,8 @@
         '<label class="gpe-membership-inline-consent" hidden>',
         '<input type="checkbox" data-gpe-membership-consent>',
         '<span>I consent to become or renew as a Girl Plus Environment member.</span>',
-        '</label>'
+        '</label>',
+        canonicalFieldsHtml
       ].join("");
       statusEl.insertAdjacentElement("afterend", panel);
       membershipPanel = panel;
@@ -93,6 +126,9 @@
       if (request && consentWrap) {
         request.addEventListener("change", function () {
           consentWrap.hidden = !request.checked;
+          var canonical = panel.querySelector("[data-gpe-membership-canonical]");
+          if (canonical) canonical.hidden = !request.checked;
+          setCanonicalRequired(panel, request.checked);
         });
       }
       return membershipPanel;
@@ -234,6 +270,18 @@
 
     emailInput.addEventListener("blur", check);
     emailInput.addEventListener("input", debounce(check, options.debounceMs || 800));
+    if (form) {
+      var explicitCampConsent = form.querySelector('[name="membershipConsent"]');
+      var existingCanonical = form.querySelector("[data-gpe-membership-canonical]");
+      if (explicitCampConsent && existingCanonical) {
+        function syncExplicitCanonical() {
+          existingCanonical.hidden = !explicitCampConsent.checked;
+          setCanonicalRequired(existingCanonical, explicitCampConsent.checked);
+        }
+        explicitCampConsent.addEventListener("change", syncExplicitCanonical);
+        syncExplicitCanonical();
+      }
+    }
 
     var api = {
       check: check,
@@ -280,7 +328,19 @@
         phone: form.querySelector('[name="phone"]') ? form.querySelector('[name="phone"]').value.trim() : "",
         city: form.querySelector('[name="city"]') ? form.querySelector('[name="city"]').value.trim() : "",
         state: form.querySelector('[name="state"]') ? form.querySelector('[name="state"]').value.trim() : "",
-        zip: form.querySelector('[name="zip"]') ? form.querySelector('[name="zip"]').value.trim() : ""
+        zip: form.querySelector('[name="zip"]') ? form.querySelector('[name="zip"]').value.trim() : "",
+        ageRange: form.querySelector('[name="ageRange"]') ? form.querySelector('[name="ageRange"]').value.trim() : "",
+        raceEthnicity: selectedValues(form, "raceEthnicity"),
+        raceEthnicityOther: form.querySelector('[name="raceEthnicityOther"]') ? form.querySelector('[name="raceEthnicityOther"]').value.trim() : "",
+        genderIdentity: selectedValues(form, "genderIdentity"),
+        genderIdentityOther: form.querySelector('[name="genderIdentityOther"]') ? form.querySelector('[name="genderIdentityOther"]').value.trim() : "",
+        eligibilityAffirmed: Boolean(form.querySelector('[name="eligibilityAffirmed"]:checked')),
+        interestedInOfficeHours: Boolean(form.querySelector('[name="interestedInOfficeHours"]:checked')),
+        climateInterests: selectedValues(form, "climateInterests"),
+        communicationPreferences: selectedValues(form, "communicationPreferences"),
+        emailConsent: Boolean(form.querySelector('[name="emailConsent"]:checked')),
+        smsConsent: Boolean(form.querySelector('[name="smsConsent"]:checked')),
+        termsConsent: Boolean(form.querySelector('[name="termsConsent"]:checked'))
       };
     },
     init: initMembershipPreflight
@@ -293,6 +353,9 @@
       ".gpe-membership-inline-panel{margin-top:.75rem;border:3px solid #000;background:#fff7cc;padding:.85rem 1rem;font-weight:700;box-shadow:3px 3px 0 #000}",
       ".gpe-membership-inline-panel[hidden]{display:none!important}",
       ".gpe-membership-inline-panel label{display:flex;gap:.65rem;align-items:flex-start;margin:.35rem 0}",
+      ".gpe-membership-inline-panel fieldset{border:0;padding:0;margin:.75rem 0 0}",
+      ".gpe-membership-inline-panel legend{font-weight:900;text-transform:uppercase;margin:.45rem 0}",
+      ".gpe-membership-inline-panel select,.gpe-membership-inline-panel input:not([type=checkbox]){border:3px solid #000;padding:.65rem;background:#fff;width:100%;margin-top:.3rem}",
       ".gpe-membership-inline-panel input{width:1.25rem;height:1.25rem;flex:0 0 auto;margin-top:.1rem;accent-color:#d53f8c}",
       ".gpe-membership-inline-panel input:focus-visible{outline:4px solid #67e8f9;outline-offset:3px}",
       ".gpe-membership-auth-panel{margin-top:.75rem;border:3px solid #000;background:#d9ffd0;padding:.85rem 1rem;font-weight:700;box-shadow:3px 3px 0 #000}",

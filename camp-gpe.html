@@ -1993,6 +1993,19 @@ body > * {
               <input id="camp-membership-consent" name="membershipConsent" value="consent" type="checkbox">
               <span>Become a Girl Plus Environment member with this Camp registration. GPE membership is free.</span>
             </label>
+            <fieldset class="gpe-membership-canonical-fields mt-4" data-gpe-membership-canonical hidden>
+              <legend class="header-font text-sm">Membership questions</legend>
+              <label><input type="checkbox" name="eligibilityAffirmed" value="yes" data-gpe-membership-required> I identify as a Black or Brown girl, woman, femme, or gender-expansive person. *</label>
+              <label>Age range * <select name="ageRange" data-gpe-membership-required><option value="">Select one</option><option value="under_18">Under 18</option><option value="18_24">18-24</option><option value="25_34">25-34</option><option value="35_44">35-44</option><option value="45_plus">45+</option><option value="prefer_not_to_say">Prefer not to say</option></select></label>
+              <fieldset><legend>Race/ethnicity *</legend><label><input type="checkbox" name="raceEthnicity" value="black_african_american"> Black or African American</label><label><input type="checkbox" name="raceEthnicity" value="latina_latine_hispanic"> Latina, Latine, or Hispanic</label><label><input type="checkbox" name="raceEthnicity" value="indigenous_native"> Indigenous or Native</label><label><input type="checkbox" name="raceEthnicity" value="asian_pacific_islander"> Asian or Pacific Islander</label><label><input type="checkbox" name="raceEthnicity" value="middle_eastern_north_african"> Middle Eastern or North African</label><label><input type="checkbox" name="raceEthnicity" value="multiracial"> Multiracial</label><label><input type="checkbox" name="raceEthnicity" value="self_describe"> Self-describe</label></fieldset>
+              <label>Race/ethnicity self-description <input name="raceEthnicityOther"></label>
+              <fieldset><legend>Gender identity</legend><label><input type="checkbox" name="genderIdentity" value="girl"> Girl</label><label><input type="checkbox" name="genderIdentity" value="woman"> Woman</label><label><input type="checkbox" name="genderIdentity" value="femme"> Femme</label><label><input type="checkbox" name="genderIdentity" value="gender_expansive"> Gender-expansive</label><label><input type="checkbox" name="genderIdentity" value="nonbinary"> Nonbinary</label><label><input type="checkbox" name="genderIdentity" value="self_describe"> Self-describe</label><label><input type="checkbox" name="genderIdentity" value="prefer_not_to_say"> Prefer not to say</label></fieldset>
+              <label>Gender self-description <input name="genderIdentityOther"></label>
+              <label><input type="checkbox" name="interestedInOfficeHours" value="yes"> I am interested in attending GPE Office Hours.</label>
+              <label><input type="checkbox" name="emailConsent" value="yes" data-gpe-membership-required> I agree to receive GPE membership emails. *</label>
+              <label><input type="checkbox" name="smsConsent" value="yes"> I agree to receive SMS/text updates where available.</label>
+              <label><input type="checkbox" name="termsConsent" value="yes" data-gpe-membership-required> I agree to GPE membership terms and privacy expectations. *</label>
+            </fieldset>
           </div>
           <div class="camp-honeypot"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
           <div class="camp-form-message" data-form-error hidden></div>
@@ -2034,8 +2047,8 @@ console.log("GPE form configuration", {
   functions: window.GPE_FORM_CONFIG.functions
 });
 </script>
-<script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-choice-controls.js?v=20260721"></script>
-<script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-form-membership.js?v=20260721"></script>
+<script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-choice-controls.js?v=20260728"></script>
+<script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-form-membership.js?v=20260728"></script>
 
 <script>
 (function () {
