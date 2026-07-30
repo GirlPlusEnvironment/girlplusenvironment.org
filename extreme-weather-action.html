@@ -684,16 +684,28 @@
               ></div>
             </div>
 
-            <form id="gpe-completion-claim" class="mt-6 bg-white brutalist-border rounded-3xl p-5">
-              <label class="header-font text-sm" for="gpe-completion-email">Report this action for Camp points review</label>
+            <form id="gpe-completion-claim" class="mt-6 bg-white brutalist-border rounded-3xl p-5" data-gpe-custom-form>
+              <label class="header-font text-sm" for="gpe-completion-email">Report this action for Camp Points</label>
               <input id="gpe-completion-email" name="email" type="email" required autocomplete="email" placeholder="Email used for GPE" style="width:100%;margin:.75rem 0;padding:.85rem;border:3px solid #000;border-radius:16px;">
               <textarea name="notes" placeholder="Optional note for Team GPE" style="width:100%;min-height:90px;padding:.85rem;border:3px solid #000;border-radius:16px;"></textarea>
               <button type="submit" class="header-font" style="margin-top:.75rem;padding:.85rem 1rem;border:3px solid #000;border-radius:999px;background:#22d3ee;color:#000;">I completed this action</button>
-              <p id="gpe-completion-status" class="mt-3 font-bold" hidden tabindex="-1"></p>
+              <p id="gpe-completion-status" class="mt-3 font-bold" data-gpe-membership-status hidden tabindex="-1"></p>
             </form>
 
+            <script>
+              window.GPE_FORM_CONFIG = Object.assign({
+                membershipLookupEndpoint: "https://wisvwuysysbitxluajmv.supabase.co/functions/v1/neon-membership-check",
+                petitionStatusEndpoint: "https://wisvwuysysbitxluajmv.supabase.co/functions/v1/petition-action-status",
+                supabaseUrl: "https://wisvwuysysbitxluajmv.supabase.co",
+                supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indpc3Z3dXlzeXNiaXR4bHVham12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5NDQ5NzYsImV4cCI6MjA5ODUyMDk3Nn0.H5bxGNrm9vXtgGqNlHRfZe4n1zMp7ZrRrzzqTYdEz7s",
+                hubLoginUrl: "https://members.girlplusenvironment.org/login",
+                hubForgotPasswordUrl: "https://members.girlplusenvironment.org/forgot-password"
+              }, window.GPE_FORM_CONFIG || {});
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.9"></script>
+            <script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-form-membership.js?v=20260729a"></script>
             <script src="https://actionnetwork.org/widgets/v6/letter/extreme-weather-puts-our-communities-at-risk-its-time-for-bold-climate-action-2?format=js&source=Girl%20Plus%20Environment"></script>
-
+            <script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-action-network-dropdowns.js?v=20260730" defer></script>
             <script>
               (function () {
                 const formAreaId =
@@ -709,7 +721,246 @@
                 const actionUrl =
                   "https://actionnetwork.org/letters/extreme-weather-puts-our-communities-at-risk-its-time-for-bold-climate-action-2?source=Girl%20Plus%20Environment";
                 const completionEndpoint =
-                  "https://wisvwuysysbitxluajmv.supabase.co/functions/v1/camp-gpe-challenge-submit";
+                  window.GPE_FORM_CONFIG.petitionCompletionEndpoint ||
+                  "https://wisvwuysysbitxluajmv.supabase.co/functions/v1/action-network-completion-bridge";
+                const petitionStatusEndpoint =
+                  window.GPE_FORM_CONFIG.petitionStatusEndpoint ||
+                  "https://wisvwuysysbitxluajmv.supabase.co/functions/v1/petition-action-status";
+                const actionSlug =
+                  "extreme-weather-puts-our-communities-at-risk-its-time-for-bold-climate-action-2";
+                const completionStoragePrefix =
+                  "gpe:petition-complete:" + actionSlug + ":";
+                let completionObserverStarted = false;
+                let actionNetworkEmail = "";
+                let completionBridgeInstalled = false;
+                let completionBridgeInFlight = false;
+
+                if (completionForm) {
+                  completionForm.style.display = "none";
+                }
+
+                if (completionForm && completionStatus && window.GPEFormMembership) {
+                  window.GPEFormMembership.init({
+                    form: completionForm,
+                    mode: "petition",
+                    emailInput: completionForm.querySelector('[name="email"]'),
+                    statusEl: completionStatus,
+                    endpoint: window.GPE_FORM_CONFIG.membershipLookupEndpoint
+                  });
+                }
+
+                function awardLabel(rule) {
+                  if (/camp/i.test(rule || "")) return "Camp GPE Points";
+                  return "Advocacy Points";
+                }
+
+                function pointFeedbackMarkup(data) {
+                  if (!data || typeof data !== "object") {
+                    return '<div style="margin-top:1rem;padding:.85rem;border:2px solid #000;border-radius:14px;background:#fff7cc;font-weight:800;">Verifying action...<br><span style="font-weight:600;">We are confirming your points with the backend.</span></div>';
+                  }
+                  const awards = Array.isArray(data.awards) ? data.awards : [];
+                  const lines = awards
+                    .filter(function (award) { return Number(award.points || 0) > 0; })
+                    .map(function (award) {
+                      return '<div style="display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(0,0,0,.18);padding:.45rem 0;"><span>' +
+                        awardLabel(String(award.rule || award.eventType || "")) +
+                        '</span><strong>+' + Number(award.points || 0) + '</strong></div>';
+                    });
+                  const awardedPoints = Number(data.awardedPoints || 0);
+                  const pendingPoints = Number(data.pendingPoints || 0);
+                  let html = lines.length ? '<div style="margin-top:1rem;">' + lines.join("") + "</div>" : "";
+                  if (awardedPoints > 0) {
+                    html += '<div style="margin-top:.75rem;font-weight:900;">Total earned <span style="float:right;">+' + awardedPoints + '</span></div>';
+                    html += '<div style="margin-top:.5rem;font-weight:700;">' + awardedPoints + " points added to your account.</div>";
+                  } else if (pendingPoints > 0) {
+                    html += '<div style="margin-top:.75rem;font-weight:900;">Points saved <span style="float:right;">+' + pendingPoints + '</span></div>';
+                    html += '<div style="margin-top:.5rem;font-weight:700;">Create or connect your Hub account any time to claim them.</div>';
+                  } else {
+                    html += '<div style="margin-top:.75rem;font-weight:800;">Verifying action...</div>';
+                  }
+                  return html;
+                }
+
+                function completionMarkup(completedAt, pointData) {
+                  return '<div style="border:3px solid #000;border-radius:18px;background:#dcfce7;padding:1rem;box-shadow:4px 4px 0 #000;">' +
+                    '<div class="header-font" style="font-size:1.25rem;">✅ Action Complete</div>' +
+                    '<div style="margin-top:.35rem;font-weight:800;">Thanks for speaking up for your community.</div>' +
+                    '<div style="margin-top:.35rem;font-size:.9rem;">petition completed ' + new Date(completedAt).toLocaleString() + '</div>' +
+                    pointFeedbackMarkup(pointData) +
+                    '<a href="https://members.girlplusenvironment.org/camp-gpe" target="_top" style="display:inline-block;margin-top:1rem;font-weight:900;text-decoration:underline;">Earn more Camp GPE points</a>' +
+                    '</div>';
+                }
+
+                function markCompletionComplete(completedAt, pointData) {
+                  if (!completionForm || !completionStatus) return;
+                  completionForm.style.display = "block";
+                  const button = completionForm.querySelector('button[type="submit"]');
+                  if (button) {
+                    button.disabled = true;
+                    button.textContent = "✅ Submission Complete";
+                  }
+                  completionStatus.innerHTML = completionMarkup(completedAt, pointData);
+                  completionStatus.hidden = false;
+                  completionStatus.focus();
+                }
+
+                async function submitPetitionCompletion(email, completedAt, completionSignal) {
+                  if (!email || email === "unknown") return null;
+                  if (completionBridgeInFlight) return null;
+                  const completionKey = completionStoragePrefix + email;
+                  const previousCompletion = sessionStorage.getItem(completionKey);
+                  if (previousCompletion) {
+                    refreshPetitionCompletion(email, previousCompletion);
+                    return null;
+                  }
+                  completionBridgeInFlight = true;
+                  sessionStorage.setItem(completionKey, completedAt);
+                  try {
+                    const response = await fetch(completionEndpoint, {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                        "Idempotency-Key": completionKey
+                      },
+                      body: JSON.stringify({
+                        email: email,
+                        actionSlug: actionSlug,
+                        actionUrl: actionUrl,
+                        sourcePage: "extreme-weather-action",
+                        completionSignal: completionSignal || "dom",
+                        completedAt: completedAt
+                      })
+                    });
+                    const data = await response.json().catch(function () { return {}; });
+                    if (!response.ok) throw new Error(data.message || "Completion could not be saved.");
+                    markCompletionComplete(data.completedAt || completedAt, data);
+                    return data;
+                  } catch (error) {
+                    completionForm.style.display = "block";
+                    completionStatus.innerHTML = completionMarkup(completedAt, null);
+                    completionStatus.hidden = false;
+                    refreshPetitionCompletion(email, completedAt);
+                    return null;
+                  } finally {
+                    completionBridgeInFlight = false;
+                  }
+                }
+
+                function findActionNetworkEmail() {
+                  const input = formArea && formArea.querySelector('input[type="email"], input[name*="email" i], input[id*="email" i]');
+                  const email = input ? String(input.value || "").trim().toLowerCase() : "";
+                  if (email) actionNetworkEmail = email;
+                  return email;
+                }
+
+                function delay(ms) {
+                  return new Promise(function (resolve) {
+                    window.setTimeout(resolve, ms);
+                  });
+                }
+
+                async function fetchPetitionStatus(email) {
+                  const response = await fetch(petitionStatusEndpoint, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: email, actionSlug: actionSlug })
+                  });
+                  const data = await response.json().catch(function () { return {}; });
+                  if (!response.ok) throw new Error(data.message || "Petition status could not be checked.");
+                  return data;
+                }
+
+                async function refreshPetitionCompletion(email, completedAt) {
+                  if (!email || email === "unknown") return;
+                  for (const waitMs of [1200, 2400, 4200, 6800]) {
+                    await delay(waitMs);
+                    const data = await fetchPetitionStatus(email).catch(function () { return null; });
+                    if (data && data.completed) {
+                      markCompletionComplete(data.completedAt || completedAt, data);
+                      return;
+                    }
+                  }
+                }
+
+                function actionNetworkCompleted() {
+                  if (!formArea) return false;
+                  if (formArea.querySelector(".can_thank_you_wrap, .can_thank_you-block, .thank-you, .thank_you")) return true;
+                  return /thank you|thanks for taking action|submission complete|you have taken action/i.test(formArea.textContent || "");
+                }
+
+                function observeActionNetworkCompletion() {
+                  if (!formArea) return;
+                  if (completionObserverStarted) return;
+                  completionObserverStarted = true;
+                  const check = function () {
+                    if (!actionNetworkCompleted()) return;
+                    const completedAt = new Date().toISOString();
+                    const email = findActionNetworkEmail() || actionNetworkEmail || "unknown";
+                    formArea.querySelectorAll('button, input[type="submit"]').forEach(function (control) {
+                      control.disabled = true;
+                      if ("value" in control) control.value = "✅ Submission Complete";
+                      if ("textContent" in control) control.textContent = "✅ Submission Complete";
+                    });
+                    markCompletionComplete(completedAt);
+                    submitPetitionCompletion(email, completedAt, "thank_you_dom");
+                  };
+                  const completionObserver = new MutationObserver(check);
+                  completionObserver.observe(formArea, { childList: true, subtree: true, characterData: true });
+                  formArea.addEventListener("submit", function () {
+                    findActionNetworkEmail();
+                    window.setTimeout(check, 800);
+                    window.setTimeout(check, 1800);
+                    window.setTimeout(check, 3500);
+                  }, true);
+                }
+
+                function installActionNetworkCompletionBridge() {
+                  if (completionBridgeInstalled) return;
+                  completionBridgeInstalled = true;
+
+                  const isActionNetworkRequest = function (url) {
+                    return /(^|\/\/)([^/]+\.)?actionnetwork\.org\//i.test(String(url || ""));
+                  };
+                  const maybeCompleteFromNetwork = function (url, status) {
+                    if (!isActionNetworkRequest(url)) return;
+                    if (status < 200 || status >= 300) return;
+                    window.setTimeout(function () {
+                      const completedAt = new Date().toISOString();
+                      const email = findActionNetworkEmail() || actionNetworkEmail || "unknown";
+                      if (!email || email === "unknown") return;
+                      markCompletionComplete(completedAt);
+                      submitPetitionCompletion(email, completedAt, "action_network_network");
+                    }, 250);
+                  };
+
+                  if (window.fetch) {
+                    const originalFetch = window.fetch.bind(window);
+                    window.fetch = function (input, init) {
+                      const url = typeof input === "string" ? input : input && input.url;
+                      return originalFetch(input, init).then(function (response) {
+                        maybeCompleteFromNetwork(url || response.url, response.status);
+                        return response;
+                      });
+                    };
+                  }
+
+                  if (window.XMLHttpRequest) {
+                    const OriginalXHR = window.XMLHttpRequest;
+                    window.XMLHttpRequest = function () {
+                      const xhr = new OriginalXHR();
+                      let requestUrl = "";
+                      const originalOpen = xhr.open;
+                      xhr.open = function (method, url) {
+                        requestUrl = String(url || "");
+                        return originalOpen.apply(xhr, arguments);
+                      };
+                      xhr.addEventListener("loadend", function () {
+                        maybeCompleteFromNetwork(requestUrl, xhr.status);
+                      });
+                      return xhr;
+                    };
+                  }
+                }
 
                 if (!formArea || !loadingMessage) {
                   return;
@@ -725,37 +976,45 @@
                     completionStatus.hidden = true;
                     try {
                       const formData = new FormData(completionForm);
+                      const email = String(formData.get("email") || "").trim().toLowerCase();
+                      const completionKey = completionStoragePrefix + email;
+                      const previousCompletion = sessionStorage.getItem(completionKey);
+                      if (previousCompletion) {
+                        markCompletionComplete(previousCompletion);
+                        refreshPetitionCompletion(email, previousCompletion);
+                        return;
+                      }
                       const response = await fetch(completionEndpoint, {
                         method: "POST",
                         headers: {
                           "Content-Type": "application/json",
-                          "Idempotency-Key": crypto.randomUUID ? crypto.randomUUID() : String(Date.now())
+                          "Idempotency-Key": completionKey
                         },
                         body: JSON.stringify({
-                          fields: {
-                            email: String(formData.get("email") || "").trim(),
-                            actions: ["other"],
-                            otherAction: "Extreme weather Action Network letter",
-                            socialLinks: actionUrl,
-                            notes: String(formData.get("notes") || "").trim(),
-                            sourcePage: "extreme-weather-action",
-                            actionSlug: "extreme-weather-puts-our-communities-at-risk-its-time-for-bold-climate-action-2"
-                          }
+                          email: email,
+                          actionSlug: actionSlug,
+                          actionUrl: actionUrl,
+                          sourcePage: "extreme-weather-action",
+                          completionSignal: "manual_fallback",
+                          completedAt: new Date().toISOString()
                         })
                       });
                       const data = await response.json().catch(() => ({}));
                       if (!response.ok) throw new Error(data.message || "Completion claim could not be saved.");
-                      completionStatus.textContent = data.message || "Your completion claim has been received for Team GPE review. Approved actions will be added to your points.";
-                      completionStatus.hidden = false;
-                      completionStatus.focus();
+                      const completedAt = data.completedAt || new Date().toISOString();
+                      sessionStorage.setItem(completionKey, completedAt);
+                      markCompletionComplete(completedAt, data);
+                      refreshPetitionCompletion(email, completedAt);
                       completionForm.reset();
                     } catch (error) {
                       completionStatus.textContent = error.message || "Completion claim could not be saved.";
                       completionStatus.hidden = false;
                       completionStatus.focus();
                     } finally {
-                      button.disabled = false;
-                      button.textContent = originalText;
+                      if (button.textContent !== "✅ Submission Complete") {
+                        button.disabled = false;
+                        button.textContent = originalText;
+                      }
                     }
                   });
                 }
@@ -767,6 +1026,8 @@
 
                   if (injectedForm) {
                     loadingMessage.remove();
+                    installActionNetworkCompletionBridge();
+                    observeActionNetworkCompletion();
                     return true;
                   }
 
