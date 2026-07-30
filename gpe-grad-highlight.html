@@ -1274,7 +1274,13 @@ video {
                 </div>
             </div>
         </section></main><script>
-window.GPE_FORM_CONFIG = window.GPE_FORM_CONFIG || {};
+window.GPE_FORM_CONFIG = Object.assign({
+  membershipLookupEndpoint: "https://wisvwuysysbitxluajmv.supabase.co/functions/v1/neon-membership-check",
+  supabaseUrl: "https://wisvwuysysbitxluajmv.supabase.co",
+  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indpc3Z3dXlzeXNiaXR4bHVham12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5NDQ5NzYsImV4cCI6MjA5ODUyMDk3Nn0.H5bxGNrm9vXtgGqNlHRfZe4n1zMp7ZrRrzzqTYdEz7s",
+  hubLoginUrl: "https://members.girlplusenvironment.org/login",
+  hubForgotPasswordUrl: "https://members.girlplusenvironment.org/forgot-password"
+}, window.GPE_FORM_CONFIG || {});
 window.GPE_FORM_CONFIG.functionBaseUrl =
   "https://wisvwuysysbitxluajmv.supabase.co/functions/v1";
 window.GPE_FORM_CONFIG.functions = Object.assign({
@@ -1295,7 +1301,7 @@ console.log("GPE form configuration", {
 });
 </script>
 <script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-choice-controls.js?v=20260721"></script>
-<script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-form-membership.js?v=20260728c"></script>
+<script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-form-membership.js?v=20260729a"></script>
     <script vid="310">
         (function () {
             function makeId() {
@@ -1341,11 +1347,12 @@ console.log("GPE form configuration", {
                 if (email && status && window.GPEFormMembership) {
                     window.GPEFormMembership.init({
                         form,
+                        mode: "inlineMembership",
                         emailInput: email,
                         statusEl: status,
                         firstNameInput: form.querySelector('[name="firstName"]'),
                         lastNameInput: form.querySelector('[name="lastName"]'),
-                        endpoint: endpointFor(form, "membershipFunctionName")
+                        endpoint: (window.GPE_FORM_CONFIG || {}).membershipLookupEndpoint || endpointFor(form, "membershipFunctionName")
                     });
                 }
 

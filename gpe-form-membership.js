@@ -37,6 +37,48 @@
     return outcome || "lookup_unavailable";
   }
 
+  function normalizedMode(options) {
+    var mode = String((options && options.mode) || (options && options.form && options.form.dataset.gpeMembershipMode) || "").trim();
+    if (mode) return mode;
+    if (options && options.form && options.form.dataset.functionName === "gpe-membership-enroll") return "membershipEnrollment";
+    return "inlineMembership";
+  }
+
+  function allowsMembershipPanel(mode) {
+    return mode !== "membershipEnrollment" && mode !== "passiveLookup" && mode !== "donation";
+  }
+
+  function allowsAuthPanel(mode) {
+    return mode !== "membershipEnrollment" && mode !== "passiveLookup" && mode !== "donation";
+  }
+
+  function messageForMode(mode, state) {
+    if (mode === "membershipEnrollment") {
+      if (state === "checking") return messages.checking;
+      if (state === "hub_user_active_member" || state === "neon_member_needs_hub_activation" || state === "active_member_existing_hub_user" || state === "active_member_needs_hub_invite") return "Existing member found. Continue updating your profile.";
+      if (state === "expired_member" || state === "inactive_or_expired_member" || state === "hub_user_no_active_membership") return "Existing account found. Continue updating your membership information.";
+      if (state === "existing_constituent_without_membership" || state === "existing_constituent_no_membership") return "Existing GPE account found. We'll update your information with this membership form.";
+      if (state === "new_person" || state === "nonmember") return "No existing membership found. Continue with this free membership form.";
+      if (state === "ambiguous_account" || state === "ambiguous_match") return "We found a possible existing account. Continue, and Team GPE will review the connection.";
+      if (state === "lookup_failed" || state === "lookup_unavailable") return "Membership status could not be checked right now. You can still continue with this form.";
+    }
+    if (mode === "passiveLookup") {
+      if (state === "checking") return messages.checking;
+      if (state === "hub_user_active_member" || state === "active_member_existing_hub_user") return "Existing Hub member found.";
+      if (state === "neon_member_needs_hub_activation" || state === "active_member_needs_hub_invite") return "Existing GPE member found.";
+      if (state === "existing_constituent_without_membership" || state === "existing_constituent_no_membership") return "Existing GPE contact found.";
+      if (state === "new_person" || state === "nonmember") return "No existing GPE record found yet.";
+      if (state === "lookup_failed" || state === "lookup_unavailable") return "Lookup unavailable. You can still continue.";
+    }
+    if (mode === "petition") {
+      if (state === "hub_user_active_member") return "Welcome back. Sign in here to connect this action to your Hub profile.";
+      if (state === "neon_member_needs_hub_activation") return "You're already a GPE member. You can take action now and activate Hub access in a new tab.";
+      if (state === "existing_constituent_without_membership" || state === "existing_constituent_no_membership") return "We found your GPE record. You can become a free member, or skip membership and still submit the petition.";
+      if (state === "new_person" || state === "nonmember") return "You can become a free GPE member, or skip membership and still submit the petition.";
+    }
+    return messages[state] || messages.lookup_failed;
+  }
+
   function validEmail(value) {
     return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(value || "").trim());
   }
@@ -90,7 +132,169 @@
     });
   }
 
+  function isVisible(el) {
+    if (!el || el.hidden || el.closest("[hidden]")) return false;
+    var style = window.getComputedStyle ? window.getComputedStyle(el) : null;
+    return !style || (style.display !== "none" && style.visibility !== "hidden");
+  }
+
+  function hasExistingMembershipFields(form) {
+    return Boolean(
+      form &&
+        form.querySelector('[name="emailConsent"],[name="eligibilityAffirmed"],[data-gpe-membership-required],[data-gpe-membership-canonical],[name="membershipConsent"]')
+    );
+  }
+
+  function requestedMembership(form) {
+    if (!form) return false;
+    var request = form.querySelector("[data-gpe-membership-request]");
+    var explicitConsent = form.querySelector('[name="membershipConsent"]');
+    var enrollmentForm = form.dataset.functionName === "gpe-membership-enroll";
+    return Boolean(enrollmentForm || (request && request.checked) || (explicitConsent && explicitConsent.checked));
+  }
+
+  function findExistingPanel(form) {
+    if (!form) return null;
+    var panel = form.querySelector("[data-gpe-membership-panel]");
+    if (panel) return panel;
+    var explicitConsent = form.querySelector('[name="membershipConsent"]');
+    var canonical = form.querySelector("[data-gpe-membership-canonical]");
+    if (explicitConsent) {
+      return explicitConsent.closest(".camp-form-field,fieldset,label,div") || canonical || explicitConsent.parentElement;
+    }
+    return canonical;
+  }
+
+  function closestFieldWrapper(control) {
+    return control.closest("label,fieldset,.camp-form-field,.gpe-membership-inline-panel,.gpe-membership-auth-panel") || control.parentElement || control;
+  }
+
+  function fieldLabel(control) {
+    var fieldset = control.closest("fieldset");
+    var legend = fieldset ? fieldset.querySelector("legend") : null;
+    if (legend && (control.type === "checkbox" || control.type === "radio")) return legend.textContent.replace(/\s*\*?\s*$/, "");
+    var label = control.closest("label");
+    if (label) return label.textContent.replace(/\s+/g, " ").replace(/\s*\*?\s*$/, "").trim();
+    if (control.name === "ageRange") return "Age range";
+    if (control.name === "raceEthnicity") return "Race / Ethnicity";
+    return control.name || "This field";
+  }
+
+  function messageFor(control, groupName) {
+    if (groupName === "raceEthnicity" || control.name === "raceEthnicity") return "Please select at least one option.";
+    if (control.name === "ageRange") return "Please select your age range.";
+    if (control.type === "checkbox" || control.type === "radio") return "This field is required.";
+    return "Please complete this field.";
+  }
+
+  function clearFieldError(control) {
+    if (!control) return;
+    control.classList.remove("gpe-field-invalid-control");
+    control.removeAttribute("aria-invalid");
+    var wrapper = closestFieldWrapper(control);
+    if (wrapper) wrapper.classList.remove("gpe-field-invalid");
+    var errorId = control.getAttribute("aria-errormessage");
+    if (errorId) {
+      var error = document.getElementById(errorId);
+      if (error) error.remove();
+      control.removeAttribute("aria-errormessage");
+    }
+  }
+
+  function showFieldError(control, message) {
+    if (!control) return;
+    var wrapper = closestFieldWrapper(control);
+    var id = control.id || control.name || "field";
+    var errorId = "gpe-error-" + id.replace(/[^a-z0-9_-]/gi, "-");
+    clearFieldError(control);
+    control.classList.add("gpe-field-invalid-control");
+    control.setAttribute("aria-invalid", "true");
+    control.setAttribute("aria-errormessage", errorId);
+    if (wrapper) wrapper.classList.add("gpe-field-invalid");
+    var error = document.createElement("div");
+    error.id = errorId;
+    error.className = "gpe-field-error";
+    error.setAttribute("role", "alert");
+    error.textContent = message || messageFor(control);
+    if (wrapper && wrapper.parentNode) wrapper.insertAdjacentElement("afterend", error);
+    else control.insertAdjacentElement("afterend", error);
+  }
+
+  function validateRequiredFields(form, opts) {
+    opts = opts || {};
+    if (!form) return true;
+    var invalid = [];
+    var seen = {};
+    var fields = Array.from(form.querySelectorAll("[required],[data-gpe-membership-required]")).filter(isVisible);
+    fields.forEach(function (field) {
+      clearFieldError(field);
+      if (field.type === "checkbox" || field.type === "radio") {
+        var name = field.name || field.getAttribute("data-gpe-membership-required");
+        if (seen[name]) return;
+        seen[name] = true;
+        var group = Array.from(form.querySelectorAll('[name="' + name + '"]')).filter(isVisible);
+        var checked = group.some(function (item) {
+          return item.checked;
+        });
+        if (!checked) invalid.push({ control: field, message: messageFor(field) });
+        return;
+      }
+      if (!String(field.value || "").trim()) invalid.push({ control: field, message: messageFor(field) });
+    });
+
+    var groupNames = {};
+    form.querySelectorAll("[data-gpe-membership-required-group]").forEach(function (field) {
+      if (isVisible(field)) groupNames[field.getAttribute("data-gpe-membership-required-group")] = true;
+    });
+    if (requestedMembership(form) || form.dataset.functionName === "gpe-membership-enroll") {
+      if (Array.from(form.querySelectorAll('[name="raceEthnicity"]')).some(isVisible)) groupNames.raceEthnicity = true;
+    }
+    Object.keys(groupNames).forEach(function (name) {
+      var group = Array.from(form.querySelectorAll('[name="' + name + '"]')).filter(isVisible);
+      if (!group.length) return;
+      group.forEach(clearFieldError);
+      if (!group.some(function (field) { return field.checked; })) {
+        invalid.push({ control: group[0], message: messageFor(group[0], name) });
+      }
+    });
+
+    invalid.forEach(function (item) {
+      showFieldError(item.control, item.message);
+    });
+
+    if (invalid.length && opts.scroll !== false) {
+      var first = invalid[0].control;
+      closestFieldWrapper(first).scrollIntoView({ behavior: "smooth", block: "center" });
+      if (opts.focus !== false && first.focus) window.setTimeout(function () { first.focus({ preventScroll: true }); }, 150);
+    }
+    return invalid.length === 0;
+  }
+
+  function installValidation(form) {
+    if (!form || form.__gpeMembershipValidationInstalled) return;
+    form.__gpeMembershipValidationInstalled = true;
+    form.addEventListener("input", function (event) {
+      clearFieldError(event.target);
+      if (event.target && event.target.name) {
+        Array.from(form.querySelectorAll('[name="' + event.target.name + '"]')).forEach(clearFieldError);
+      }
+    });
+    form.addEventListener("change", function (event) {
+      clearFieldError(event.target);
+      if (event.target && event.target.name) {
+        Array.from(form.querySelectorAll('[name="' + event.target.name + '"]')).forEach(clearFieldError);
+      }
+    });
+    form.addEventListener("submit", function (event) {
+      if (!validateRequiredFields(form, { scroll: true, focus: true })) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true);
+  }
+
   function initMembershipPreflight(options) {
+    options = options || {};
     var form = options.form;
     var emailInput = options.emailInput;
     var statusEl = options.statusEl;
@@ -101,6 +305,10 @@
     var controller = null;
     var lastEmail = "";
     var result = null;
+    var reusesExistingPanel = false;
+    var mode = normalizedMode(options);
+    var lookupRequestId = 0;
+    var membershipPanelInteracted = false;
 
     if (statusEl) {
       if (!statusEl.getAttribute("role")) statusEl.setAttribute("role", "status");
@@ -109,6 +317,14 @@
 
     function ensurePanel() {
       if (membershipPanel || !form || !statusEl) return membershipPanel;
+      if (!allowsMembershipPanel(mode)) return null;
+      var existingPanel = findExistingPanel(form);
+      if (existingPanel) {
+        membershipPanel = existingPanel;
+        reusesExistingPanel = true;
+        return membershipPanel;
+      }
+      if (hasExistingMembershipFields(form)) return null;
       var panel = document.createElement("div");
       panel.className = options.panelClass || "gpe-membership-inline-panel";
       panel.setAttribute("data-gpe-membership-panel", "true");
@@ -132,21 +348,31 @@
       var consentWrap = panel.querySelector(".gpe-membership-inline-consent");
       if (request && consentWrap) {
         request.addEventListener("change", function () {
+          membershipPanelInteracted = true;
           consentWrap.hidden = !request.checked;
           var canonical = panel.querySelector("[data-gpe-membership-canonical]");
           if (canonical) canonical.hidden = !request.checked;
           setCanonicalRequired(panel, request.checked);
+          validateRequiredFields(form, { scroll: false, focus: false });
         });
       }
+      panel.addEventListener("input", function () {
+        membershipPanelInteracted = true;
+      });
+      panel.addEventListener("change", function () {
+        membershipPanelInteracted = true;
+      });
       return membershipPanel;
     }
 
     function ensureAuthPanel() {
       if (!form || !statusEl) return null;
+      if (!allowsAuthPanel(mode)) return null;
       var existing = form.querySelector("[data-gpe-auth-panel]");
       if (existing) return existing;
       var config = publicConfig();
       var hubLogin = config.hubLoginUrl || "https://members.girlplusenvironment.org/login";
+      var hubSignup = config.hubSignupUrl || hubLogin + "?mode=signup";
       var forgot = config.hubForgotPasswordUrl || hubLogin;
       var panel = document.createElement("div");
       panel.className = options.authPanelClass || "gpe-membership-auth-panel";
@@ -158,7 +384,7 @@
         '<button type="button" data-gpe-password-toggle>Show password</button>',
         '<button type="button" data-gpe-auth-submit>Sign in</button>',
         '<a data-gpe-forgot-password href="' + forgot + '" target="_top">Forgot password?</a>',
-        '<a data-gpe-hub-link href="' + hubLogin + '" target="_top">Visit Hub</a>',
+        '<a data-gpe-hub-link href="' + hubLogin + '" target="_blank" rel="noopener">Visit Hub</a>',
         '<div data-gpe-auth-status role="status" aria-live="polite" hidden></div>'
       ].join("");
       statusEl.insertAdjacentElement("afterend", panel);
@@ -213,17 +439,18 @@
     function setState(state, data) {
       result = data || result;
       state = stateFrom(data, state);
-      statusEl.textContent = messages[state] || messages.lookup_failed;
+      statusEl.textContent = messageForMode(mode, state);
       statusEl.dataset.state = state;
       statusEl.hidden = state === "idle";
       var panel = ensurePanel();
       var authPanel = ensureAuthPanel();
       if (panel) {
-        var showPanel = state === "new_person" || state === "nonmember" || state === "inactive_or_expired_member" || state === "expired_member" || state === "existing_constituent_without_membership" || state === "existing_constituent_no_membership" || state === "hub_user_no_active_membership" || state === "ambiguous_account" || state === "ambiguous_match" || state === "lookup_failed" || state === "lookup_unavailable";
+        var showPanel = allowsMembershipPanel(mode) && (state === "new_person" || state === "nonmember" || state === "inactive_or_expired_member" || state === "expired_member" || state === "existing_constituent_without_membership" || state === "existing_constituent_no_membership" || state === "hub_user_no_active_membership" || state === "ambiguous_account" || state === "ambiguous_match" || state === "lookup_failed" || state === "lookup_unavailable");
+        var keepUserPanelOpen = membershipPanelInteracted && !reusesExistingPanel && !showPanel;
         var label = panel.querySelector("[data-gpe-membership-request-label]");
         if (label) label.textContent = panelLabelFor(state);
-        panel.hidden = !showPanel;
-        panel.setAttribute("aria-expanded", showPanel ? "true" : "false");
+        if (!reusesExistingPanel) panel.hidden = !(showPanel || keepUserPanelOpen);
+        panel.setAttribute("aria-expanded", (showPanel || keepUserPanelOpen) ? "true" : "false");
       }
       if (authPanel) {
         var authCopy = authPanel.querySelector("[data-gpe-auth-copy]");
@@ -231,7 +458,7 @@
         var passwordToggle = authPanel.querySelector("[data-gpe-password-toggle]");
         var authSubmit = authPanel.querySelector("[data-gpe-auth-submit]");
         var hubLink = authPanel.querySelector("[data-gpe-hub-link]");
-        var showAuth = state === "hub_user_active_member" || state === "neon_member_needs_hub_activation";
+        var showAuth = allowsAuthPanel(mode) && (state === "hub_user_active_member" || state === "neon_member_needs_hub_activation");
         authPanel.hidden = !showAuth;
         authPanel.setAttribute("aria-expanded", showAuth ? "true" : "false");
         if (authCopy) authCopy.textContent = messages[state] || "";
@@ -239,11 +466,15 @@
         if (passwordRow) passwordRow.hidden = !needsPassword;
         if (passwordToggle) passwordToggle.hidden = !needsPassword;
         if (authSubmit) authSubmit.hidden = !needsPassword;
-        if (hubLink) hubLink.textContent = state === "neon_member_needs_hub_activation" ? "Activate Hub account" : "Visit Hub";
+        if (hubLink) {
+          hubLink.href = state === "neon_member_needs_hub_activation" ? hubSignup : hubLogin;
+          hubLink.textContent = state === "neon_member_needs_hub_activation" ? "Create Hub account" : "Visit Hub";
+        }
       }
       if (form) {
         form.dataset.membershipOutcome = state;
         form.dataset.identityState = state;
+        form.dataset.gpeMembershipMode = mode;
         form.dispatchEvent(new CustomEvent("gpe:membership", { detail: { state: state, result: result } }));
       }
     }
@@ -254,7 +485,13 @@
       lastEmail = email;
       if (controller) controller.abort();
       controller = new AbortController();
+      var requestId = ++lookupRequestId;
       setState("checking");
+      var slowLookupTimer = window.setTimeout(function () {
+        if (requestId === lookupRequestId && statusEl && statusEl.dataset.state === "checking") {
+          statusEl.textContent = "This is taking a little longer than usual. You can continue while we finish checking.";
+        }
+      }, Number(options.slowLookupMs || 5000));
       try {
         console.log("Calling endpoint:", endpoint);
         var response = await fetch(endpoint, {
@@ -269,22 +506,28 @@
         });
         if (!response.ok) throw new Error("membership lookup failed");
         var data = await response.json();
+        if (requestId !== lookupRequestId) return;
         setState(data.publicState || data.outcome || "lookup_failed", data);
       } catch (error) {
-        if (error.name !== "AbortError") setState("lookup_failed");
+        if (requestId === lookupRequestId && error.name !== "AbortError") setState("lookup_failed");
+      } finally {
+        window.clearTimeout(slowLookupTimer);
       }
     }
 
     emailInput.addEventListener("blur", check);
     emailInput.addEventListener("input", debounce(check, options.debounceMs || 800));
     if (form) {
+      installValidation(form);
       var explicitCampConsent = form.querySelector('[name="membershipConsent"]');
       var existingCanonical = form.querySelector("[data-gpe-membership-canonical]");
       if (explicitCampConsent && existingCanonical) {
         enhanceMembershipCheckboxLayout(existingCanonical);
         function syncExplicitCanonical() {
+          membershipPanelInteracted = membershipPanelInteracted || explicitCampConsent.checked;
           existingCanonical.hidden = !explicitCampConsent.checked;
           setCanonicalRequired(existingCanonical, explicitCampConsent.checked);
+          validateRequiredFields(form, { scroll: false, focus: false });
         }
         explicitCampConsent.addEventListener("change", syncExplicitCanonical);
         syncExplicitCanonical();
@@ -326,6 +569,9 @@
       var explicitCampConsent = form.querySelector('[name="membershipConsent"]');
       var requested = Boolean((request && request.checked) || (explicitCampConsent && explicitCampConsent.checked));
       if (!requested) return null;
+      if (!validateRequiredFields(form, { scroll: true, focus: true })) {
+        return { requested: true, consent: false, invalid: true, source: source || form.dataset.source || form.dataset.functionName || "gpe_public_form" };
+      }
       return {
         requested: true,
         consent: Boolean((consent && consent.checked) || (explicitCampConsent && explicitCampConsent.checked)),
@@ -351,6 +597,7 @@
         termsConsent: Boolean(form.querySelector('[name="termsConsent"]:checked'))
       };
     },
+    validateRequiredForForm: validateRequiredFields,
     init: initMembershipPreflight
   };
 
@@ -368,6 +615,7 @@
       ".gpe-membership-inline-panel .gpe-check-row,.gpe-membership-inline-choice,.gpe-membership-inline-consent{display:grid!important;grid-template-columns:1.375rem minmax(0,1fr)!important;align-items:start!important;column-gap:.75rem!important;row-gap:0!important;width:100%;line-height:1.35}",
       ".gpe-membership-inline-panel .gpe-check-row span,.gpe-membership-inline-choice span,.gpe-membership-inline-consent span{min-width:0}",
       ".gpe-membership-inline-panel select,.gpe-membership-inline-panel input:not([type=checkbox]){border:3px solid #000;padding:.65rem;background:#fff;width:100%;margin-top:.3rem}",
+      ".gpe-membership-inline-panel select,[data-gpe-membership-canonical] select,[data-gpe-custom-form] select,[data-gpe-grad-form] select,[data-camp-gpe-form] select{pointer-events:auto!important;touch-action:auto!important;position:relative;z-index:2}",
       ".gpe-membership-inline-panel input[type=checkbox],[data-gpe-custom-form] input[type=checkbox],[data-gpe-grad-form] input[type=checkbox],[data-camp-gpe-form] input[type=checkbox]{width:1.375rem!important;height:1.375rem!important;min-width:1.375rem!important;max-width:1.375rem!important;padding:0!important;margin:.1rem 0 0!important;flex:0 0 1.375rem;accent-color:#d53f8c}",
       "[data-gpe-custom-form] .gpe-membership-canonical-fields .gpe-check-row,[data-gpe-custom-form] .gpe-membership-canonical-fields label:has(input[type=checkbox]),[data-gpe-grad-form] .gpe-membership-canonical-fields .gpe-check-row,[data-gpe-grad-form] .gpe-membership-canonical-fields label:has(input[type=checkbox]),[data-camp-gpe-form] .gpe-membership-canonical-fields .gpe-check-row,[data-camp-gpe-form] .gpe-membership-canonical-fields label:has(input[type=checkbox]){display:grid!important;grid-template-columns:1.375rem minmax(0,1fr)!important;align-items:start!important;gap:0 .75rem!important;width:100%;line-height:1.35}",
       "[data-gpe-custom-form] .gpe-membership-canonical-fields fieldset,[data-gpe-grad-form] .gpe-membership-canonical-fields fieldset,[data-camp-gpe-form] .gpe-membership-canonical-fields fieldset{display:grid;gap:.45rem;margin-top:.75rem}",
@@ -378,7 +626,10 @@
       ".gpe-membership-auth-panel label{display:grid;gap:.35rem;margin:.5rem 0}",
       ".gpe-membership-auth-panel input{border:3px solid #000;padding:.7rem;background:#fff;width:100%}",
       ".gpe-membership-auth-panel button,.gpe-membership-auth-panel a{display:inline-flex;margin:.35rem .35rem .35rem 0;border:3px solid #000;background:#fff;color:#000;padding:.65rem .9rem;font-weight:900;text-decoration:none;box-shadow:3px 3px 0 #000}",
-      ".gpe-membership-auth-panel button:focus-visible,.gpe-membership-auth-panel a:focus-visible,.gpe-membership-auth-panel input:focus-visible{outline:4px solid #67e8f9;outline-offset:3px}"
+      ".gpe-membership-auth-panel button:focus-visible,.gpe-membership-auth-panel a:focus-visible,.gpe-membership-auth-panel input:focus-visible{outline:4px solid #67e8f9;outline-offset:3px}",
+      ".gpe-field-invalid-control{border-color:#dc2626!important;outline:3px solid rgba(220,38,38,.2)!important;outline-offset:2px!important}",
+      ".gpe-field-invalid{border-color:#dc2626!important}",
+      ".gpe-field-error{margin:.35rem 0 .75rem;color:#b91c1c;font-weight:900;font-size:.9rem;line-height:1.3}"
     ].join("");
     document.head.appendChild(style);
   }

@@ -175,7 +175,13 @@
   </main>
 
   <script>
-    window.GPE_FORM_CONFIG = window.GPE_FORM_CONFIG || {};
+    window.GPE_FORM_CONFIG = Object.assign({
+  membershipLookupEndpoint: "https://wisvwuysysbitxluajmv.supabase.co/functions/v1/neon-membership-check",
+  supabaseUrl: "https://wisvwuysysbitxluajmv.supabase.co",
+  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indpc3Z3dXlzeXNiaXR4bHVham12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5NDQ5NzYsImV4cCI6MjA5ODUyMDk3Nn0.H5bxGNrm9vXtgGqNlHRfZe4n1zMp7ZrRrzzqTYdEz7s",
+  hubLoginUrl: "https://members.girlplusenvironment.org/login",
+  hubForgotPasswordUrl: "https://members.girlplusenvironment.org/forgot-password"
+}, window.GPE_FORM_CONFIG || {});
     window.GPE_FORM_CONFIG.functionBaseUrl =
       "https://wisvwuysysbitxluajmv.supabase.co/functions/v1";
     window.GPE_FORM_CONFIG.functions = Object.assign({
@@ -196,7 +202,7 @@
     });
   </script>
   <script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-choice-controls.js?v=20260721"></script>
-  <script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-form-membership.js?v=20260728c"></script>
+  <script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-form-membership.js?v=20260729a"></script>
   <script>
     const PUBLIC_CONFIG = window.GPE_FORM_CONFIG || {};
     const PUBLIC_FUNCTIONS = PUBLIC_CONFIG.functions || {};
@@ -218,9 +224,9 @@
     }
     const CONFIG = {
       functionUrl: configuredFunction("neon-climate-survey"),
-      membershipUrl: PUBLIC_CONFIG.membershipUrl || "become-a-member.html#membership",
+      membershipUrl: PUBLIC_CONFIG.membershipUrl || "https://www.girlplusenvironment.org/become-a-member",
       membershipCheckUrl: configuredFunction("neon-membership-check"),
-      hubLoginUrl: PUBLIC_CONFIG.hubLoginUrl || "https://members.girlplusenvironment.org/login"
+      hubLoginUrl: PUBLIC_CONFIG.hubLoginUrl || "https://members.girlplusenvironment.org/"
     };
     const STATES = [["AL","Alabama"],["AK","Alaska"],["AZ","Arizona"],["AR","Arkansas"],["CA","California"],["CO","Colorado"],["CT","Connecticut"],["DE","Delaware"],["DC","District of Columbia"],["FL","Florida"],["GA","Georgia"],["HI","Hawaii"],["ID","Idaho"],["IL","Illinois"],["IN","Indiana"],["IA","Iowa"],["KS","Kansas"],["KY","Kentucky"],["LA","Louisiana"],["ME","Maine"],["MD","Maryland"],["MA","Massachusetts"],["MI","Michigan"],["MN","Minnesota"],["MS","Mississippi"],["MO","Missouri"],["MT","Montana"],["NE","Nebraska"],["NV","Nevada"],["NH","New Hampshire"],["NJ","New Jersey"],["NM","New Mexico"],["NY","New York"],["NC","North Carolina"],["ND","North Dakota"],["OH","Ohio"],["OK","Oklahoma"],["OR","Oregon"],["PA","Pennsylvania"],["RI","Rhode Island"],["SC","South Carolina"],["SD","South Dakota"],["TN","Tennessee"],["TX","Texas"],["UT","Utah"],["VT","Vermont"],["VA","Virginia"],["WA","Washington"],["WV","West Virginia"],["WI","Wisconsin"],["WY","Wyoming"],["AS","American Samoa"],["FM","Federated States of Micronesia"],["GU","Guam"],["MH","Marshall Islands"],["MP","Northern Mariana Islands"],["PW","Palau"],["PR","Puerto Rico"],["UM","U.S. Minor Outlying Islands"],["VI","Virgin Islands"],["AA","Armed Forces Americas"],["AE","Armed Forces Europe, the Middle East, an"],["AP","Armed Forces Pacific"],["AB","Alberta"],["BC","British Columbia"],["MB","Manitoba"],["NB","New Brunswick"],["NL","Newfoundland and Labrador"],["NS","Nova Scotia"],["NT","Northwest Territories"],["NU","Nunavut Territory"],["ON","Ontario"],["PE","Prince Edward Island"],["QC","Quebec"],["SK","Saskatchewan"],["YT","Yukon Territory"]];
     const FIELD_DEFS = [
@@ -434,6 +440,17 @@
           optionLabels: Array.isArray(values[field.key]) ? values[field.key].map((v) => labelFor(field, v)) : labelFor(field, values[field.key])
         };
       });
+      const form = document.getElementById("surveyForm");
+      const membershipRequest = window.GPEFormMembership?.membershipRequestForForm(form, "mobile_climate_survey");
+      if (membershipRequest) {
+        membershipRequest.firstName = membershipRequest.firstName || values.firstName || "";
+        membershipRequest.lastName = membershipRequest.lastName || values.lastName || "";
+        membershipRequest.email = membershipRequest.email || values.emailAddress || "";
+        membershipRequest.phone = membershipRequest.phone || values.phoneNumber || "";
+        membershipRequest.city = membershipRequest.city || values.city || "";
+        membershipRequest.state = membershipRequest.state || values.stateOrProvince || "";
+        membershipRequest.zip = membershipRequest.zip || values.zipCode || "";
+      }
       return {
         idempotencyKey: getOrCreateSubmissionId(),
         surveyId: 2,
@@ -451,7 +468,8 @@
             zipCode: values.zipCode
           }
         },
-        answers
+        answers,
+        membershipRequest
       };
     }
     async function submitForm(event) {
@@ -490,25 +508,36 @@
     function showSuccess(result) {
       document.getElementById("surveyForm").style.display = "none";
       document.getElementById("successView").style.display = "block";
+      const heading = document.querySelector("#successView h2");
       const message = document.getElementById("successMessage");
       const action = document.getElementById("successAction");
+      action.hidden = true;
+      action.removeAttribute("href");
       const outcome = result.membershipOutcome || "submission_saved_neon_sync_pending";
-      if (outcome === "active_member_needs_hub_invite") {
-        message.textContent = "Your feedback is in — and your membership is confirmed. Check your email for your secure GPE Hub invitation. Be sure to check Spam or Promotions.";
-      } else if (outcome === "active_member_existing_hub_user") {
-        message.textContent = "Your feedback is in. Your membership is already connected to the GPE Hub.";
-        action.href = result.hubLoginUrl || CONFIG.hubLoginUrl;
-        action.textContent = "Go to GPE Hub";
+      const status = result.membershipCreationStatus || "not_requested";
+      const hubUrl = result.hubLoginUrl || CONFIG.hubLoginUrl;
+      const membershipUrl = result.membershipUrl || CONFIG.membershipUrl;
+      const existingActiveMember = status === "already_active" || outcome === "active_member_existing_hub_user";
+      const confirmedNewMember = status === "confirmed" || Boolean(result.neonMembershipId);
+      const emailPending = confirmedNewMember && (result.membershipEmailQueued || result.hubInviteQueued || outcome === "active_member_needs_hub_invite");
+      if (emailPending && !existingActiveMember) {
+        heading.textContent = "Check your inbox";
+        message.innerHTML = "Your response was submitted and your membership information was received.<br><br>We sent an email with your membership confirmation and next steps for accessing the GPE Community Hub.<br><br><small>Don’t see it? Check your spam folder or use the same email address to sign in.</small>";
+        action.href = hubUrl;
+        action.textContent = "Open the Hub";
         action.hidden = false;
-      } else if (outcome === "nonmember") {
-        message.textContent = "Your feedback is in. GPE Hub access is a member benefit. Complete your membership and we’ll send your Hub invitation automatically.";
-        action.href = result.membershipUrl || CONFIG.membershipUrl;
+      } else if (existingActiveMember || confirmedNewMember) {
+        heading.textContent = "You’re officially a GPE member 💚";
+        message.textContent = "Your survey response was submitted and your membership is active. Check your inbox for your membership confirmation and access the GPE Community Hub to explore opportunities, resources, events, and community. New to the Hub? Use the invitation or account setup link in your email.";
+        action.href = hubUrl;
+        action.textContent = "Access the Hub";
+        action.hidden = false;
+      } else {
+        heading.textContent = "Your response has been submitted";
+        message.textContent = "Thank you for sharing your perspective with Girl Plus Environment. Become a member to access opportunities, resources, funding, events, and the GPE Community Hub.";
+        action.href = membershipUrl;
         action.textContent = "Become a Member";
         action.hidden = false;
-      } else if (outcome === "ambiguous_account") {
-        message.textContent = "Your feedback is in. We need to manually confirm your membership record before sending Hub access.";
-      } else {
-        message.textContent = "Your feedback is in. We saved your survey and will finish syncing it if any connected service needs a retry.";
       }
       document.getElementById("successView").focus();
     }
@@ -519,11 +548,12 @@
     if (window.GPEFormMembership) {
       window.GPEFormMembership.init({
         form: document.getElementById("surveyForm"),
+        mode: "inlineMembership",
         emailInput: document.querySelector('[data-membership-email]'),
         statusEl: document.getElementById("membershipPreflightStatus"),
         firstNameInput: document.querySelector('[name="firstName"]'),
         lastNameInput: document.querySelector('[name="lastName"]'),
-        endpoint: CONFIG.membershipCheckUrl
+        endpoint: PUBLIC_CONFIG.membershipLookupEndpoint || CONFIG.membershipCheckUrl
       });
     }
     document.getElementById("prevBtn").addEventListener("click", () => showStep(currentStep - 1));
