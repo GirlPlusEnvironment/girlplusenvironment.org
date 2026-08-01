@@ -311,7 +311,7 @@
     var membershipPanelInteracted = false;
     var config = publicConfig();
     var hubLoginUrl = config.hubLoginUrl || "https://members.girlplusenvironment.org/login";
-    var hubInviteUrl = config.hubInviteUrl || "https://members.girlplusenvironment.org/invite";
+    var hubInviteUrl = config.hubInviteUrl || "https://members.girlplusenvironment.org/invite/";
     var hubActivationUrl = config.hubActivationUrl || config.hubSignupUrl || hubInviteUrl || hubLoginUrl + "?mode=signup";
     var hubForgotPasswordUrl = config.hubForgotPasswordUrl || hubLoginUrl;
 
@@ -385,7 +385,7 @@
         '<button type="button" data-gpe-password-toggle>Show password</button>',
         '<button type="button" data-gpe-auth-submit>Sign in</button>',
         '<a data-gpe-forgot-password href="' + hubForgotPasswordUrl + '" target="_top">Forgot password?</a>',
-        '<a data-gpe-hub-link href="' + hubLoginUrl + '" target="_blank" rel="noopener">Visit Hub</a>',
+        '<a data-gpe-hub-link href="' + hubLoginUrl + '" target="_blank" rel="noopener noreferrer">Visit Hub</a>',
         '<div data-gpe-auth-status role="status" aria-live="polite" hidden></div>'
       ].join("");
       statusEl.insertAdjacentElement("afterend", panel);
