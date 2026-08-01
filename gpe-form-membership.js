@@ -309,6 +309,11 @@
     var mode = normalizedMode(options);
     var lookupRequestId = 0;
     var membershipPanelInteracted = false;
+    var config = publicConfig();
+    var hubLoginUrl = config.hubLoginUrl || "https://members.girlplusenvironment.org/login";
+    var hubInviteUrl = config.hubInviteUrl || "https://members.girlplusenvironment.org/invite";
+    var hubActivationUrl = config.hubActivationUrl || config.hubSignupUrl || hubInviteUrl || hubLoginUrl + "?mode=signup";
+    var hubForgotPasswordUrl = config.hubForgotPasswordUrl || hubLoginUrl;
 
     if (statusEl) {
       if (!statusEl.getAttribute("role")) statusEl.setAttribute("role", "status");
@@ -370,10 +375,6 @@
       if (!allowsAuthPanel(mode)) return null;
       var existing = form.querySelector("[data-gpe-auth-panel]");
       if (existing) return existing;
-      var config = publicConfig();
-      var hubLogin = config.hubLoginUrl || "https://members.girlplusenvironment.org/login";
-      var hubSignup = config.hubSignupUrl || hubLogin + "?mode=signup";
-      var forgot = config.hubForgotPasswordUrl || hubLogin;
       var panel = document.createElement("div");
       panel.className = options.authPanelClass || "gpe-membership-auth-panel";
       panel.setAttribute("data-gpe-auth-panel", "true");
@@ -383,8 +384,8 @@
         '<label data-gpe-password-row>Password <input type="password" data-gpe-auth-password autocomplete="current-password"></label>',
         '<button type="button" data-gpe-password-toggle>Show password</button>',
         '<button type="button" data-gpe-auth-submit>Sign in</button>',
-        '<a data-gpe-forgot-password href="' + forgot + '" target="_top">Forgot password?</a>',
-        '<a data-gpe-hub-link href="' + hubLogin + '" target="_blank" rel="noopener">Visit Hub</a>',
+        '<a data-gpe-forgot-password href="' + hubForgotPasswordUrl + '" target="_top">Forgot password?</a>',
+        '<a data-gpe-hub-link href="' + hubLoginUrl + '" target="_blank" rel="noopener">Visit Hub</a>',
         '<div data-gpe-auth-status role="status" aria-live="polite" hidden></div>'
       ].join("");
       statusEl.insertAdjacentElement("afterend", panel);
@@ -467,7 +468,7 @@
         if (passwordToggle) passwordToggle.hidden = !needsPassword;
         if (authSubmit) authSubmit.hidden = !needsPassword;
         if (hubLink) {
-          hubLink.href = state === "neon_member_needs_hub_activation" ? hubSignup : hubLogin;
+          hubLink.href = state === "neon_member_needs_hub_activation" ? hubActivationUrl : hubLoginUrl;
           hubLink.textContent = state === "neon_member_needs_hub_activation" ? "Create Hub account" : "Visit Hub";
         }
       }
@@ -479,6 +480,19 @@
       }
     }
 
+    function safeSetState(state, data) {
+      try {
+        setState(state, data);
+      } catch (error) {
+        console.error("Membership UI state failed", error);
+        if (statusEl) {
+          statusEl.hidden = false;
+          statusEl.dataset.state = "lookup_failed";
+          statusEl.textContent = "Membership status could not be displayed right now. You can still continue.";
+        }
+      }
+    }
+
     async function check() {
       var email = emailInput.value.trim();
       if (!validEmail(email) || email === lastEmail || !endpoint) return;
@@ -486,7 +500,7 @@
       if (controller) controller.abort();
       controller = new AbortController();
       var requestId = ++lookupRequestId;
-      setState("checking");
+      safeSetState("checking");
       var slowLookupTimer = window.setTimeout(function () {
         if (requestId === lookupRequestId && statusEl && statusEl.dataset.state === "checking") {
           statusEl.textContent = "This is taking a little longer than usual. You can continue while we finish checking.";
@@ -507,9 +521,9 @@
         if (!response.ok) throw new Error("membership lookup failed");
         var data = await response.json();
         if (requestId !== lookupRequestId) return;
-        setState(data.publicState || data.outcome || "lookup_failed", data);
+        safeSetState(data.publicState || data.outcome || "lookup_failed", data);
       } catch (error) {
-        if (requestId === lookupRequestId && error.name !== "AbortError") setState("lookup_failed");
+        if (requestId === lookupRequestId && error.name !== "AbortError") safeSetState("lookup_failed");
       } finally {
         window.clearTimeout(slowLookupTimer);
       }
