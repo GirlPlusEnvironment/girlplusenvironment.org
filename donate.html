@@ -1552,51 +1552,223 @@ console.log("GPE form configuration", {
 <script src="https://cdn.jsdelivr.net/gh/GirlPlusEnvironment/girlplusenvironment.org@main/gpe-choice-controls.js?v=20260721"></script>
 <script>
 (function(){
-  function makeId(){return crypto.randomUUID?crypto.randomUUID():String(Date.now())+"-"+Math.random().toString(16).slice(2);}
-  function endpointFor(form,key){const config=window.GPE_FORM_CONFIG||{};const functions=config.functions||{};const aliases={functionName:"donationIntake"};const name=form.dataset[key];const configured=functions[name]||functions[aliases[key]];if(configured){if(/^https?:\/\//i.test(configured))return configured;if(config.functionBaseUrl)return config.functionBaseUrl.replace(/\/$/,"")+"/"+String(configured).replace(/^\//,"");console.error("GPE endpoint could not be resolved because functionBaseUrl is missing:",configured);return "";}if(name&&config.functionBaseUrl)return config.functionBaseUrl.replace(/\/$/,"")+"/"+String(name).replace(/^\//,"");if(name)console.error("GPE endpoint could not be resolved because functionBaseUrl is missing:",name);return "";}
-  function collect(form){const fields={};new FormData(form).forEach((value,key)=>{if(key==="website")return;if(fields[key])fields[key]=Array.isArray(fields[key])?fields[key].concat(value):[fields[key],value];else fields[key]=value;});const custom=String(fields.otherAmount||"").trim();if(fields.amount==="custom"&&custom){fields.amount=custom;fields.amountSource="custom";}else{fields.amountSource="preset";fields.otherAmount="";}return fields;}
-  function show(el,text){el.textContent=text;el.hidden=false;el.focus&&el.focus();}
-  function syncOtherAmount(form){const otherWrap=form.querySelector('.donation-other-amount');const otherInput=form.querySelector('[name="otherAmount"]');const customRadio=form.querySelector('[name="amount"][value="custom"]');if(!otherWrap||!otherInput||!customRadio)return;otherWrap.hidden=!customRadio.checked;otherInput.required=customRadio.checked;if(!customRadio.checked)otherInput.value='';}
-  document.querySelectorAll('[data-gpe-custom-form]').forEach((form)=>{
-    window.GPEChoiceControls?.initialize(form);
+  function makeId(){
+    return window.crypto&&typeof window.crypto.randomUUID==="function"
+      ?window.crypto.randomUUID()
+      :String(Date.now())+"-"+Math.random().toString(16).slice(2);
+  }
+
+  function endpointFor(form){
+    const config=window.GPE_FORM_CONFIG||{};
+    const functions=config.functions||{};
+    const name=form.dataset.functionName||"gpe-donation-intake";
+    const configured=functions[name]||functions.donationIntake||name;
+
+    if(/^https?:\/\//i.test(configured))return configured;
+    if(!config.functionBaseUrl){
+      console.error("GPE functionBaseUrl is missing.");
+      return "";
+    }
+    return config.functionBaseUrl.replace(/\/$/,"")+"/"+String(configured).replace(/^\//,"");
+  }
+
+  function collect(form){
+    const fields={};
+    new FormData(form).forEach(function(value,key){
+      if(key==="website")return;
+      if(Object.prototype.hasOwnProperty.call(fields,key)){
+        fields[key]=Array.isArray(fields[key])?fields[key].concat(value):[fields[key],value];
+      }else{
+        fields[key]=value;
+      }
+    });
+
+    const custom=String(fields.otherAmount||"").trim();
+    if(fields.amount==="custom"){
+      fields.amount=custom;
+      fields.amountSource="custom";
+    }else{
+      fields.amountSource="preset";
+      fields.otherAmount="";
+    }
+    return fields;
+  }
+
+  function show(el,text){
+    if(!el)return;
+    el.textContent=text;
+    el.hidden=false;
+    if(typeof el.focus==="function")el.focus();
+  }
+
+  function hide(el){
+    if(el)el.hidden=true;
+  }
+
+  function syncOtherAmount(form){
+    const wrap=form.querySelector(".donation-other-amount");
+    const input=form.querySelector('[name="otherAmount"]');
+    const custom=form.querySelector('[name="amount"][value="custom"]');
+    if(!wrap||!input||!custom)return;
+
+    wrap.hidden=!custom.checked;
+    input.required=custom.checked;
+    if(!custom.checked)input.value="";
+  }
+
+  async function readResponse(response){
+    const text=await response.text();
+    if(!text)return {};
+    try{return JSON.parse(text);}
+    catch(_){return {message:text};}
+  }
+
+  document.querySelectorAll("[data-gpe-custom-form]").forEach(function(form){
+    if(window.GPEChoiceControls)window.GPEChoiceControls.initialize(form);
+
     syncOtherAmount(form);
-    form.querySelectorAll('[name="amount"]').forEach((input)=>input.addEventListener('change',()=>syncOtherAmount(form)));
-    form.querySelector('[name="otherAmount"]')?.addEventListener('input',(event)=>{const value=String(event.target.value||'').trim();const customRadio=form.querySelector('[name="amount"][value="custom"]');if(value&&customRadio&&!customRadio.checked){customRadio.checked=true;customRadio.dispatchEvent(new Event('change',{bubbles:true}));window.GPEChoiceControls?.update(customRadio,form);syncOtherAmount(form);}});
-    form.addEventListener('submit',async(event)=>{
-      event.preventDefault();
-      const error=form.querySelector('[data-form-error]');
-      const success=form.querySelector('[data-form-success]');
-      error.hidden=true;
-      success.hidden=true;
-      syncOtherAmount(form);
-      const customRadio=form.querySelector('[name="amount"][value="custom"]');
-      const otherInput=form.querySelector('[name="otherAmount"]');
-      if(customRadio?.checked&&!(Number(String(otherInput?.value||'').trim())>0)){show(error,'Please enter a valid custom donation amount.');return;}
-      if(!form.checkValidity()){show(error,'Please complete the required fields before submitting.');return;}
-      const endpoint=endpointFor(form,'functionName');if(!endpoint){show(error,'This form is not connected yet. Please try again later.');return;}
-      const button=form.querySelector('button[type="submit"]');
-      const label=button.querySelector('[data-submit-label]');
-      const originalLabel=label?label.textContent:button.textContent;
-      button.disabled=true;
-      if(label)label.textContent='SUBMITTING...';else button.textContent='SUBMITTING...';
-      try{
-        console.log("Calling endpoint:",endpoint);
-        const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Idempotency-Key':form.dataset.idempotencyKey||(form.dataset.idempotencyKey=makeId())},body:JSON.stringify({fields:collect(form),website:form.querySelector('[name="website"]')?.value||''})});
-        const data=await response.json().catch(()=>({}));
-        if(!response.ok)throw new Error(data.message||'Submission failed.');
-        if(data.paymentUrl){
-          show(success,'Your information is saved. Continue to the secure payment page to complete your donation.');
-          window.location.href=data.paymentUrl;
-        }else if(data.paymentStatus==='payment_configuration_required'){
-          show(error,'Your information is saved, but the secure payment link is not configured yet. Please contact GPE to complete your gift.');
-        }else{
-          show(success,data.duplicate?'We already received this donation intent.':'Your information is saved. Continue to the secure payment page to complete your donation.');
+
+    form.querySelectorAll('[name="amount"]').forEach(function(input){
+      input.addEventListener("change",function(){
+        syncOtherAmount(form);
+      });
+    });
+
+    const otherAmount=form.querySelector('[name="otherAmount"]');
+    if(otherAmount){
+      otherAmount.addEventListener("input",function(event){
+        const value=String(event.target.value||"").trim();
+        const custom=form.querySelector('[name="amount"][value="custom"]');
+
+        if(value&&custom&&!custom.checked){
+          custom.checked=true;
+          custom.dispatchEvent(new Event("change",{bubbles:true}));
+          if(window.GPEChoiceControls)window.GPEChoiceControls.update(custom,form);
+          syncOtherAmount(form);
         }
+      });
+    }
+
+    form.addEventListener("submit",async function(event){
+      event.preventDefault();
+
+      const error=form.querySelector("[data-form-error]");
+      const success=form.querySelector("[data-form-success]");
+      const button=form.querySelector('button[type="submit"]');
+      const label=button?button.querySelector("[data-submit-label]"):null;
+      const originalLabel=label?label.textContent:(button?button.textContent:"");
+
+      hide(error);
+      hide(success);
+      syncOtherAmount(form);
+
+      const custom=form.querySelector('[name="amount"][value="custom"]');
+      const other=form.querySelector('[name="otherAmount"]');
+
+      if(custom&&custom.checked&&!(Number(String((other&&other.value)||"").trim())>0)){
+        show(error,"Please enter a valid custom donation amount.");
+        if(other)other.focus();
+        return;
+      }
+
+      if(!form.checkValidity()){
+        form.reportValidity();
+        show(error,"Please complete the required fields before submitting.");
+        return;
+      }
+
+      const endpoint=endpointFor(form);
+      if(!endpoint){
+        show(error,"This donation form is not connected yet. Please try again later.");
+        return;
+      }
+
+      if(button)button.disabled=true;
+      if(label)label.textContent="SAVING...";
+      else if(button)button.textContent="SAVING...";
+
+      try{
+        const idempotencyKey=form.dataset.idempotencyKey||(form.dataset.idempotencyKey=makeId());
+        const payload={
+          fields:collect(form),
+          website:(form.querySelector('[name="website"]')||{}).value||""
+        };
+
+        console.log("Calling donation intake endpoint:",endpoint);
+
+        const response=await fetch(endpoint,{
+          method:"POST",
+          mode:"cors",
+          credentials:"omit",
+          headers:{
+            "Content-Type":"application/json",
+            "Idempotency-Key":idempotencyKey
+          },
+          body:JSON.stringify(payload)
+        });
+
+        const data=await readResponse(response);
+        console.log("Donation intake response status:",response.status);
+
+        if(!response.ok){
+          console.error("Donation intake failed with status:",response.status);
+
+          if(response.status===401){
+            throw new Error("The donation service is rejecting public requests. Deploy gpe-donation-intake with JWT verification disabled.");
+          }
+          if(response.status===403){
+            throw new Error("This page is not currently allowed to call the donation service. Check the allowed-origin configuration.");
+          }
+          throw new Error(data.message||data.error||("Donation intake failed with status "+response.status+"."));
+        }
+
+        if(!data.paymentUrl){
+          console.error("Donation intake succeeded without a payment URL.");
+
+          if(data.paymentStatus==="payment_configuration_required"){
+            throw new Error("Your information was saved, but the secure Neon payment URL is not configured.");
+          }
+
+          throw new Error("Your information was saved, but the secure payment page could not be opened.");
+        }
+
+        show(
+          success,
+          data.duplicate
+            ?"We already saved this donation request. Opening the secure Neon donation page..."
+            :"Your information is saved. Opening the secure Neon donation page..."
+        );
+
+        if(label)label.textContent="OPENING SECURE DONATION...";
+        else if(button)button.textContent="OPENING SECURE DONATION...";
+
+        let paymentUrl;
+        try{
+          paymentUrl=new URL(data.paymentUrl);
+        }catch(_){
+          throw new Error("The donation service returned an invalid payment URL.");
+        }
+        if(
+          paymentUrl.protocol!=="https:"||
+          paymentUrl.hostname!=="girlplusenvironment.app.neoncrm.com"||
+          paymentUrl.pathname!=="/forms/donate"
+        ){
+          throw new Error("The donation service returned an unapproved payment destination.");
+        }
+        console.log("Opening secure payment destination:",paymentUrl.origin+paymentUrl.pathname);
+        window.location.assign(paymentUrl.toString());
       }catch(err){
-        show(error,err.message||'Submission could not be completed. Your answers are still here.');
+        console.error("GPE donation submission error:",err);
+        show(
+          error,
+          err&&err.message
+            ?err.message
+            :"Donation submission could not be completed. Your answers are still here."
+        );
       }finally{
-        button.disabled=false;
-        if(label)label.textContent=originalLabel;else button.textContent=originalLabel;
+        if(button)button.disabled=false;
+        if(label)label.textContent=originalLabel;
+        else if(button)button.textContent=originalLabel;
       }
     });
   });
